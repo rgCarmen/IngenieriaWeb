@@ -1,14 +1,43 @@
 package com.aplicacion.backendcitas.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id; 
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class Paciente extends Persona {
 
-    public Paciente(long id, String nombre, String apellidos, String correo){
-        super(id, nombre, apellidos, correo);
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String dni;
+
+    public Paciente(){
+        super();
+    }
+
+    public Paciente(long id, String nombre, String apellidos, String correo, String telefono, String dni){
+        super(nombre, apellidos, correo, telefono);
+        this.dni=dni;
        
+    }
+
+    public long getId(){
+        return id;
+    }
+
+    public void setId(long id){
+        this.id=id;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
     
 }

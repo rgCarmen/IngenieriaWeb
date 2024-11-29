@@ -1,80 +1,86 @@
 package com.aplicacion.backendcitas.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+@Table(name = "cita", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"medico_id", "fecha"})
+})
 public class Cita {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date fecha;
+    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime fecha;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "paciente_id", nullable = true) // Relación opcional con Paciente
     private Paciente paciente;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "medico_id", nullable = false) // Relación obligatoria con Medico
     private Medico medico;
 
-    public Cita(){
+    @Enumerated(EnumType.STRING)
+    private TipoCita tipoCita;
 
+    public Cita() {}
+
+    public Cita(LocalDateTime fecha, Medico medico) {
+        if (fecha.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("La fecha debe ser mayor a la fecha y hora actual");
+        }
+        this.fecha = fecha;
+        this.medico = medico;
     }
 
-    public Cita(Date fecha, Medico medico){
-        this.fecha=fecha;
-        this.medico=medico;
-    }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public void setId(long id){
-        this.id=id;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public Date getFecha(){
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha){
-        this.fecha=fecha;
+    public void setFecha(LocalDateTime fecha) {
+        if (fecha.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("La fecha debe ser mayor a la fecha y hora actual");
+        }
+        this.fecha = fecha;
     }
 
-    public Paciente getPaciente(){
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente){
-        this.paciente=paciente;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
-    public Medico getMedico(){
+    public Medico getMedico() {
         return medico;
     }
 
-    public void setMedico(Medico medico){
-        this.medico=medico;
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
-    @Override
-    public boolean equals(Object o){
-        return (o instanceof Cita) && ((Cita) o).getId()==this.id;
-    }
-  
-    @Override
-    public int hashCode(){
-        return (int)id;
+    public TipoCita getTipoCita(){
+        return tipoCita;
     }
 
-    
+    public void setTipoCita(TipoCita tipoCita){
+        this.tipoCita=tipoCita;
+    }
 }

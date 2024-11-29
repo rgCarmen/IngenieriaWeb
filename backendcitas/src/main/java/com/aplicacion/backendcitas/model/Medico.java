@@ -1,17 +1,34 @@
 package com.aplicacion.backendcitas.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id; 
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class Medico extends Persona {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String especialidad;
     
+    public Medico(){
+        super();
+    }
 
-    public Medico(long id, String nombre, String apellidos, String correo, String especialidad){
-        super(id, nombre, apellidos, correo);
+    public Medico(String nombre, String apellidos, String correo, String telefono, String especialidad){
+        super(nombre, apellidos, correo, telefono);
         this.especialidad=especialidad;
+    }
+
+    public long getId(){
+        return id;
+    }
+
+    public void setId(long id){
+        this.id=id;
     }
 
     public String getEspecialidad() {
