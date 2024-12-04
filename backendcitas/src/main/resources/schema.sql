@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS CITA (
                       id BIGINT AUTO_INCREMENT PRIMARY KEY,
                       paciente_id BIGINT NOT NULL,
                       medico_id BIGINT NOT NULL,
-                      fecha_hora DATETIME NOT NULL,  -- O TIMESTAMP si lo prefieres
+                      fecha_hora TIMESTAMP NOT NULL,  -- O TIMESTAMP si lo prefieres
                       tipo_cita VARCHAR(50),
                       FOREIGN KEY (paciente_id) REFERENCES paciente(id),
                       FOREIGN KEY (medico_id) REFERENCES medico(id)
