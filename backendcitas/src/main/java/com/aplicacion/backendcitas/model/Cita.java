@@ -27,10 +27,18 @@ public class Cita {
     @JoinColumn(name = "medico_id", nullable = false) // Relación obligatoria con Medico
     private Medico medico;
 
+    @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoCita tipoCita;
 
+    @Column(nullable = true)
+    private String descripcion;
+
     public Cita() {}
+
+    public long getId() {
+        return id;
+    }
 
     public Cita(LocalDateTime fecha, Medico medico) {
         if (fecha.isBefore(LocalDateTime.now())) {
@@ -41,9 +49,7 @@ public class Cita {
     }
 
 
-    public long getId() {
-        return id;
-    }
+
 
     public void setId(long id) {
         this.id = id;
