@@ -1,3 +1,8 @@
+-- Insercion de datos para la tabla Usuario
+INSERT INTO usuario (contrasena, email, nombre, rol) 
+VALUES ('12345', 'paciente@example.com', 'Juan Perez', 'PACIENTE');
+
+
 -- Inserción de datos para la tabla Paciente
 INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES
  ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'),
