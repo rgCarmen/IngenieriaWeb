@@ -2,7 +2,7 @@ package com.aplicacion.backendcitas.model;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ public class CitaService {
 
     @Autowired
     private CitaRepository citaRepository;
+    private PacienteRepository pacienteRepository;
 
 
     public List<Cita> obtenerTodasLasCitas() {
@@ -30,7 +31,7 @@ public class CitaService {
         if (cita.getFecha().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("La fecha de la cita no puede ser anterior a la fecha y hora actual.");
         }
-        boolean existeCita = citaRepository.existsByMedicoAndFecha(cita.getMedico(), cita.getFecha());
+        boolean existeCita = citaRepository.existsByMedicoIdAndFecha(cita.getMedico().getId(), cita.getFecha());
         if (existeCita) {
             throw new IllegalArgumentException("Ya existe una cita para el mismo médico en la misma fecha y hora.");
         }
@@ -54,7 +55,50 @@ public class CitaService {
     }
 
     public void eliminarCita(Long id) {
-        citaRepository.deleteById(id);
+        Cita cita = obtenerCitaPorId(id);
+        if (cita.getFecha().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("No se pueden eliminar citas pasadas.");
+        }
+    
+        citaRepository.delete(cita);
+    }
+
+
+    public List<Cita> obtenerCitasLibres(Long medicoId, String especialidad) {
+        if (medicoId != null) {
+            return citaRepository.findByMedicoIdAndPacienteIsNull(medicoId);
+        } else if (especialidad != null) {
+            return citaRepository.findByMedicoEspecialidadAndPacienteIsNull(especialidad);
+        } else {
+            //devolver citas libres
+            return citaRepository.findByPacienteIsNull();
+        }
+    }
+
+    public Cita asignarCita(long citaId, long pacienteId) {
+        // Asignar cita a un paciente
+        Cita cita= obtenerCitaPorId(citaId);
+        if (cita.getPaciente() !=null){
+            throw new IllegalArgumentException("La cita ya tiene asignado un paciente");
+        }
+
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+        .orElseThrow(() -> new EntityNotFoundException("Paciente no encontrado con ID: " + pacienteId));
+
+        cita.setPaciente(paciente);
+        return citaRepository.save(cita);
+    }
+
+    public Cita cancelarCita(long citaId) {
+        // cancelar la cita por parte del paciente
+        Cita cita = obtenerCitaPorId(citaId);
+
+        if (cita.getPaciente() == null) {
+            throw new IllegalArgumentException("La cita no está asignada a ningún paciente.");
+        }
+
+        cita.setPaciente(null); 
+        return citaRepository.save(cita);
     }
 
 
@@ -66,6 +110,8 @@ public class CitaService {
         return citaRepository.findByMedicoId(medicoId);
     }
 
+
+    /* 
     public List<Cita> obtenerCitasPorRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 
         Specification<Cita> spec = Specification.where(null);
@@ -80,6 +126,7 @@ public class CitaService {
         return citaRepository.findAll(spec);
 
     }
+        */
 
 
 

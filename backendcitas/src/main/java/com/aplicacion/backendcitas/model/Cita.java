@@ -89,4 +89,12 @@ public class Cita {
     public void setTipoCita(TipoCita tipoCita){
         this.tipoCita=tipoCita;
     }
+
+    public String getDescripcion(){
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion){
+        this.descripcion=descripcion;
+    }
 }

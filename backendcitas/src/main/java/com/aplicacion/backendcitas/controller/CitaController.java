@@ -20,6 +20,8 @@ import com.aplicacion.backendcitas.model.CitaService;
 @RestController
 public class CitaController {
 
+    // Un controlador más general para ver citas, pero no realizar muchas modificaciones en ellas. Quizás adecuado para el ADMINISTRADOR
+
     @Autowired
     private CitaService citaService;
 
@@ -34,6 +36,8 @@ public class CitaController {
         return new ResponseEntity<>(citaService.obtenerCitaPorId(id), HttpStatus.OK);
     }
 
+    /* 
+
     @PostMapping(value = "/citas",     consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> crearCita(@Valid @RequestBody Cita cita) {
         Cita nuevaCita = citaService.crearCita(cita);
@@ -47,7 +51,7 @@ public class CitaController {
         Cita citaActualizada = citaService.actualizarCita(id, cita);
         return new ResponseEntity<>(citaActualizada, HttpStatus.OK);
     }
-
+    */
 
     @DeleteMapping("/citas/{id}")
     public ResponseEntity<Void> eliminarCita(@PathVariable Long id) {

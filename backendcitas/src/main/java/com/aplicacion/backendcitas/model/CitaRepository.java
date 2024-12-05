@@ -14,5 +14,11 @@ public interface CitaRepository extends JpaRepository<Cita, Long>, JpaSpecificat
     List<Cita> findByPacienteId(Long pacienteId);
 
     List<Cita> findByMedicoId(Long medicoId);
-    boolean existsByMedicoAndFecha(Medico medico, LocalDateTime fecha);
+    boolean existsByMedicoIdAndFecha(Long medicoId, LocalDateTime fecha);
+
+    List<Cita> findByMedicoIdAndPacienteIsNull(Long medicoId);
+
+    List<Cita> findByMedicoEspecialidadAndPacienteIsNull(String especialidad);
+
+    List<Cita> findByPacienteIsNull();
 }
