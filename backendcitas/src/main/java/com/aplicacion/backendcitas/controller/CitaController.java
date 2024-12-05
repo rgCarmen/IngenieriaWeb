@@ -23,7 +23,6 @@ public class CitaController {
     @Autowired
     private CitaService citaService;
 
-
     @GetMapping("/citas")
     public List<Cita> obtenerCitas() {
         return citaService.obtenerTodasLasCitas();
