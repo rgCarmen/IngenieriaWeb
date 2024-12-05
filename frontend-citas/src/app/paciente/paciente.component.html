@@ -1,0 +1,35 @@
+<div class="paciente-container">
+    <header>
+      <h2>Bienvenido/a, {{ pacienteNombre }}</h2>
+      <p>Información personal y citas programadas.</p>
+    </header>
+  
+    <!-- Sección de Información del Paciente -->
+    <section class="perfil">
+      <h3>Perfil</h3>
+      <ul>
+        <li><strong>Nombre:</strong> {{ pacienteNombre }}</li>
+        <li><strong>Fecha de nacimiento:</strong> {{ fechaNacimiento }}</li>
+        <li><strong>Contacto:</strong> {{ email }}</li>
+      </ul>
+    </section>
+  
+    <!-- Sección de Citas -->
+    <section class="citas">
+      <h3>Citas Programadas</h3>
+      <ul>
+        <li *ngFor="let cita of citas">
+          <p><strong>Fecha:</strong> {{ cita.fecha }}</p>
+          <p><strong>Hora:</strong> {{ cita.hora }}</p>
+          <p><strong>Médico:</strong> {{ cita.medico }}</p>
+        </li>
+      </ul>
+    </section>
+  
+    <!-- Acciones -->
+    <section class="acciones">
+      <button (click)="agendarCita()">Agendar Nueva Cita</button>
+      <button (click)="cerrarSesion()">Cerrar Sesión</button>
+    </section>
+  </div>
+  
