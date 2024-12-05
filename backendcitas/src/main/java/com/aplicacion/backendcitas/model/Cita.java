@@ -19,11 +19,11 @@ public class Cita {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fecha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "paciente_id", nullable = true) // Relación opcional con Paciente
     private Paciente paciente;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "medico_id", nullable = false) // Relación obligatoria con Medico
     private Medico medico;
 
