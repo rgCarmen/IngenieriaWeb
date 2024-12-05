@@ -82,23 +82,29 @@ public class MedicoController {
 
         citaService.eliminarCita(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    } catch (EntityNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 si la cita no existe
-    }
+        } catch (EntityNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 si la cita no existe
+        }
     }
 
 
     // Modificar Cita (hora válida y tipo?)
     @PutMapping(value = "/{medicoId}/citas/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> actualizarCita(@PathVariable Long id,@PathVariable Long medicoId ,@Valid @RequestBody Cita cita) {
-            
-            //TODO comprobar que la cita que está actualizando sea de ese medico
+         try{
+
+             //comprobar que la cita a modificar sea de ese medico
+            Cita citaExistente = citaService.obtenerCitaPorId(id);
+            if (citaExistente.getMedico().getId() != medicoId) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); 
+            }
+
             Cita citaActualizada = citaService.actualizarCita(id, cita);
             return new ResponseEntity<>(citaActualizada, HttpStatus.OK);
-        
 
-        
-        
+         } catch (EntityNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+        }    
         
     }
 
