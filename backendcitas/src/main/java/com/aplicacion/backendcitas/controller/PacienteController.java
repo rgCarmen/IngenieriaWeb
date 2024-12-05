@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aplicacion.backendcitas.model.Cita;
 import com.aplicacion.backendcitas.model.CitaService;
-import com.aplicacion.backendcitas.model.Medico;
 import com.aplicacion.backendcitas.model.Paciente;
 import com.aplicacion.backendcitas.model.PacienteRepository;
 
