@@ -1,5 +1,7 @@
 package com.aplicacion.backendcitas.model;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 import jakarta.persistence.*;
 //import jakarta.validation.constraints.*;
 
@@ -9,13 +11,12 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera un ID único automáticamente
     private Long id;
-
     private String nombre;
-
     @Column(unique = true) // Restringe duplicados en la base de datos
     private String email;
-
     private String contrasena;
+    @Enumerated(EnumType.STRING)
+    private UsuarioRol rol;
 
     // Getters y Setters
     public Long getId() {
@@ -48,5 +49,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public UsuarioRol getRol(){
+        return rol;
+    }
+
+    public void setRol(UsuarioRol rol){
+        this.rol = rol;
     }
 }

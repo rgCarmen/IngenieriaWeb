@@ -24,9 +24,9 @@ import jakarta.persistence.EntityNotFoundException;
 @RequestMapping("/paciente")
 public class PacienteController {
 
-@Autowired
+    @Autowired
     private CitaService citaService;
-@Autowired
+    @Autowired
     private PacienteRepository pacienteRepository;
 
     // Ver sus citas Agendadas
