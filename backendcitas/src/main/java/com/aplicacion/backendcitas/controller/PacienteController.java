@@ -9,12 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aplicacion.backendcitas.model.Cita;
 import com.aplicacion.backendcitas.model.CitaService;
+import com.aplicacion.backendcitas.model.Medico;
+import com.aplicacion.backendcitas.model.Paciente;
 import com.aplicacion.backendcitas.model.PacienteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -28,6 +29,7 @@ public class PacienteController {
     private CitaService citaService;
     @Autowired
     private PacienteRepository pacienteRepository;
+
 
     // Ver sus citas Agendadas
     @GetMapping("/{pacienteId}/citas")
@@ -51,6 +53,10 @@ public class PacienteController {
             if (citaExistente.getPaciente() != null){
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
             }
+
+            Paciente paciente = pacienteRepository.findById(pacienteId)
+        .orElseThrow(() -> new EntityNotFoundException("Paciente no encontrado con ID: " + pacienteId));
+
         
         // comprobar que no es una cita pasada
         if (citaExistente.getFecha().isBefore(LocalDateTime.now())) {
@@ -59,8 +65,9 @@ public class PacienteController {
                
 
         //paciente existe se comprueba en el servicio
+            citaExistente.setPaciente(paciente);
            
-            Cita citaAsignada= citaService.asignarCita(citaExistente.getId(), pacienteId);
+            Cita citaAsignada= citaService.actualizarCita(id, citaExistente);
             return new ResponseEntity<>(citaAsignada, HttpStatus.OK);
         } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
