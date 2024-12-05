@@ -1,56 +1,192 @@
-2024-12-04 17:00:41.590429+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:00:53.578453+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:01:02.411980+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:03:51.674097+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:04:10.206144+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:04:23.710110+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:04:47.653114+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:08:31.934374+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PACIENTE" ya existe
-Table "PACIENTE" already exists; SQL statement:
-CREATE TABLE PACIENTE ( id BIGINT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(255), apellidos VARCHAR(255), dni VARCHAR(255), telefono VARCHAR(255), email VARCHAR(255) ) [42101-224]
-2024-12-04 17:08:41.247662+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PACIENTE" ya existe
-Table "PACIENTE" already exists; SQL statement:
-CREATE TABLE PACIENTE ( id BIGINT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(255), apellidos VARCHAR(255), dni VARCHAR(255), telefono VARCHAR(255), email VARCHAR(255) ) [42101-224]
-2024-12-04 17:09:11.649134+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PACIENTE" ya existe
-Table "PACIENTE" already exists; SQL statement:
-CREATE TABLE PACIENTE ( id BIGINT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(255), apellidos VARCHAR(255), dni VARCHAR(255), telefono VARCHAR(255), email VARCHAR(255) ) [42101-224]
-2024-12-04 17:10:51.760387+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PACIENTE" not found (this database is empty); SQL statement:
-INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'), ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'), ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'), ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'), ('Pedro', 'González Ruiz', '89012345E', '689012345', 'pedro.gonzalez@example.com'), ('Isabel', 'Hernández Diaz', '45678901F', '645678901', 'isabel.hernandez@example.com'), ('Carlos', 'Jiménez Moreno', '10111213G', '610111213', 'carlos.jimenez@example.com'), ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'), ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'), ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com') [42104-224]
-2024-12-04 17:14:00.462282+01:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM PACIENTE USUARIO [*]MEDICO"
-Syntax error in SQL statement "SELECT * FROM PACIENTE USUARIO [*]MEDICO"; SQL statement:
-SELECT * FROM PACIENTE USUARIO MEDICO [42000-224]
-2024-12-04 17:17:18.393757+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
-CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) ) [42001-224]
-2024-12-04 17:17:24.405728+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
-CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) ) [42001-224]
-2024-12-04 17:17:42.513996+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
-CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) ) [42001-224]
-2024-12-04 17:20:53.510975+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT [*]IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
-CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT IDENTITY PRIMARY KEY, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) ) [42001-224]
+2024-12-04 18:20:30.561808+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "TIPOCITA" no encontrada
+Column "TIPOCITA" not found; SQL statement:
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipoCita) VALUES ('2024-12-05 10:00:00', 'Consulta de Cardiología', (SELECT id FROM PACIENTE WHERE dni = '12345678A'), (SELECT id FROM MEDICO WHERE especialidad = 'Cardiología'), 'CONSULTA') [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:188)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:150)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:126)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:27)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:13)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.aplicacion.backendcitas.BackendcitasApplication.main(BackendcitasApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-12-04 18:22:00.510219+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "TIPOCITA" no encontrada
+Column "TIPOCITA" not found; SQL statement:
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipoCita) VALUES ('2024-12-05 10:00:00', 'Consulta de Cardiología', (SELECT id FROM PACIENTE WHERE dni = '12345678A'), (SELECT id FROM MEDICO WHERE especialidad = 'Cardiología'), 'CONSULTA') [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:188)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:150)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:126)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:27)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:13)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.aplicacion.backendcitas.BackendcitasApplication.main(BackendcitasApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-12-04 18:22:49.126177+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "TIPOCITA" no encontrada
+Column "TIPOCITA" not found; SQL statement:
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipoCita) VALUES ('2024-12-06 12:00:00', 'Consulta de Traumatología', (SELECT id FROM PACIENTE WHERE dni = '98765432B'), (SELECT id FROM MEDICO WHERE especialidad = 'Traumatología'), 'CONSULTA') [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:188)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:150)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:126)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:27)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:13)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.aplicacion.backendcitas.BackendcitasApplication.main(BackendcitasApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-12-04 18:23:04.875377+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "TIPOCITA" no encontrada
+Column "TIPOCITA" not found; SQL statement:
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipoCita) VALUES ('2024-12-06 12:00:00', 'Consulta de Traumatología', (SELECT id FROM PACIENTE WHERE dni = '98765432B'), (SELECT id FROM MEDICO WHERE especialidad = 'Traumatología'), 'CONSULTA') [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:188)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:150)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:126)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:27)
+	at com.aplicacion.backendcitas.SchemaDataInitializer.onApplicationEvent(SchemaDataInitializer.java:13)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.aplicacion.backendcitas.BackendcitasApplication.main(BackendcitasApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-12-04 18:30:08.260437+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT AUTO_INCREMENT PRIMARY KEY [*]START WITH 1000, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; se esperaba "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT AUTO_INCREMENT PRIMARY KEY [*]START WITH 1000, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) )"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS PACIENTE ( id BIGINT AUTO_INCREMENT PRIMARY KEY START WITH 1000, nombre VARCHAR(255) NOT NULL, apellidos VARCHAR(255) NOT NULL, dni VARCHAR(20) NOT NULL, telefono VARCHAR(20) NOT NULL, email VARCHAR(255) ) [42001-224]
