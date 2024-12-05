@@ -25,4 +25,43 @@ INSERT INTO MEDICO (nombre, apellidos, especialidad, telefono, email) VALUES
  ('Lucía', 'Moreno García', 'Ginecología', '699999999', 'lucia.moreno@medico.com'),
  ('Jorge', 'Ruiz Sánchez', 'Urología', '600000000', 'jorge.ruiz@medico.com');
 
+-- Cita de Juan Pérez con la médica Elena López (Cardiología)
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipo_cita)
+VALUES
+    ('2024-12-05 10:00:00', 'Consulta de Cardiología',
+     (SELECT id FROM PACIENTE WHERE dni = '12345678A'),
+     (SELECT id FROM MEDICO WHERE especialidad = 'Cardiología'),
+     'CONSULTA');
+
+-- Cita de Ana García con el médico Javier Fernández (Traumatología)
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipo_cita)
+VALUES
+    ('2024-12-06 12:00:00', 'Consulta de Traumatología',
+     (SELECT id FROM PACIENTE WHERE dni = '98765432B'),
+     (SELECT id FROM MEDICO WHERE especialidad = 'Traumatología'),
+     'CONSULTA');
+
+-- Cita de Luis Martínez con la médica Rosa Martínez (Pediatría)
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipo_cita)
+VALUES
+    ('2024-12-07 09:00:00', 'Consulta de Pediatría',
+     (SELECT id FROM PACIENTE WHERE dni = '56789012C'),
+     (SELECT id FROM MEDICO WHERE especialidad = 'Pediatría'),
+     'CONSULTA');
+
+-- Cita de María Sánchez con el médico David González (Medicina General)
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipo_cita)
+VALUES
+    ('2024-12-08 15:00:00', 'Consulta de Medicina General',
+     (SELECT id FROM PACIENTE WHERE dni = '23456789D'),
+     (SELECT id FROM MEDICO WHERE especialidad = 'Medicina General'),
+     'CONSULTA');
+
+-- Cita de Pedro González con la médica Marta Rodríguez (Dermatología)
+INSERT INTO CITA (fecha, descripcion, paciente_id, medico_id, tipo_cita)
+VALUES
+    ('2024-12-09 11:30:00', 'Consulta de Dermatología',
+     (SELECT id FROM PACIENTE WHERE dni = '89012345E'),
+     (SELECT id FROM MEDICO WHERE especialidad = 'Dermatología'),
+     'CONSULTA');
 
