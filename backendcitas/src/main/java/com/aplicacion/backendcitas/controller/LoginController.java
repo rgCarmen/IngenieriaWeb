@@ -27,14 +27,14 @@ public class LoginController {
     public ResponseEntity<?> autenticarUsuario(@RequestBody CredencialesDTO credenciales) {
         try {
             // Lógica de autenticación
-            UsuarioRol rol = usuarioService.obtenerRol(credenciales.getEmail(), credenciales.getContrasena());
+            UsuarioRol rol = usuarioService.obtenerRol(credenciales.getEmail(), credenciales.getContrasena().hashCode());
             
             // Guardar el rol del usuario en la variable estática
             rolUsuario = rol;  // Convertir el rol a cadena para guardar
 
             return ResponseEntity.ok().body("Autenticado correctamente, rol: " + rol);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(401).body(e.getMessage());
+            return ResponseEntity.status(401).body(e.getMessage() + credenciales.getContrasena().hashCode() );
         }
     }
 

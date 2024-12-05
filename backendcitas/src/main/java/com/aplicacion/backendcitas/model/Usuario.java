@@ -14,7 +14,7 @@ public class Usuario {
     private String nombre;
     @Column(unique = true) // Restringe duplicados en la base de datos
     private String email;
-    private String contrasena;
+    private int contrasena;
     @Enumerated(EnumType.STRING)
     private UsuarioRol rol;
 
@@ -43,11 +43,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getContrasena() {
+    public int getContrasena() {
         return contrasena;
     }
 
-    public void setContrasena(String contrasena) {
+    public void setContrasena(int contrasena) {
         this.contrasena = contrasena;
     }
 

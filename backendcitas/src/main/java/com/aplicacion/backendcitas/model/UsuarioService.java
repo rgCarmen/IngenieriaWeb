@@ -9,9 +9,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public UsuarioRol obtenerRol(String email, String contrasena) {
+    public UsuarioRol obtenerRol(String email, int hashcontrasena) {
         // Buscar el usuario en la base de datos
-        Usuario usuario = usuarioRepository.findByEmailAndContrasena(email, contrasena);
+        Usuario usuario = usuarioRepository.findByEmailAndContrasena(email, hashcontrasena);
 
         if (usuario != null) {
             // Si el usuario existe, devolver el rol
