@@ -1,0 +1,30 @@
+<div class="create-appointment">
+  <h2>Crear Cita</h2>
+
+  <!-- Selección de especialidad -->
+  <div class="form-group">
+    <label for="specialty">Especialidad</label>
+    <select id="specialty" [(ngModel)]="selectedSpecialty" (change)="filterDoctors()">
+      <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+    </select>
+  </div>
+
+  <!-- Selección de doctor -->
+  <div class="form-group" *ngIf="filteredDoctors.length > 0">
+    <label for="doctor">Doctor</label>
+    <select id="doctor" [(ngModel)]="selectedDoctor" (change)="loadAvailableDates()">
+      <option *ngFor="let doctor of filteredDoctors" [value]="doctor">{{ doctor.name }}</option>
+    </select>
+  </div>
+
+  <!-- Calendario -->
+  <div *ngIf="selectedDoctor">
+    <h3>Seleccione una fecha</h3>
+    <div class="calendar-container">
+      <mat-calendar
+        [(selected)]="selectDate"
+        (selectedChange)="selectDate($event)"
+      ></mat-calendar>
+    </div>
+  </div>
+</div>

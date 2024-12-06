@@ -1,0 +1,102 @@
+.appointments-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #495057;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #a71d2a;
+}
+
+.calendar button {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.calendar button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Contenedor del calendario */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+mat-calendar {
+  width: 100%;
+  max-width: 600px; /* Amplía el ancho del calendario */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px; /* Incrementa el padding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px; /* Aumenta el tamaño de la fuente */
+}
+
+/* Ajusta el tamaño de los campos de selección */
+select {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 400px; /* Fija un ancho máximo */
+  padding: 10px; /* Aumenta el padding */
+  font-size: 18px; /* Incrementa el tamaño del texto */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px; /* Añade separación superior */
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 18px; /* Tamaño más grande para las etiquetas */
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block; /* Asegura que la etiqueta esté encima del campo */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Espaciado entre los grupos */
+  text-align: center; /* Centra los campos */
+}

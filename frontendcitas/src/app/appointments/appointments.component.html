@@ -1,1 +1,11 @@
-<p>appointments works!</p>
+<div class="appointments-container">
+    <h1>Gestión de Citas</h1>
+    <div class="actions">
+      <button (click)="navigateTo('create')" class="btn-primary">Crear Cita</button>
+      <button (click)="navigateTo('modify')" class="btn-secondary">Modificar Cita</button>
+      <button (click)="navigateTo('cancel')" class="btn-danger">Cancelar Cita</button>
+    </div>
+    
+    <router-outlet></router-outlet>
+  </div>
+  
