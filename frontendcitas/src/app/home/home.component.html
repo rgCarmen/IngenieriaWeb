@@ -1,1 +1,27 @@
-<p>home works!</p>
+<div class="home-container">
+    <!-- Encabezado -->
+    <h1>Bienvenido a Gestión de Citas</h1>
+    <p>Organiza y gestiona tus citas médicas de forma sencilla y rápida.</p>
+  
+    <!-- Características -->
+    <div class="features">
+      <h2>¿Qué puedes hacer aquí?</h2>
+      <ul>
+        <li>Agenda tus citas médicas de forma sencilla.</li>
+        <li>Consulta tu historial y datos clínicos.</li>
+        <li>Accede a estadísticas y reportes detallados.</li>
+      </ul>
+    </div>
+  
+    <!-- Botones de acción -->
+    <div class="actions">
+      <button mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" (click)="goToLogin()">Iniciar sesión</button>
+      <a mat-raised-button color="accent" routerLink="/citas" *ngIf="authService.isLoggedIn()">Mis Citas</a>
+      <a mat-raised-button color="warn" routerLink="/mi-cuenta" *ngIf="authService.isLoggedIn()">Mi Cuenta</a>
+    </div>
+
+    <!-- Imagen -->
+    <img src="https://vinculotic.com/wp-content/uploads/2021/07/atencion-medica-remota-01.jpg" alt="Gestión médica" class="hero-image">
+    
+</div>
+  

@@ -11,8 +11,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(public authService: AuthService, private router: Router) {}
 
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  goToLogin() {
+    this.router.navigate(['/login']); // Redirige al login
+  }
+
+  logout() {
+    this.authService.logout(); // Lógica para cerrar sesión
+    this.router.navigate(['/']); // Redirige al home
   }
 }

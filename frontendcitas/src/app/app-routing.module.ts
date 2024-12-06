@@ -5,7 +5,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
-//import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
+import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
 //import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
@@ -14,16 +14,23 @@ import { RoleGuard } from './role.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'citas', component: AppointmentsComponent, children: [
-    { path: 'create', component: CreateAppointmentComponent },
-    //{ path: 'modify', component: ModifyAppointmentComponent },
-    //{ path: 'cancel', component: CancelAppointmentComponent },
-  ] },
-  { path: 'mi-cuenta', component: AccountComponent, canActivate: [RoleGuard], data: { role: 'paciente' } },
-  //{ path: 'historial', component: HistoryComponent, canActivate: [RoleGuard], data: { role: 'medico' } },
-  //{ path: 'estadisticas', component: StatisticsComponent, canActivate: [RoleGuard], data: { role: 'admin' } },
+  { 
+    path: 'citas', 
+    component: AppointmentsComponent, 
+    canActivate: [AuthGuard], // Protege el acceso a citas
+    children: [
+      { path: 'create', component: CreateAppointmentComponent },
+      { path: 'modify', component: ModifyAppointmentComponent },
+    ] 
+  },
+  { 
+    path: 'mi-cuenta', 
+    component: AccountComponent, 
+    canActivate: [AuthGuard, RoleGuard], 
+    data: { role: 'paciente' } // Solo accesible para pacientes
+  },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: '', pathMatch: 'full' }, // Redirige a home si la ruta no existe
 ];
 
 @NgModule({

@@ -20,6 +20,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
+import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
+import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { CreateAppointmentComponent } from './appointments/create-appointment/cr
     AccountComponent,
     LoginComponent,
     HeaderComponent,
-    CreateAppointmentComponent
+    CreateAppointmentComponent,
+    ModifyAppointmentComponent,
+    CancelAppointmentComponent
   ],
   imports: [
     BrowserModule,

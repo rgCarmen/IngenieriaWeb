@@ -1,0 +1,54 @@
+.home-container {
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #007bff;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.features {
+    margin-top: 30px;
+}
+
+.features h2 {
+    font-size: 2rem;
+    color: #0056b3;
+}
+
+.features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features li {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.actions {
+    margin-top: 40px;
+}
+
+.actions button, .actions a {
+    margin: 10px;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+}
+
+/* Imagen del componente */
+.hero-image {
+    max-width: 30%; /* Ajusta el tamaño máximo al 50% del ancho del contenedor */
+    height: auto; /* Mantiene las proporciones originales */
+    margin: 20px auto; /* Centra la imagen horizontalmente */
+    display: block; /* Asegura que la imagen sea un bloque */
+    border-radius: 10px; /* Opcional: redondea las esquinas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: añade una sombra */
+}
