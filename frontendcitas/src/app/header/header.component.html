@@ -1,11 +1,15 @@
 <nav>
-    <mat-toolbar color="primary">
-      <span>Gestión de Citas</span>
-      <span class="spacer"></span>
-      <a mat-button routerLink="/">Inicio</a>
-      <a mat-button routerLink="/citas">Citas</a>
-      <a mat-button routerLink="/mi-cuenta">Mi cuenta</a>
-      <button mat-button (click)="logout()" *ngIf="authService.isLoggedIn()">Cerrar sesión</button>
-    </mat-toolbar>
-  </nav>
-  
+  <mat-toolbar color="primary">
+    <span>Gestión de Citas</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/" *ngIf="authService.isLoggedIn()">Inicio</a>
+    <a mat-button routerLink="/citas" *ngIf="authService.isLoggedIn()">Citas</a>
+    <a mat-button routerLink="/mi-cuenta" *ngIf="authService.isLoggedIn()">Mi cuenta</a>
+
+    <!-- Opciones específicas por rol -->
+    <a mat-button routerLink="/historial" *ngIf="authService.getRole() === 'medico'">Historial Clínico</a>
+    <a mat-button routerLink="/estadisticas" *ngIf="authService.getRole() === 'admin'">Estadísticas</a>
+
+    <button mat-button (click)="logout()" *ngIf="authService.isLoggedIn()">Cerrar sesión</button>
+  </mat-toolbar>
+</nav>

@@ -11,10 +11,16 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  username: string = ''; // Agrega estas variables
+  password: string = ''; // Agrega estas variables
+
   constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
-    this.authService.login();
-    this.router.navigate(['/']);
+    if (this.authService.login(this.username, this.password)) {
+      this.router.navigate(['/']);
+    } else {
+      alert('Usuario o contraseña incorrectos');
+    }
   }
 }

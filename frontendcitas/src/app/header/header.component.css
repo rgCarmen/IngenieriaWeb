@@ -1,7 +1,6 @@
 .spacer {
-    flex: 1;
-  }
-  nav {
-    margin-bottom: 20px;
-  }
-  
+  flex: 1;
+}
+nav {
+  margin-bottom: 20px;
+}
