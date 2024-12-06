@@ -1,6 +1,64 @@
+/* Diseño general de dos columnas */
+.home-layout {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Espaciado entre el menú y el contenido */
+    padding: 20px;
+}
+
+/* Menú lateral */
+.sidebar {
+    flex: 1; /* Tamaño flexible para el menú */
+    max-width: 300px;
+    background: #f8f9fa; /* Fondo claro */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3, .sidebar h4 {
+    color: #0056b3; /* Azul para los encabezados */
+    margin-bottom: 10px;
+}
+
+.sidebar p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 3; /* Tamaño flexible para el contenido principal */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos originales del contenido principal */
 .home-container {
     text-align: center;
-    padding: 50px;
+    margin-top: 0;
+    padding: 0px;
 }
 
 h1 {
@@ -45,7 +103,7 @@ p {
 
 /* Imagen del componente */
 .hero-image {
-    max-width: 30%; /* Ajusta el tamaño máximo al 50% del ancho del contenedor */
+    max-width: 80%; /* Ajusta el tamaño máximo al 80% del ancho del contenedor */
     height: auto; /* Mantiene las proporciones originales */
     margin: 20px auto; /* Centra la imagen horizontalmente */
     display: block; /* Asegura que la imagen sea un bloque */

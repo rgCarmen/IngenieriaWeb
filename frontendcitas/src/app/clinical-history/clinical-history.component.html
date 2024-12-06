@@ -1,0 +1,32 @@
+<div class="clinical-history-container">
+    <!-- Encabezado -->
+    <h1>Historial Clínico</h1>
+    <p class="description">
+      Consulta el historial clínico de tus pacientes asignados. Haz clic en "Ver" para obtener más detalles sobre cada diagnóstico.
+    </p>
+  
+    <!-- Tabla -->
+    <table>
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Fecha</th>
+          <th>Diagnóstico</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of clinicalRecords">
+          <td>{{ record.patient }}</td>
+          <td>{{ record.date }}</td>
+          <td>{{ record.diagnosis }}</td>
+          <td>
+            <button mat-raised-button color="primary" (click)="viewDetails(record)">
+              Ver
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

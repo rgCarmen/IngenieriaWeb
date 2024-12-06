@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
 import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
 import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
+import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CancelAppointmentComponent } from './appointments/cancel-appointment/ca
     HeaderComponent,
     CreateAppointmentComponent,
     ModifyAppointmentComponent,
-    CancelAppointmentComponent
+    CancelAppointmentComponent,
+    ClinicalHistoryComponent
   ],
   imports: [
     BrowserModule,
