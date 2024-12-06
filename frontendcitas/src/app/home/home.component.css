@@ -1,17 +1,18 @@
 /* Diseño general de dos columnas */
 .home-layout {
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px); /* Ocupa el 100% de la altura menos la barra de navegación */
     display: flex;
     align-items: flex-start;
     gap: 20px; /* Espaciado entre el menú y el contenido */
     padding: 20px;
+    background-color: #f3f4f6; /* Fondo claro de la página */
 }
 
 /* Menú lateral */
 .sidebar {
     flex: 1; /* Tamaño flexible para el menú */
-    max-width: 300px;
-    background: #f8f9fa; /* Fondo claro */
+    max-width: 300px; /* Tamaño máximo del menú */
+    background: #ffffff; /* Fondo blanco */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -19,12 +20,13 @@
 
 .sidebar h3, .sidebar h4 {
     color: #0056b3; /* Azul para los encabezados */
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2rem; /* Tamaño más destacado */
 }
 
 .sidebar p {
     font-size: 1rem;
-    color: #555;
+    color: #333; /* Oscurece un poco para contraste */
     margin-bottom: 10px;
 }
 
@@ -40,9 +42,20 @@
 .sidebar a {
     text-decoration: none;
     color: #007bff;
+    font-weight: bold;
 }
 
 .sidebar a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para el enlace "Soporte" en el menú lateral */
+.support-link {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.support-link:hover {
     text-decoration: underline;
 }
 
@@ -52,27 +65,40 @@
     padding: 20px;
     display: flex;
     justify-content: center;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
-/* Estilos originales del contenido principal */
 .home-container {
     text-align: center;
-    margin-top: 0;
-    padding: 0px;
+    width: 100%;
+    padding: 0;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     color: #007bff;
+    margin-bottom: 20px;
 }
 
 p {
     font-size: 1.2rem;
     color: #555;
+    margin-bottom: 20px;
 }
 
+/* Mensaje destacado */
+.highlight-message {
+    font-size: 1.2rem;
+    color: #008b8b;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* Características */
 .features {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .features h2 {
@@ -86,27 +112,65 @@ p {
 }
 
 .features li {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar texto e iconos */
+    gap: 10px;
     margin: 10px 0;
     font-size: 1.2rem;
     color: #333;
 }
 
+.material-icons {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+/* Botones */
 .actions {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .actions button, .actions a {
     margin: 10px;
     padding: 15px 20px;
     font-size: 1.1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.contact-btn:hover {
+    background-color: #0056b3;
 }
 
 /* Imagen del componente */
 .hero-image {
-    max-width: 80%; /* Ajusta el tamaño máximo al 80% del ancho del contenedor */
+    max-width: 75%; /* Ajusta el tamaño máximo al 75% del ancho del contenedor */
     height: auto; /* Mantiene las proporciones originales */
     margin: 20px auto; /* Centra la imagen horizontalmente */
     display: block; /* Asegura que la imagen sea un bloque */
     border-radius: 10px; /* Opcional: redondea las esquinas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: añade una sombra */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+}
+
+.map-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.map-section h3 {
+    font-size: 1.2rem;
+    color: #0056b3;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.map-section iframe {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
