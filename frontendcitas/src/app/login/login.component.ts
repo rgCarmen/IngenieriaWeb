@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 export class LoginComponent {
   username: string = ''; // Agrega estas variables
   password: string = ''; // Agrega estas variables
+  showPassword: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,5 +23,9 @@ export class LoginComponent {
     } else {
       alert('Usuario o contraseña incorrectos');
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }
