@@ -1,48 +1,44 @@
-<div class="modify-appointment">
-    <h2>Modificar Cita</h2>
-  
-    <!-- Lista de citas -->
+<div class="create-appointment-container">
+  <div class="form-section">
+    <h2>✏️ Modificar Cita</h2>
+
+    <!-- Selección de cita a modificar -->
     <div class="form-group">
-      <label for="appointment">Selecciona la cita a modificar</label>
-      <select
-        id="appointment"
-        [(ngModel)]="selectedAppointment"
-        (change)="loadAppointmentDetails()"
-      >
+      <label for="appointment">📋 Selecciona la cita a modificar</label>
+      <select id="appointment" [(ngModel)]="selectedAppointment" (change)="loadAppointmentDetails()">
         <option *ngFor="let appointment of appointments" [value]="appointment">
           {{ appointment.specialty }} - {{ appointment.doctor }} - {{ appointment.date }}
         </option>
       </select>
     </div>
-  
-    <!-- Detalles de la cita seleccionada -->
-    <div *ngIf="selectedAppointment" class="appointment-details">
-      <h3>Detalles de la Cita</h3>
-      <div class="form-group">
-        <label for="specialty">Especialidad</label>
-        <select id="specialty" [(ngModel)]="selectedAppointment.specialty" (change)="filterDoctors()">
-          <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
-        </select>
-      </div>
-  
-      <div class="form-group">
-        <label for="doctor">Doctor</label>
-        <select id="doctor" [(ngModel)]="selectedAppointment.doctor">
-          <option *ngFor="let doctor of filteredDoctors" [value]="doctor">{{ doctor }}</option>
-        </select>
-      </div>
-  
-      <div class="form-group">
-        <h3>Seleccione una nueva fecha</h3>
-        <div class="calendar-container">
-          <mat-calendar
-            [(selected)]="selectedAppointment.date"
-            (selectedChange)="updateDate($event)"
-          ></mat-calendar>
-        </div>
-      </div>
-  
-      <button class="btn-primary" (click)="saveChanges()">Guardar Cambios</button>
+
+    <!-- Especialidad -->
+    <div class="form-group" *ngIf="selectedAppointment">
+      <label for="specialty">🩺 Especialidad</label>
+      <select id="specialty" [(ngModel)]="selectedAppointment.specialty" (change)="filterDoctors()">
+        <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+      </select>
+    </div>
+
+    <!-- Doctor -->
+    <div class="form-group" *ngIf="selectedAppointment">
+      <label for="doctor">👩‍⚕️ Doctor</label>
+      <select id="doctor" [(ngModel)]="selectedAppointment.doctor">
+        <option *ngFor="let doctor of filteredDoctors" [value]="doctor">{{ doctor }}</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" (click)="saveChanges()">💾 Guardar Cambios</button>
+  </div>
+
+  <!-- Calendario -->
+  <div class="calendar-section" *ngIf="selectedAppointment">
+    <h3>📅 Seleccione una nueva fecha</h3>
+    <div class="calendar-container">
+      <mat-calendar
+        [(selected)]="selectedAppointment.date"
+        (selectedChange)="updateDate($event)"
+      ></mat-calendar>
     </div>
   </div>
-  
+</div>

@@ -25,12 +25,34 @@ export class CreateAppointmentComponent {
     this.availableDates = []; // Limpia las fechas disponibles
   }
 
-  // Carga las fechas disponibles del doctor seleccionado
   loadAvailableDates() {
     if (this.selectedDoctor) {
       this.availableDates = this.selectedDoctor.availableDates;
+      this.highlightAvailableDates();
     }
   }
+  
+  // Función para resaltar días disponibles
+  highlightAvailableDates() {
+    const calendarDays = document.querySelectorAll('.mat-calendar-body-cell-content');
+  
+    calendarDays.forEach(day => {
+      const dayElement = day as HTMLElement; // Casting a HTMLElement
+      const dayText = dayElement.textContent;
+  
+      if (dayText) {
+        const dayString = dayText.padStart(2, '0');
+        const month = new Date().getMonth() + 1;
+        const year = new Date().getFullYear();
+        const dateStr = `${year}-${month.toString().padStart(2, '0')}-${dayString}`;
+  
+        if (this.availableDates.includes(dateStr)) {
+          dayElement.style.backgroundColor = '#90ee90'; // Resaltar en verde
+          dayElement.style.borderRadius = '50%';
+        }
+      }
+    });
+  }  
 
   // Lógica para seleccionar una fecha del calendario
   selectDate(date: Date) {

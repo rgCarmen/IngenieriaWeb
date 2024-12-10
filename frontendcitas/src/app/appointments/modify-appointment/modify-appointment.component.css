@@ -1,63 +1,69 @@
-.modify-appointment {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  h2 {
-    color: #0056b3;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  label {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  select {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .calendar-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  mat-calendar {
-    width: 100%;
-    max-width: 600px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 18px;
-  }
-  
-  button {
-    padding: 15px 20px;
-    font-size: 18px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+/* Título azul con tamaño más grande */
+h2 {
+  font-size: 2rem;
+  color: #007bff; /* Azul */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Ajustes a los campos de selección */
+select {
+  width: 100%;
+  max-width: 100%; /* Ocupa el ancho completo del contenedor */
+  padding: 12px;   /* Padding más amplio */
+  font-size: 18px; /* Texto más grande */
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+/* Botón de búsqueda con tamaño acorde */
+button.btn-primary {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Ajustes para los nombres de los campos */
+label {
+  display: block;           /* Asegura que la etiqueta se muestre en una línea separada */
+  text-align: left;         /* Alinea el texto a la izquierda */
+  font-size: 18px;          /* Tamaño de fuente más grande */
+  font-weight: bold;        /* Hace que las etiquetas sean más llamativas */
+  margin-bottom: 5px;       /* Espacio inferior para separar del select */
+}
+
+/* Contenedor de la sección izquierda */
+.form-section {
+  width: 45%;
+  padding-right: 20px;
+}
+
+/* Ajuste del contenedor principal */
+.create-appointment-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 30px;
+  background: linear-gradient(135deg, #f3f4f6, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustar el tamaño y posición del calendario */
+mat-calendar {
+  width: 110%;                /* Aumenta ligeramente el ancho */
+  max-width: 700px;           /* Establece un límite máximo */
+  padding: 50px;              /* Padding adicional para un diseño más espacioso */
+  font-size: 20px;            /* Tamaño de fuente ligeramente mayor */
+  transform: translate(-80px, -50px); /* Desplaza el calendario hacia la izquierda */
+}
+
