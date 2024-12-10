@@ -1,1 +1,27 @@
-<p>cancel-appointment works!</p>
+<div class="cancel-appointment-container">
+    <div class="form-section">
+      <h2>❌ Cancelar Cita</h2>
+  
+      <!-- Selección de cita a cancelar -->
+      <div class="form-group">
+        <label for="appointment">📋 Selecciona la cita a cancelar</label>
+        <select id="appointment" [(ngModel)]="selectedAppointment">
+          <option *ngFor="let appointment of appointments" [value]="appointment">
+            {{ appointment.specialty }} - {{ appointment.doctor }} - {{ appointment.date }}
+          </option>
+        </select>
+      </div>
+  
+      <button 
+        class="btn-danger" 
+        (click)="confirmCancellation()" 
+        [disabled]="!selectedAppointment">
+        🗑️ Cancelar Cita
+      </button>
+    </div>
+  
+    <!-- Confirmación de cancelación -->
+    <div class="confirmation-section" *ngIf="cancellationConfirmed">
+      <p>✅ La cita con el/la doctor(a) {{ selectedAppointment?.doctor }} ha sido cancelada.</p>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+/* Contenedor principal */
+.cancel-appointment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+  
+    /* Estilo para la sección del formulario */
+    .form-section {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+  
+    h2 {
+    font-size: 2rem;
+    color: #007bff; /* Azul */
+    margin-bottom: 20px;
+    }
+
+    label {
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+
+    select {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    }
+
+    button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+
+    &.btn-danger {
+        background-color: #dc3545;
+        color: white;
+
+        &:hover {
+        background-color: #c82333;
+        }
+
+        &:disabled {
+        background-color: #f5c6cb;
+        cursor: not-allowed;
+        }
+    }
+    }
+}
+
+/* Mensaje de confirmación */
+.confirmation-section {
+    p {
+    font-size: 16px;
+    color: #28a745; /* Verde para indicar éxito */
+    margin-top: 20px;
+    font-weight: bold;
+    }
+}
+}

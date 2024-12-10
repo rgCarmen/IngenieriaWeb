@@ -6,7 +6,7 @@ import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
 import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
-// import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
+import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       { path: 'create', component: CreateAppointmentComponent },
       { path: 'modify', component: ModifyAppointmentComponent },
-      // { path: 'cancel', component: CancelAppointmentComponent },
+      { path: 'cancel', component: CancelAppointmentComponent },
     ],
   },
 
