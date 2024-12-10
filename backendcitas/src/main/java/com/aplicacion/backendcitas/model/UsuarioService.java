@@ -9,7 +9,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public UsuarioRol obtenerRol(String email, int hashcontrasena) {
+    public UsuarioRol obtenerRol(String email, String hashcontrasena) {
         // Buscar el usuario en la base de datos
         Usuario usuario = usuarioRepository.findByEmailAndContrasena(email, hashcontrasena);
 
@@ -21,4 +21,14 @@ public class UsuarioService {
             throw new RuntimeException("Usuario o contraseña incorrectos");
         }
     }
+
+    public Usuario crearUsuario(Usuario usuario){
+        usuario.setConfirmarContrasena(usuario.getContrasena());
+        int contrasenaHashed = usuario.getContrasena().hashCode();
+        usuario.setContrasena(String.valueOf(contrasenaHashed));
+      
+        return usuarioRepository.saveAndFlush(usuario);
+    }
 }
+
+

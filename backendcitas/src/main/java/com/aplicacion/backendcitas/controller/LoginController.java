@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aplicacion.backendcitas.dto.CredencialesDTO;
+import com.aplicacion.backendcitas.model.Cita;
+import com.aplicacion.backendcitas.model.Usuario;
 import com.aplicacion.backendcitas.model.UsuarioRol;
 import com.aplicacion.backendcitas.model.UsuarioService;
 
@@ -27,7 +29,7 @@ public class LoginController {
     public ResponseEntity<?> autenticarUsuario(@RequestBody CredencialesDTO credenciales) {
         try {
             // Lógica de autenticación
-            UsuarioRol rol = usuarioService.obtenerRol(credenciales.getEmail(), credenciales.getContrasena().hashCode());
+            UsuarioRol rol = usuarioService.obtenerRol(credenciales.getEmail(),  String.valueOf(credenciales.getContrasena().hashCode()));
             
             // Guardar el rol del usuario en la variable estática
             rolUsuario = rol;  // Convertir el rol a cadena para guardar
@@ -53,6 +55,15 @@ public class LoginController {
         // Limpiar la variable estática al cerrar sesión
         rolUsuario = null;
         return "Has cerrado sesión correctamente.";
+    }
+
+    @PostMapping("/registrar")
+    public Usuario registrarUsuario(@RequestBody Usuario usuario){
+        Usuario u= usuarioService.crearUsuario(usuario);
+        u.setContrasena(null);
+
+        return u;
+
     }
 }
 

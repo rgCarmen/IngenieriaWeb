@@ -1,6 +1,9 @@
 -- Insercion de datos para la tabla Usuario
 INSERT INTO usuario (contrasena, email, nombre, rol) 
-VALUES ('46792755', 'paciente@example.com', 'Juan Perez', 'PACIENTE'); -- contraseña 12345
+VALUES ('749146993', 'paciente@example.com', 'paciente', 'PACIENTE'), --contraseña paciente
+('92668751',	'admin@example.com',	'admin', 'ADMINISTRADOR'),--admin
+('-1078031031',	'medico@example.com',	'medico',	'MEDICO'); --medico 
+
 
 
 -- Inserción de datos para la tabla Paciente

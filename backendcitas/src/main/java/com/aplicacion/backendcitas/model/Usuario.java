@@ -2,6 +2,8 @@ package com.aplicacion.backendcitas.model;
 
 import org.antlr.v4.runtime.misc.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 //import jakarta.validation.constraints.*;
 
@@ -14,9 +16,14 @@ public class Usuario {
     private String nombre;
     @Column(unique = true) // Restringe duplicados en la base de datos
     private String email;
-    private int contrasena;
+
+    private String contrasena;
+    
     @Enumerated(EnumType.STRING)
     private UsuarioRol rol;
+
+    @Transient //no incluir en la base de datos porque corresponde a la contraseña y no al hashCode
+    private String confirmarContrasena;
 
     // Getters y Setters
     public Long getId() {
@@ -43,11 +50,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public int getContrasena() {
+    public String getContrasena() {
         return contrasena;
     }
 
-    public void setContrasena(int contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
@@ -57,5 +64,13 @@ public class Usuario {
 
     public void setRol(UsuarioRol rol){
         this.rol = rol;
+    }
+
+    public String getConfirmarContrasena() {
+        return confirmarContrasena;
+    }
+
+    public void setConfirmarContrasena(String confirmarContrasena) {
+        this.confirmarContrasena = confirmarContrasena;
     }
 }
