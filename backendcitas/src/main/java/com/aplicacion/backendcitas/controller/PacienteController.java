@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aplicacion.backendcitas.model.Cita;
 import com.aplicacion.backendcitas.model.CitaService;
-import com.aplicacion.backendcitas.model.Paciente;
 import com.aplicacion.backendcitas.model.PacienteRepository;
+import com.aplicacion.backendcitas.model.entidades.Cita;
+import com.aplicacion.backendcitas.model.entidades.Paciente;
 
 import jakarta.persistence.EntityNotFoundException;
 

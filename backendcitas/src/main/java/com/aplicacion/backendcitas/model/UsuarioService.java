@@ -3,6 +3,8 @@ package com.aplicacion.backendcitas.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aplicacion.backendcitas.model.entidades.Usuario;
+
 @Service
 public class UsuarioService {
 
@@ -28,6 +30,15 @@ public class UsuarioService {
         usuario.setContrasena(String.valueOf(contrasenaHashed));
       
         return usuarioRepository.saveAndFlush(usuario);
+    }
+
+    public Usuario registrarUsuario(Usuario usuario) {
+        // Validar si el email ya existe en la base de datos
+        if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            throw new RuntimeException("El email ya está registrado.");
+        }
+        // Guardar el usuario en la base de datos
+        return usuarioRepository.save(usuario);
     }
 }
 

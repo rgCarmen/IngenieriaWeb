@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import com.aplicacion.backendcitas.model.entidades.Cita;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

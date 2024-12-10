@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aplicacion.backendcitas.model.Cita;
 import com.aplicacion.backendcitas.model.CitaService;
+import com.aplicacion.backendcitas.model.entidades.Cita;
 
 @RestController
 public class CitaController {

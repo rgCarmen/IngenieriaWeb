@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aplicacion.backendcitas.dto.CredencialesDTO;
-import com.aplicacion.backendcitas.model.Cita;
-import com.aplicacion.backendcitas.model.Usuario;
 import com.aplicacion.backendcitas.model.UsuarioRol;
 import com.aplicacion.backendcitas.model.UsuarioService;
+import com.aplicacion.backendcitas.model.entidades.Cita;
+import com.aplicacion.backendcitas.model.entidades.Usuario;
 
 @RestController
 @RequestMapping(path = "/login")
