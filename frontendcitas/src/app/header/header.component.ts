@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -8,15 +8,27 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  userRole: string | null = null;
+
   constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    // Obtener el rol del usuario al inicializar el componente
+    this.authService.getRoleFromServer().subscribe({
+      next: (role) => this.userRole = role,
+      error: () => this.userRole = null,
+    });
+  }
 
   goToLogin() {
     this.router.navigate(['/login']); // Redirige al login
   }
 
   logout() {
-    this.authService.logout(); // Lógica para cerrar sesión
-    this.router.navigate(['/']); // Redirige al home
+    this.authService.logout().subscribe(() => {
+      this.userRole = null;
+      this.router.navigate(['/']); // Redirige al home después de cerrar sesión
+    });
   }
 }

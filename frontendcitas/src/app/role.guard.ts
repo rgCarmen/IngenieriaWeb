@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { AuthService, Role } from './auth.service';
+import { CanActivate, Router, ActivatedRouteSnapshot, UrlTree } from '@angular/router';
+import { AuthService } from './auth.service';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -8,15 +10,20 @@ import { AuthService, Role } from './auth.service';
 export class RoleGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: any): boolean {
-    const expectedRole: Role = route.data.role;
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
+    const expectedRole = route.data['role'];
 
-    if (this.authService.isLoggedIn() && this.authService.getRole() === expectedRole) {
-      return true;
-    }
-
-    // Redirige al login si no está autenticado o no tiene el rol correcto
-    this.router.navigate(['/login']);
-    return false;
+    return this.authService.getRoleFromServer().pipe(
+      map((role) => {
+        if (this.authService.isLoggedIn() && role === expectedRole) {
+          return true;
+        } else {
+          return this.router.createUrlTree(['/unauthorized']);
+        }
+      }),
+      catchError(() => {
+        return of(this.router.createUrlTree(['/login']));
+      })
+    );
   }
 }

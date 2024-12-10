@@ -10,8 +10,7 @@ import { ModifyAppointmentComponent } from './appointments/modify-appointment/mo
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
-// import { HistoryComponent } from './history/history.component';
-// import { StatisticsComponent } from './statistics/statistics.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Importar el componente de acceso no autorizado
 
 const routes: Routes = [
   // Página principal
@@ -21,10 +20,20 @@ const routes: Routes = [
   {
     path: 'citas',
     component: AppointmentsComponent,
-    canActivate: [AuthGuard], // Solo usuarios autenticados pueden acceder
+    canActivate: [AuthGuard],
     children: [
-      { path: 'create', component: CreateAppointmentComponent },
-      { path: 'modify', component: ModifyAppointmentComponent },
+      { 
+        path: 'create', 
+        component: CreateAppointmentComponent, 
+        canActivate: [RoleGuard],
+        data: { role: 'paciente' } // Solo accesible para pacientes
+      },
+      { 
+        path: 'modify', 
+        component: ModifyAppointmentComponent, 
+        canActivate: [RoleGuard],
+        data: { role: 'admin' } // Solo accesible para administradores
+      },
       // { path: 'cancel', component: CancelAppointmentComponent },
     ],
   },
@@ -47,6 +56,9 @@ const routes: Routes = [
 
   // Ruta para el login
   { path: 'login', component: LoginComponent },
+
+  // Ruta para accesos no autorizados
+  { path: 'unauthorized', component: UnauthorizedComponent },
 
   // Redirección por defecto
   { path: '**', redirectTo: '', pathMatch: 'full' },

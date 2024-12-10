@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { CreateAppointmentComponent } from './appointments/create-appointment/cr
 import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
 import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { ClinicalHistoryComponent } from './clinical-history/clinical-history.co
     CreateAppointmentComponent,
     ModifyAppointmentComponent,
     CancelAppointmentComponent,
-    ClinicalHistoryComponent
+    ClinicalHistoryComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { ClinicalHistoryComponent } from './clinical-history/clinical-history.co
   ],
   providers: [
     provideClientHydration(withEventReplay()),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
   ],
   bootstrap: [AppComponent]
 })
