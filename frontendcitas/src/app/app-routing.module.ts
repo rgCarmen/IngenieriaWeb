@@ -21,17 +21,19 @@ const routes: Routes = [
     path: 'citas',
     component: AppointmentsComponent,
     canActivate: [AuthGuard],
+    data: { role: 'PACIENTE' },
     children: [
       { 
         path: 'create', 
         component: CreateAppointmentComponent, 
-        canActivate: [RoleGuard],
+        canActivate: [AuthGuard],
         data: { role: 'PACIENTE' } // Solo accesible para pacientes
       },
+      
       { 
         path: 'modify', 
         component: ModifyAppointmentComponent, 
-        canActivate: [RoleGuard],
+        canActivate: [AuthGuard],
         data: { role: 'ADMINISTRADOR' } // Solo accesible para administradores
       },
       // { path: 'cancel', component: CancelAppointmentComponent },
@@ -42,7 +44,7 @@ const routes: Routes = [
   {
     path: 'mi-cuenta',
     component: AccountComponent,
-    canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard],
     data: { role: 'PACIENTE' }, // Solo accesible para pacientes
   },
 
@@ -50,7 +52,7 @@ const routes: Routes = [
   {
     path: 'historial',
     component: ClinicalHistoryComponent,
-    canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard],
     data: { role: 'MEDICO' }, // Solo accesible para médicos
   },
 

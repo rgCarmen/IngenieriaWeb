@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 
-export type Role = 'admin' | 'medico' | 'paciente';
+export type Role = 'ADMINISTRADOR' | 'MEDICO' | 'PACIENTE';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +60,13 @@ export class AuthService {
 
   // Método para obtener el rol desde el servidor
   getRoleFromServer(): Observable<Role> {
-    return this.http.get<Role>(`${this.baseUrl}/obtenerRol`);
+    return this.http.get<{ rol: Role }>(`${this.baseUrl}/obtenerRol`).pipe(
+      map((response) => response.rol), // Extraemos el rol de la respuesta
+      catchError((err) => {
+        console.error('Error al obtener el rol', err);
+        throw err; // Propagar el error
+      })
+    );
   }
 
   // Método para obtener el rol almacenado localmente
