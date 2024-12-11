@@ -1,5 +1,8 @@
 package com.aplicacion.backendcitas.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +38,10 @@ public class RegistroController {
 
             // Guardar el paciente en la base de datos
             Usuario usuarioRegistrado = usuarioService.registrarUsuario(nuevoPaciente);
+            Map<String, Object> response = new HashMap<>();
+            response.put("registro", true);
 
-            return ResponseEntity.status(201).body("Paciente registrado correctamente con ID: " + usuarioRegistrado.getId());
+            return ResponseEntity.status(201).body(response);
         } catch (RuntimeException e) {
             return ResponseEntity.status(400).body("Error al registrar el paciente: " + e.getMessage());
         }

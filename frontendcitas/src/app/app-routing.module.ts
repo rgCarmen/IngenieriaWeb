@@ -11,10 +11,17 @@ import { AuthGuard } from './auth.guard';
 // import { RoleGuard } from './role.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Importar el componente de acceso no autorizado
+<<<<<<< HEAD
+import {RegistroComponent} from './registro/registro.component';
+=======
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
 import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
+<<<<<<< HEAD
 import { StadisticsComponent } from './stadistics/stadistics.component';
+=======
+>>>>>>> 264a81a8067d6d62ec2fd5d7c09873b0908429fd
+>>>>>>> a363d4fb74a932586fad1572db8e6dc8f1b2e56d
 
 const routes: Routes = [
   // Página principal
@@ -77,6 +84,8 @@ const routes: Routes = [
 
   // Ruta para el login
   { path: 'login', component: LoginComponent },
+
+  { path: 'registro', component: RegistroComponent},
 
   // Ruta para accesos no autorizados
   { path: 'unauthorized', component: UnauthorizedComponent },
