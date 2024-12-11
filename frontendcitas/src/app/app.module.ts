@@ -25,7 +25,13 @@ import { ModifyAppointmentComponent } from './appointments/modify-appointment/mo
 import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+<<<<<<< HEAD
 import { RegistroComponent } from './registro/registro.component';
+=======
+import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
+import { GuidesComponent } from './home/guides/guides.component';
+import { SupportComponent } from './home/support/support.component';
+>>>>>>> 264a81a8067d6d62ec2fd5d7c09873b0908429fd
 
 @NgModule({
   declarations: [
@@ -40,7 +46,13 @@ import { RegistroComponent } from './registro/registro.component';
     CancelAppointmentComponent,
     ClinicalHistoryComponent,
     UnauthorizedComponent,
+<<<<<<< HEAD
     RegistroComponent
+=======
+    MedicalServicesComponent,
+    GuidesComponent,
+    SupportComponent
+>>>>>>> 264a81a8067d6d62ec2fd5d7c09873b0908429fd
   ],
   imports: [
     BrowserModule,

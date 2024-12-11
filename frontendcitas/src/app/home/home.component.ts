@@ -14,4 +14,9 @@ export class HomeComponent {
   goToLogin() {
     this.router.navigate(['/login']);
   }
+
+  // Función para verificar si se está en una subruta
+  isSubRouteActive(): boolean {
+    return this.router.url !== '/home';
+  }
 }

@@ -3,32 +3,33 @@
   <aside class="sidebar">
     <h3>Información del Centro</h3>
     <p>Hospital Central</p>
-    <p>Horario: 8:00 AM - 8:00 PM</p>
+    <p>Horario: 8:00 - 20:00</p>
     <p>Teléfono: 555-123-456</p>
 
     <h4>Contenido Relevante</h4>
     <ul>
-      <li><a href="#">Servicios Médicos</a></li>
-      <li><a href="#">Guías para Pacientes</a></li>
-      <li><a href="#">Soporte</a></li>
-      <div class="map-section">
-        <h3>Encuéntranos Aquí</h3>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.438848845759!2d-4.4780498!3d36.7183379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f74a8e8d3ad3%3A0x8ab8f0732b872dc5!2sHospital%20Universitario%20Virgen%20de%20la%20Victoria%20(El%20Cl%C3%ADnico)!5e0!3m2!1ses!2ses!4v1696848306235!5m2!1ses!2ses"
-          width="100%"
-          height="300"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy">
-        </iframe>
-      </div>
+      <li><a routerLink="/home/medical-services">Servicios Médicos</a></li>
+      <li><a routerLink="/home/guides">Guías para Pacientes</a></li>
+      <li><a routerLink="/home/support">Soporte</a></li>
     </ul>
+
+    <div class="map-section">
+      <h3>Encuéntranos Aquí</h3>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.438848845759!2d-4.4780498!3d36.7183379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f74a8e8d3ad3%3A0x8ab8f0732b872dc5!2sHospital%20Universitario%20Virgen%20de%20la%20Victoria%20(El%20Cl%C3%ADnico)!5e0!3m2!1ses!2ses!4v1696848306235!5m2!1ses!2ses"
+        width="100%"
+        height="300"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+    </div>
   </aside>
 
   <!-- Contenido principal -->
   <main class="main-content">
-    <div class="home-container">
-      <!-- Encabezado -->
+    <!-- Mostrar contenido de bienvenida solo si no se está en una subruta -->
+    <div class="home-container" *ngIf="!isSubRouteActive()">
       <h1>Bienvenido a Gestión de Citas</h1>
       <p class="highlight-message">"Tu salud, nuestra prioridad: gestiona tus citas sin complicaciones."</p>
 
@@ -52,5 +53,8 @@
       <!-- Imagen -->
       <img src="assets/medical-illustration.jpg" alt="Gestión médica" class="hero-image">
     </div>
+
+    <!-- Vista para las subrutas -->
+    <router-outlet></router-outlet>
   </main>
 </div>
