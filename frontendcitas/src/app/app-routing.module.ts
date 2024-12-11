@@ -8,7 +8,7 @@ import { CreateAppointmentComponent } from './appointments/create-appointment/cr
 import { ModifyAppointmentComponent } from './appointments/modify-appointment/modify-appointment.component';
 // import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { AuthGuard } from './auth.guard';
-import { RoleGuard } from './role.guard';
+// import { RoleGuard } from './role.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Importar el componente de acceso no autorizado
 
@@ -25,14 +25,14 @@ const routes: Routes = [
       { 
         path: 'create', 
         component: CreateAppointmentComponent, 
-        canActivate: [RoleGuard],
-        data: { role: 'PACIENTE' } // Solo accesible para pacientes
+        canActivate: [AuthGuard],
+        data: { role: 'PACIENTE' } 
       },
       { 
         path: 'modify', 
         component: ModifyAppointmentComponent, 
-        canActivate: [RoleGuard],
-        data: { role: 'ADMINISTRADOR' } // Solo accesible para administradores
+        canActivate: [AuthGuard],
+        data: { role: 'PACIENTE' } 
       },
       // { path: 'cancel', component: CancelAppointmentComponent },
     ],
@@ -42,15 +42,14 @@ const routes: Routes = [
   {
     path: 'mi-cuenta',
     component: AccountComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'PACIENTE' }, // Solo accesible para pacientes
+    canActivate: [AuthGuard],
   },
 
   // Ruta para el historial clínico, protegida por RoleGuard (solo doctores)
   {
     path: 'historial',
     component: ClinicalHistoryComponent,
-    canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard],
     data: { role: 'MEDICO' }, // Solo accesible para médicos
   },
 
