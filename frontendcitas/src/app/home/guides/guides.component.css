@@ -1,0 +1,71 @@
+.guides-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 100%; /* Aprovecha todo el ancho disponible */
+  margin: 0 auto;
+}
+
+.guide-card {
+  border: 1px solid #d1e7ff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #f0f8ff; /* Color de fondo por defecto */
+}
+
+/* Colores diferentes para cada tarjeta */
+.guide-card:nth-child(1) {
+  background-color: #e0f7fa; /* Turquesa claro */
+}
+
+.guide-card:nth-child(2) {
+  background-color: #e8f5e9; /* Verde claro */
+}
+
+.guide-card:nth-child(3) {
+  background-color: #fff3e0; /* Naranja claro */
+}
+
+.guide-card:nth-child(4) {
+  background-color: #f3e5f5; /* Lila claro */
+}
+
+.guide-card:nth-child(5) {
+  background-color: #e1f5fe; /* Azul claro */
+  grid-column: span 2; /* La última tarjeta ocupa dos columnas */
+  justify-self: center; /* Centra la tarjeta dentro del grid */
+}
+
+.guide-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo del título dentro de cada tarjeta con iconos */
+.guide-card h3 {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #000; /* Títulos en color negro */
+  margin-bottom: 10px;
+}
+
+.guide-card h3 i {
+  margin-right: 10px;
+  color: #555; /* Color del icono */
+  font-size: 1.5rem;
+}
+
+/* Título principal "Guías para Pacientes" */
+.guides-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}

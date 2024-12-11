@@ -1,0 +1,102 @@
+/* Encabezado principal de soporte */
+.support-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+/* Descripción general */
+.support-description {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* Contenedor de las tarjetas de contacto */
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Estilo para cada tarjeta de contacto */
+.contact-card {
+  background-color: #f0f8ff;
+  border: 1px solid #d1e7ff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  flex: 1 1 250px; /* Ancho base de 250px y ajustable */
+  max-width: 300px; /* Ancho máximo de 300px */
+  white-space: normal; /* Permite saltos de línea */
+  overflow-wrap: break-word; /* Fuerza saltos de línea si es necesario */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icono dentro de cada tarjeta */
+.contact-card i {
+  font-size: 2rem;
+  color: #007bff;
+}
+
+/* Texto dentro de cada tarjeta */
+.contact-card p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Formulario de contacto */
+.contact-form {
+  max-width: 500px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Etiquetas del formulario */
+.contact-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Campos de entrada del formulario */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1e7ff;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Botón de enviar */
+.contact-form button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Efecto hover para el botón */
+.contact-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Título del formulario de contacto */
+.form-header {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

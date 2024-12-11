@@ -11,10 +11,21 @@ import { AuthGuard } from './auth.guard';
 // import { RoleGuard } from './role.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Importar el componente de acceso no autorizado
+import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
+import { GuidesComponent } from './home/guides/guides.component';
+import { SupportComponent } from './home/support/support.component';
 
 const routes: Routes = [
   // Página principal
-  { path: '', component: HomeComponent },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      { path: 'medical-services', component: MedicalServicesComponent },
+      { path: 'guides', component: GuidesComponent },
+      { path: 'support', component: SupportComponent },
+    ],
+  },
 
   // Rutas para citas, protegidas por AuthGuard
   {
@@ -61,8 +72,8 @@ const routes: Routes = [
   // Ruta para accesos no autorizados
   { path: 'unauthorized', component: UnauthorizedComponent },
 
-  // Redirección por defecto
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirección por defecto
+  { path: '**', redirectTo: '/home' }, // Redirección para rutas no encontradas
 ];
 
 @NgModule({

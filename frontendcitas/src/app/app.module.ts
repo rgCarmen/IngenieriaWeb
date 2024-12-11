@@ -25,6 +25,9 @@ import { ModifyAppointmentComponent } from './appointments/modify-appointment/mo
 import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
+import { GuidesComponent } from './home/guides/guides.component';
+import { SupportComponent } from './home/support/support.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     ModifyAppointmentComponent,
     CancelAppointmentComponent,
     ClinicalHistoryComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    MedicalServicesComponent,
+    GuidesComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,
