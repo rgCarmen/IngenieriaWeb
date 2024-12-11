@@ -1,0 +1,50 @@
+.agenda-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Alinea elementos verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    gap: 20px; /* Espaciado entre elementos */
+  }
+
+
+  table {
+    width: 90%; /* Ajusta el ancho al 90% del contenedor */
+    max-width: 1000px; /* Establece un límite máximo para pantallas grandes */
+    border-collapse: collapse;
+    margin: 0 auto; /* Centra la tabla */
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra a la tabla */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
+  }
+  
+  /* Encabezados de tabla */
+  th {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 15px;
+    text-align: left;
+    font-size: 1rem;
+  }
+  
+  /* Filas de tabla */
+  td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+  
+.btn-warn {
+    background-color: #f44336; 
+    color: #fff; 
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  button:hover {
+    background-color: #ff9ca9;
+  }
+  
