@@ -26,7 +26,9 @@ export class AuthService {
    * @returns Observable con la respuesta del servidor
    */
   login(email: string, contrasena: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/autenticar`, { email, contrasena });
+    const headers = { 'Content-Type': 'application/json' };
+  const body = { email, contrasena };
+  return this.http.post('http://localhost:8080/login/autenticar', body, { headers });
   }
 
   /**

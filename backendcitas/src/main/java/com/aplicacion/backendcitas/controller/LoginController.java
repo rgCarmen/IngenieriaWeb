@@ -1,5 +1,8 @@
 package com.aplicacion.backendcitas.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +36,12 @@ public class LoginController {
             
             // Guardar el rol del usuario en la variable estática
             rolUsuario = rol;  // Convertir el rol a cadena para guardar
+            Map<String, Object> response = new HashMap<>();
+            response.put("autentificar", true);
+            response.put("rol", rol);
 
-            return ResponseEntity.ok().body("Autenticado correctamente, rol: " + rol);
+
+            return ResponseEntity.ok().body(response);
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(e.getMessage() + credenciales.getContrasena().hashCode() );
         }

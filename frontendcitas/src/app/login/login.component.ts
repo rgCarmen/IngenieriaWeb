@@ -18,11 +18,18 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
-    if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/']);
-    } else {
-      alert('Usuario o contraseña incorrectos');
-    }
+    console.log('Botón de login presionado'); // Log para saber que se ejecutó el método
+    console.log('Credenciales:', { email: this.username, contrasena: this.password });
+    this.authService.login(this.username, this.password).subscribe({
+      next: (response) => {
+        console.log('Autenticado correctamente', response); // Respuesta del servidor
+        this.router.navigate(['/']); // Redirige al usuario a la página principal
+      },
+      error: (error) => {
+        console.error('Error en la autenticación:', error);
+        alert('Usuario o contraseña incorrectos'); // Mensaje de error si las credenciales no son correctas
+      }
+    });
   }
 
   togglePasswordVisibility(): void {
