@@ -21,6 +21,7 @@ const routes: Routes = [
     path: 'citas',
     component: AppointmentsComponent,
     canActivate: [AuthGuard],
+    data: { role: 'PACIENTE' },
     children: [
       { 
         path: 'create', 
@@ -28,6 +29,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { role: 'PACIENTE' } 
       },
+      
       { 
         path: 'modify', 
         component: ModifyAppointmentComponent, 
