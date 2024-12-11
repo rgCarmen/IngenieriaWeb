@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout().subscribe(() => {
+      console.log("Logout")
       this.userRole = null;
       this.router.navigate(['/']); // Redirige al home después de cerrar sesión
     });

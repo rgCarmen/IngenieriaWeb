@@ -60,11 +60,13 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/logout")
-    public String logout() {
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
         // Limpiar la variable estática al cerrar sesión
         rolUsuario = null;
-        return "Has cerrado sesión correctamente.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("logout",true);
+        return  ResponseEntity.ok(response);
     }
 
     @PostMapping("/registrar")

@@ -57,7 +57,7 @@ export class AuthService {
       localStorage.removeItem('isAuthenticated');
       localStorage.removeItem('userRole');
     }
-    return this.http.get(`${this.baseUrl}/logout`);
+    return this.http.post(`${this.baseUrl}/logout`, {});
   }
 
   getRoleFromServer(): Observable<Role> {
