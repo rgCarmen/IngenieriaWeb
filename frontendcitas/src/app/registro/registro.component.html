@@ -1,105 +1,110 @@
 <div class="registro-container">
-    <form (ngSubmit)="registro()"> 
-      <h2>Registrate como Paciente</h2>
-  
-      <!-- Campo de usuario -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          [(ngModel)]="email" 
-          placeholder="Introduce un email"
-          required
-        />
-      </div>
+  <form (ngSubmit)="registro()" #registroForm="ngForm">
+    <h2>Registrate como Paciente</h2>
 
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          [(ngModel)]="nombre" 
-          placeholder="Introduce su nombre y apellidos"
-          required
-        />
+    <!-- Campo de usuario -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        #emailField="ngModel"
+        placeholder="Introduce un email"
+        required
+        email
+      />
+      <div *ngIf="emailField.invalid && emailField.touched" class="error-message">
+        El email es obligatorio y debe ser válido.
       </div>
-  
-      <!-- Campo de contraseña -->
-      <div class="form-group">
-        <label for="contrasena">Contraseña</label>
-        <div style="position: relative;">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            id="password"
-            name="password"
-            [(ngModel)]="password"
-            placeholder="Introduce tu contraseña"
-            required
-          />
-          <button
-            type="button"
-            style="
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-          "
-            (click)="togglePasswordVisibility()"
-          >
-           <img
-            [src]="showPassword ? 'assets/closed-eye.svg': 'assets/open-eye.svg' "
+    </div>
+
+    <!-- Campo de nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        [(ngModel)]="nombre"
+        #nombreField="ngModel"
+        placeholder="Introduce su nombre y apellidos"
+        required
+      />
+      <div *ngIf="nombreField.invalid && nombreField.touched" class="error-message">
+        El nombre es obligatorio.
+      </div>
+    </div>
+
+    <!-- Campo de contraseña -->
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <div style="position: relative;">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          #passwordField="ngModel"
+          placeholder="Introduce tu contraseña"
+          required
+          minlength="6"
+        />
+        <button
+          type="button"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;"
+          (click)="togglePasswordVisibility()"
+        >
+          <img
+            [src]="showPassword ? 'assets/closed-eye.svg': 'assets/open-eye.svg'"
             alt="Mostrar/Ocultar"
             width="20"
             height="20"
           />
-          </button> 
-        </div> 
+        </button>
       </div>
+      <div *ngIf="passwordField.invalid && passwordField.touched" class="error-message">
+        La contraseña es obligatoria y debe tener al menos 6 caracteres.
+      </div>
+    </div>
 
-
-      <div class="form-group">
-        <label for="confirm-password"> Confirmar Contraseña</label>
-        <div style="position: relative;">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            id="confirm-password"
-            name="confirm-password"
-            [(ngModel)]="confirmPassword"
-            placeholder="Repite tu contraseña"
-            required
-            (input)="validatePasswords()"
-          />
-          <button
-            type="button"
-            style="
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-          "
-            (click)="togglePasswordVisibility()"
-          >
-           <img
-            [src]="showPassword ? 'assets/closed-eye.svg': 'assets/open-eye.svg' "
+    <!-- Confirmación de contraseña -->
+    <div class="form-group">
+      <label for="confirm-password">Confirmar Contraseña</label>
+      <div style="position: relative;">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="confirm-password"
+          name="confirm-password"
+          [(ngModel)]="confirmPassword"
+          #confirmPasswordField="ngModel"
+          placeholder="Repite tu contraseña"
+          required
+          (input)="validatePasswords()"
+        />
+        <button
+          type="button"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;"
+          (click)="togglePasswordVisibility()"
+        >
+          <img
+            [src]="showPassword ? 'assets/closed-eye.svg': 'assets/open-eye.svg'"
             alt="Mostrar/Ocultar"
             width="20"
             height="20"
           />
-          </button> 
-        </div> 
-        <p *ngIf="passwordMismatch" class="error-message">Las contraseñas no coinciden</p>
+        </button>
       </div>
-  
-      <!-- Botón de inicio de sesión -->
-      <button type="submit" class="btn-primary">Registrar</button>
-    </form>
-  </div>
+      <div *ngIf="passwordMismatch" class="error-message">Las contraseñas no coinciden.</div>
+      <div *ngIf="confirmPasswordField.invalid && confirmPasswordField.touched" class="error-message">
+        La confirmación de la contraseña es obligatoria.
+      </div>
+    </div>
+
+    <!-- Botón de registro -->
+    <button type="submit" class="btn-primary" [disabled]="registroForm.invalid || passwordMismatch">
+      Registrar
+    </button>
+  </form>
+</div>
