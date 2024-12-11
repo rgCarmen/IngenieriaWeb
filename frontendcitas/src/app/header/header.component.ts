@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     // Obtener el rol del usuario al inicializar el componente
     this.authService.getRoleFromServer().subscribe({
       next: (role) => {
-        console.log('Rol obtenido del servidor:', role);
+        // console.log('Rol obtenido del servidor:', role);
         this.userRole = role;},
       error: (err) => {
         console.log('Error:', err);
