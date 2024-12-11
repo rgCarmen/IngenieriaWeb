@@ -24,6 +24,19 @@ public class UsuarioService {
         }
     }
 
+    public long obtenerId(String email, String hashcontrasena) {
+        // Buscar el usuario en la base de datos
+        Usuario usuario = usuarioRepository.findByEmailAndContrasena(email, hashcontrasena);
+
+        if (usuario != null) {
+            // Si el usuario existe, devolver el rol
+            return usuario.getId();
+        } else {
+            // Si no se encuentra, devolver un mensaje de error
+            throw new RuntimeException("Usuario o contraseña incorrectos");
+        }
+    }
+
     public Usuario crearUsuario(Usuario usuario){
         usuario.setConfirmarContrasena(usuario.getContrasena());
         int contrasenaHashed = usuario.getContrasena().hashCode();

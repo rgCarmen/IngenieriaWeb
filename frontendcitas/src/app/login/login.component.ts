@@ -23,7 +23,7 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
         console.log('Autenticado correctamente', response); // Respuesta del servidor
-        this.authService.setAuthentication(response.rol);
+        this.authService.setAuthentication(response.rol, response.id);
         this.router.navigate(['/']); // Redirige al usuario a la página principal
       },
       error: (error) => {

@@ -12,20 +12,27 @@ export class AuthService {
   private baseUrl = 'http://localhost:8080/login'; // URL del backend
   private isAuthenticated = false;
   private userRole: Role | null = null;
+  private userId: number = -1;
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated') || 'false');
       this.userRole = localStorage.getItem('userRole') as Role | null;
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId) {
+        this.userId = Number(storedUserId); // Convierte el id a número
+      }
     }
   }
 
-  setAuthentication(role: Role) {
+  setAuthentication(role: Role, id: number) {
     this.isAuthenticated = true;
     this.userRole = role;
+    this.userId= id
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('isAuthenticated', JSON.stringify(true));
       localStorage.setItem('userRole', role);
+      localStorage.setItem('userId', this.userId.toString());
     }
   }
 
