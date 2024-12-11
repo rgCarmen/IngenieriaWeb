@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
-import { AuthService, Role } from './auth.service';
+import { CanActivate, Router, ActivatedRouteSnapshot, UrlTree } from '@angular/router';
+import { AuthService } from './auth.service';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const expectedRole = route.data['role'];
+  
     const localRole = this.authService.getRole();
 
     if (this.authService.isLoggedIn()) {
@@ -27,5 +28,6 @@ export class AuthGuard implements CanActivate {
     }else{
       return of(this.router.createUrlTree(['/login']));
     }
+  
   }
 }
