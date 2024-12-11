@@ -16,8 +16,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     // Obtener el rol del usuario al inicializar el componente
     this.authService.getRoleFromServer().subscribe({
-      next: (role) => this.userRole = role,
-      error: () => this.userRole = null,
+      next: (role) => {
+        console.log('Rol obtenido del servidor:', role);
+        this.userRole = role;},
+      error: (err) => {
+        console.log('Error:', err);
+        this.userRole = null;
+      }
     });
   }
 

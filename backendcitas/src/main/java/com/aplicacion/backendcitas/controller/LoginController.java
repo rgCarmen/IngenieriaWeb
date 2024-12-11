@@ -49,9 +49,12 @@ public class LoginController {
 
     @GetMapping("/obtenerRol")
     public ResponseEntity<?> obtenerRol() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("rol", rolUsuario);
         // Devolver el rol guardado en la variable estática
         if (rolUsuario != null) {
-            return ResponseEntity.ok().body("Rol actual del usuario: " + rolUsuario);
+            System.out.println("Rol actual del usuario: " + rolUsuario);
+            return ResponseEntity.ok().body(response);
         } else {
             return ResponseEntity.status(401).body("No se ha autenticado ningún usuario.");
         }
