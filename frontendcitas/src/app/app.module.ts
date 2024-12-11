@@ -32,6 +32,7 @@ import { MedicalServicesComponent } from './home/medical-services/medical-servic
 import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
+import { CitasComponent } from './citas/citas.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { StadisticsComponent } from './stadistics/stadistics.component';
     GuidesComponent,
     SupportComponent,
     StadisticsComponent,
-    SupportComponent
+    SupportComponent,
+    CitasComponent
   ],
   imports: [
     BrowserModule,

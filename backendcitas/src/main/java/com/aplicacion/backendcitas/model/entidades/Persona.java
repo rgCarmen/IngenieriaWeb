@@ -14,7 +14,7 @@ public abstract class Persona {
     private String telefono;
 
     @OneToOne
-    @JoinColumn(name = "usuario_id", nullable = true) // PROVISIONAL opcional para que no haya que cambiar los insert
+    @JoinColumn(name = "usuario_id", unique = true, nullable = true) // PROVISIONAL opcional para que no haya que cambiar los insert
     private Usuario usuario;
 
     public Persona(){
@@ -66,7 +66,7 @@ public abstract class Persona {
         this.usuario=usuario;
     }
 
-    public Usuario getUsuario(Usuario usuario){
+    public Usuario getUsuario(){
         return usuario;
     }
 

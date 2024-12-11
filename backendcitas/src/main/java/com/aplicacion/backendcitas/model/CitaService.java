@@ -15,6 +15,8 @@ public class CitaService {
 
     @Autowired
     private CitaRepository citaRepository;
+
+    @Autowired
     private PacienteRepository pacienteRepository;
 
 
@@ -105,8 +107,9 @@ public class CitaService {
 
 
 
-    public List<Cita> obtenerCitasPorPaciente(Long pacienteId) {
-        return citaRepository.findByPacienteId(pacienteId);
+    public List<Cita> obtenerCitasPorPaciente(Long usuarioId) {
+        Paciente p=pacienteRepository.findByUsuarioId(usuarioId);
+        return citaRepository.findByPacienteId(p.getId());
     }
 
     public List<Cita> obtenerCitasPorMedico(Long medicoId) {

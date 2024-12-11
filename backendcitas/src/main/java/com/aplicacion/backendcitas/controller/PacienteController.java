@@ -20,84 +20,76 @@ import com.aplicacion.backendcitas.model.entidades.Paciente;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-//Lo del rol se puede poner con @PreAutorize
+// Lo del rol se puede poner con @PreAutorize
 @RequestMapping("/paciente")
 public class PacienteController {
 
     @Autowired
     private CitaService citaService;
+    
     @Autowired
     private PacienteRepository pacienteRepository;
 
-
     // Ver sus citas Agendadas
-    @GetMapping("/{pacienteId}/citas")
-    public List<Cita> obtenerCitas(@PathVariable Long pacienteId) {
-        return citaService.obtenerCitasPorPaciente(pacienteId);
-    
+    @GetMapping("/{usuarioId}/citas")
+    public List<Cita> obtenerCitas(@PathVariable Long usuarioId) {
+        return citaService.obtenerCitasPorPaciente(usuarioId);
+
     }
 
     // Ver citas libres????
 
+    // Pedir cita (buscar cita libre con las características que desea y asignarle
+    // el paciente)
+    // ? no funciona y no se por qué
 
-    // Pedir cita (buscar cita libre con las características que desea y asignarle el paciente)
-    //? no funciona y no se por qué
-    
-    @PutMapping("/{pacienteId}/citas/pedir/{id}")
-    public ResponseEntity<Cita> pedirCita(@PathVariable Long pacienteId,@PathVariable Long id) {
-        try{
-            Cita citaExistente= citaService.obtenerCitaPorId(id);
+    @PutMapping("/{usuarioId}/citas/pedir/{id}")
+    public ResponseEntity<?> pedirCita(@PathVariable Long usuarioId, @PathVariable Long id) {
+        try {
+            Cita citaExistente = citaService.obtenerCitaPorId(id);
 
-        //cita esta libre
-            if (citaExistente.getPaciente() != null){
+            // cita esta libre
+            if (citaExistente.getPaciente() != null) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
             }
 
-            Paciente paciente = pacienteRepository.findById(pacienteId)
-        .orElseThrow(() -> new EntityNotFoundException("Paciente no encontrado con ID: " + pacienteId));
+            Paciente paciente = pacienteRepository.findByUsuarioId(usuarioId);
+            // comprobar que no es una cita pasada
+            if (citaExistente.getFecha().isBefore(LocalDateTime.now())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
 
-        
-        // comprobar que no es una cita pasada
-        if (citaExistente.getFecha().isBefore(LocalDateTime.now())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
-        }
-               
-
-        //paciente existe se comprueba en el servicio
+            // paciente existe se comprueba en el servicio
             citaExistente.setPaciente(paciente);
-           
-            Cita citaAsignada= citaService.actualizarCita(id, citaExistente);
+
+            Cita citaAsignada = citaService.actualizarCita(id, citaExistente);
             return new ResponseEntity<>(citaAsignada, HttpStatus.OK);
+
         } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-    
+
     }
- 
 
     // Cancelar cita
-    @PutMapping("/{pacienteId}/citas/cancelar/{id}")
-    public ResponseEntity<Void> cancelarCita(@PathVariable Long pacienteId, @PathVariable Long id) {
+    @PutMapping("/{usuarioId}/citas/cancelar/{id}")
+    public ResponseEntity<Void> cancelarCita(@PathVariable Long usuarioId, @PathVariable Long id) {
         try {
-        Cita cita = citaService.obtenerCitaPorId(id);
-        if (cita.getPaciente().getId() != pacienteId) { //comprobar que sea una cita de ese paciente
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); 
-        }
-        if (cita.getFecha().isBefore(LocalDateTime.now())) { // que no sea una cita pasada
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
-        }
+            Cita cita = citaService.obtenerCitaPorId(id);
+            if (cita.getPaciente().getUsuario().getId() != usuarioId) { // comprobar que sea una cita de ese paciente
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+            if (cita.getFecha().isBefore(LocalDateTime.now())) { // que no sea una cita pasada
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
 
-        citaService.cancelarCita(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            citaService.cancelarCita(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 si la cita no existe
         }
     }
 
-
-
-    
-    
 }

@@ -8,7 +8,6 @@ VALUES ('749146993', 'paciente@example.com', 'paciente', 'PACIENTE'), --contrase
 
 -- Inserción de datos para la tabla Paciente
 INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES
- ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com'),
  ('Ana', 'García Rodríguez', '98765432B', '698765432', 'ana.garcia@example.com'),
  ('Luis', 'Martínez López', '56789012C', '656789012', 'luis.martinez@example.com'),
  ('María', 'Sánchez Fernández', '23456789D', '623456789', 'maria.sanchez@example.com'),
@@ -18,6 +17,9 @@ INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email) VALUES
  ('Laura', 'Álvarez Pérez', '78901234H', '678901234', 'laura.alvarez@example.com'),
  ('Miguel', 'Romero García', '34567890I', '634567890', 'miguel.romero@example.com'),
  ('Sofía', 'Navarro Martínez', '90123456J', '690123456', 'sofia.navarro@example.com');
+
+ INSERT INTO PACIENTE (nombre, apellidos, dni, telefono, email, usuario_id) VALUES
+ ('Juan', 'Pérez Gómez', '12345678A', '612345678', 'juan.perez@example.com', 1);
 
 
 -- Inserción de datos para la tabla Medico

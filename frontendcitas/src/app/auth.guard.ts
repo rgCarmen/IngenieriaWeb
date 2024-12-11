@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const expectedRole = route.data['role'];
     const localRole = this.authService.getRole();
-
+    console.log(expectedRole);
     if (this.authService.isLoggedIn()) {
     console.log('Rol recibido del servidor:', localRole);
     if (this.authService.isLoggedIn() && (!expectedRole || localRole === expectedRole)) {
