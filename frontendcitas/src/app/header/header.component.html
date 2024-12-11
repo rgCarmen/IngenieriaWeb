@@ -5,12 +5,12 @@
 
     <!-- Pestañas visibles solo si el usuario está autenticado -->
     <a mat-button routerLink="/">Inicio</a>
-    <a mat-button routerLink="/citas">Citas</a>
-    <a mat-button routerLink="/mi-cuenta">Mi cuenta</a>
+    <a mat-button routerLink="/appointments">Citas</a>
+    <a mat-button routerLink="/account">Mi cuenta</a>
 
     <!-- Opciones específicas por rol -->
-    <a mat-button routerLink="/historial" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Historial Clínico</a>
-    <a mat-button routerLink="/estadisticas" *ngIf="authService.isLoggedIn() && authService.getRole() === 'ADMINISTRADOR'">Estadísticas</a>
+    <a mat-button routerLink="/history" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Historial Clínico</a>
+    <a mat-button routerLink="/stadistics" *ngIf="authService.isLoggedIn() && authService.getRole() === 'ADMINISTRADOR'">Estadísticas</a>
 
     <!-- Botón de login/logout -->
     <button mat-button (click)="logout()" *ngIf="authService.isLoggedIn()">Cerrar sesión</button>

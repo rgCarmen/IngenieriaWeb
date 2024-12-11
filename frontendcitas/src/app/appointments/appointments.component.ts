@@ -11,6 +11,6 @@ export class AppointmentsComponent {
   constructor(private router: Router) {}
 
   navigateTo(action: string) {
-    this.router.navigate(['/citas', action]);
+    this.router.navigate(['/appointments', action]);
   }
 }

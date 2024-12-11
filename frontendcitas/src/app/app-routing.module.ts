@@ -14,6 +14,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; /
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
 import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
+import { StadisticsComponent } from './stadistics/stadistics.component';
 
 const routes: Routes = [
   // Página principal
@@ -29,10 +30,10 @@ const routes: Routes = [
 
   // Rutas para citas, protegidas por AuthGuard
   {
-    path: 'citas',
+    path: 'appointments',
     component: AppointmentsComponent,
     canActivate: [AuthGuard],
-    data: { role: 'PACIENTE' },
+    data: { role: 'PACIENTE'},
     children: [
       { 
         path: 'create', 
@@ -53,17 +54,25 @@ const routes: Routes = [
 
   // Ruta para la cuenta del usuario, protegida por AuthGuard y RoleGuard
   {
-    path: 'mi-cuenta',
+    path: 'account',
     component: AccountComponent,
     canActivate: [AuthGuard],
   },
 
   // Ruta para el historial clínico, protegida por RoleGuard (solo doctores)
   {
-    path: 'historial',
+    path: 'history',
     component: ClinicalHistoryComponent,
     canActivate: [AuthGuard],
     data: { role: 'MEDICO' }, // Solo accesible para médicos
+  },
+
+  // Ruta para estadisticas, protegida por RoleGuard (solo admins)
+  {
+    path: 'stadistics',
+    component: StadisticsComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'ADMINISTRADOR' }, // Solo accesible para administradores
   },
 
   // Ruta para el login

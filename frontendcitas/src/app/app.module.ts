@@ -28,6 +28,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
 import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
+import { StadisticsComponent } from './stadistics/stadistics.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SupportComponent } from './home/support/support.component';
     UnauthorizedComponent,
     MedicalServicesComponent,
     GuidesComponent,
-    SupportComponent
+    SupportComponent,
+    StadisticsComponent
   ],
   imports: [
     BrowserModule,
