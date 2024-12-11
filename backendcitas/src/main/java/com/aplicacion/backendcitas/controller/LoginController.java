@@ -23,8 +23,6 @@ import com.aplicacion.backendcitas.model.entidades.Usuario;
 public class LoginController {
 
     // Variable estática para almacenar el rol del usuario
-    private static UsuarioRol rolUsuario;
-
     @Autowired
     private UsuarioService usuarioService;
 
@@ -34,8 +32,7 @@ public class LoginController {
             // Lógica de autenticación
             UsuarioRol rol = usuarioService.obtenerRol(credenciales.getEmail(),  String.valueOf(credenciales.getContrasena().hashCode()));
             
-            // Guardar el rol del usuario en la variable estática
-            rolUsuario = rol;  // Convertir el rol a cadena para guardar
+           
             Map<String, Object> response = new HashMap<>();
             response.put("autentificar", true);
             response.put("rol", rol);
@@ -47,23 +44,10 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/obtenerRol")
-    public ResponseEntity<?> obtenerRol() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("rol", rolUsuario);
-        // Devolver el rol guardado en la variable estática
-        if (rolUsuario != null) {
-            System.out.println("Rol actual del usuario: " + rolUsuario);
-            return ResponseEntity.ok().body(response);
-        } else {
-            return ResponseEntity.status(401).body("No se ha autenticado ningún usuario.");
-        }
-    }
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
         // Limpiar la variable estática al cerrar sesión
-        rolUsuario = null;
         Map<String, Object> response = new HashMap<>();
         response.put("logout",true);
         return  ResponseEntity.ok(response);

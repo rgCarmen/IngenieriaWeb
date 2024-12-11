@@ -14,26 +14,18 @@ export class AuthGuard implements CanActivate {
     const expectedRole = route.data['role'];
     const localRole = this.authService.getRole();
 
-    // Verifica primero el rol almacenado localmente
+    if (this.authService.isLoggedIn()) {
+    console.log('Rol recibido del servidor:', localRole);
     if (this.authService.isLoggedIn() && (!expectedRole || localRole === expectedRole)) {
+      console.log("Autorizado")
       return of(true);
+    }else{
+      console.log(" No Autorizado")
+      return of(this.router.createUrlTree(['/unauthorized']));
     }
 
-    // Si no coincide, consulta al servidor como respaldo
-    return this.authService.getRoleFromServer().pipe(
-      map((role) => {
-        console.log('Rol recibido del servidor:', role);
-        if (this.authService.isLoggedIn() && role === expectedRole) {
-          console.log("Autorizado")
-          return true;
-        } else {
-          console.log(" No Autorizado")
-          return this.router.createUrlTree(['/unauthorized']);
-        }
-      }),
-      catchError(() => {
-        return of(this.router.createUrlTree(['/login']));
-      })
-    );
+    }else{
+      return of(this.router.createUrlTree(['/login']));
+    }
   }
 }

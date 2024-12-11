@@ -15,15 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // Obtener el rol del usuario al inicializar el componente
-    this.authService.getRoleFromServer().subscribe({
-      next: (role) => {
-        // console.log('Rol obtenido del servidor:', role);
-        this.userRole = role;},
-      error: (err) => {
-        console.log('Error:', err);
-        this.userRole = null;
-      }
-    });
+    this.userRole = this.authService.getRole();
   }
 
   goToLogin() {
@@ -31,10 +23,10 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      console.log("Logout")
-      this.userRole = null;
-      this.router.navigate(['/']); // Redirige al home después de cerrar sesión
-    });
+    this.authService.logout();
+    console.log("Logout");
+    this.userRole = null;
+    this.router.navigate(['/']); // Redirige al home después de cerrar sesión
+   
   }
 }

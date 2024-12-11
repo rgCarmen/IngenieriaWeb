@@ -13,20 +13,21 @@ export class RoleGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const expectedRole = route.data['role'];
   
-    return this.authService.getRoleFromServer().pipe(
-      
-      map((role) => {
-        console.log('Rol recibido del servidor:', role);
-        console.log("Login?:", this.authService.isLoggedIn())
-        if (this.authService.isLoggedIn() && role === expectedRole) {
-          return true;
-        } else {
-          return this.router.createUrlTree(['/unauthorized']);
-        }
-      }),
-      catchError(() => {
-        return of(this.router.createUrlTree(['/login']));
-      })
-    );
+    const localRole = this.authService.getRole();
+
+    if (this.authService.isLoggedIn()) {
+    console.log('Rol recibido del servidor:', localRole);
+    if (this.authService.isLoggedIn() && (!expectedRole || localRole === expectedRole)) {
+      console.log("Autorizado")
+      return of(true);
+    }else{
+      console.log(" No Autorizado")
+      return of(this.router.createUrlTree(['/unauthorized']));
+    }
+
+    }else{
+      return of(this.router.createUrlTree(['/login']));
+    }
+  
   }
 }

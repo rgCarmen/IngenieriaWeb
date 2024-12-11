@@ -50,17 +50,13 @@ export class AuthService {
     return this.userRole;
   }
 
-  logout(): Observable<any> {
+  logout() {
     this.isAuthenticated = false;
     this.userRole = null;
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('isAuthenticated');
       localStorage.removeItem('userRole');
     }
-    return this.http.post(`${this.baseUrl}/logout`, {});
   }
 
-  getRoleFromServer(): Observable<Role> {
-    return this.http.get<Role>(`${this.baseUrl}/obtenerRol`);
-  }
 }
