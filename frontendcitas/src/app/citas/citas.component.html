@@ -1,1 +1,9 @@
-<p>citas works!</p>
+<h1>Agenda de Citas</h1>
+
+<ul *ngIf="citas.length > 0">
+    <li *ngFor="let cita of citas">
+      <strong>Fecha:</strong> {{ cita.fecha }}
+      <strong>Médico:</strong> {{ cita.medico }}
+      <strong>Especialidad:</strong> {{ cita.especialidad }}
+    </li>
+  </ul>

@@ -28,7 +28,7 @@ export class AuthService {
   setAuthentication(role: Role, id: number) {
     this.isAuthenticated = true;
     this.userRole = role;
-    this.userId= id
+    this.userId = id
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('isAuthenticated', JSON.stringify(true));
       localStorage.setItem('userRole', role);
@@ -41,7 +41,7 @@ export class AuthService {
     const body = { email, contrasena };
     return this.http.post(`${this.baseUrl}/autenticar`, body, { headers });
   }
-  
+
 
   isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
@@ -56,6 +56,17 @@ export class AuthService {
     }
     return this.userRole;
   }
+
+  getId(): String | null {
+    if (this.isAuthenticated) {
+      if (isPlatformBrowser(this.platformId)) {
+        return localStorage.getItem('userId');
+      }
+      return this.userId !== -1 ? this.userId.toString() : null;
+    }
+    return null;
+  }
+
 
   logout() {
     this.isAuthenticated = false;
