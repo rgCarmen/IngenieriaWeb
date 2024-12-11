@@ -11,6 +11,7 @@ import { AuthGuard } from './auth.guard';
 // import { RoleGuard } from './role.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Importar el componente de acceso no autorizado
+import {RegistroComponent} from './registro/registro.component';
 
 const routes: Routes = [
   // Página principal
@@ -57,6 +58,8 @@ const routes: Routes = [
 
   // Ruta para el login
   { path: 'login', component: LoginComponent },
+
+  { path: 'registro', component: RegistroComponent},
 
   // Ruta para accesos no autorizados
   { path: 'unauthorized', component: UnauthorizedComponent },

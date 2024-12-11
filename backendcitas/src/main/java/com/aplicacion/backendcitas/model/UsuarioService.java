@@ -38,7 +38,7 @@ public class UsuarioService {
             throw new RuntimeException("El email ya está registrado.");
         }
         // Guardar el usuario en la base de datos
-        return usuarioRepository.save(usuario);
+        return crearUsuario(usuario);
     }
 }
 

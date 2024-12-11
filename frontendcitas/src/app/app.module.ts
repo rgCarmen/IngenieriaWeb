@@ -25,6 +25,7 @@ import { ModifyAppointmentComponent } from './appointments/modify-appointment/mo
 import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     ModifyAppointmentComponent,
     CancelAppointmentComponent,
     ClinicalHistoryComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
