@@ -10,7 +10,6 @@ public abstract class Persona {
 
     private String nombre;
     private String apellidos;
-    private String email;
     private String telefono;
 
     @OneToOne
@@ -21,10 +20,9 @@ public abstract class Persona {
 
     }
 
-    public Persona(String nombre, String apellidos, String email, String telefono, Usuario usuario){
+    public Persona(String nombre, String apellidos, String telefono, Usuario usuario){
         this.nombre=nombre;
         this.apellidos=apellidos;
-        this.email=email;
         this.telefono=telefono;
         this.usuario=usuario;
     }
@@ -45,15 +43,7 @@ public abstract class Persona {
     public void setApellidos(String apellidos){
         this.apellidos=apellidos;
     }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public void setEmail(String email){
-        this.email=email;
-    }
-
+    
     public String getTelefono(){
         return telefono;
     }

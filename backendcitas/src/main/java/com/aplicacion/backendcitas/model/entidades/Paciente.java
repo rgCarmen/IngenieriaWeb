@@ -20,8 +20,8 @@ public class Paciente extends Persona {
         super();
     }
 
-    public Paciente(long id, String nombre, String apellidos, String correo, String telefono, String dni, Usuario usuario){
-        super(nombre, apellidos, correo, telefono, usuario);
+    public Paciente(long id, String nombre, String apellidos, String telefono, String dni, Usuario usuario){
+        super(nombre, apellidos, telefono, usuario);
         this.dni=dni;
        
     }

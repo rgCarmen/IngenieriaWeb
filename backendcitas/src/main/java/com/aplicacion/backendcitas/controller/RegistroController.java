@@ -33,7 +33,7 @@ public class RegistroController {
             Usuario nuevoPaciente = new Usuario();
             nuevoPaciente.setEmail(usuarioDTO.getEmail());
             nuevoPaciente.setContrasena(usuarioDTO.getContrasena());
-            nuevoPaciente.setNombre(usuarioDTO.getNombre());
+            //nuevoPaciente.setNombre(usuarioDTO.getNombre());
             nuevoPaciente.setRol(UsuarioRol.PACIENTE); // Definimos el rol como "PACIENTE"
 
             // Guardar el paciente en la base de datos

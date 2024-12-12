@@ -12,7 +12,6 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera un ID único automáticamente
     private Long id;
-    private String nombre;
     @Column(unique = true) // Restringe duplicados en la base de datos
     private String email;
 
@@ -31,14 +30,6 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getEmail() {
