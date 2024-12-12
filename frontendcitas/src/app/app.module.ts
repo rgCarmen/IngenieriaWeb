@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
@@ -32,6 +34,8 @@ import { MedicalServicesComponent } from './home/medical-services/medical-servic
 import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
+import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
+import { CrearCitaComponent } from './agenda-medico/crear-cita/crear-cita.component';
 
 
 @NgModule({
@@ -53,16 +57,20 @@ import { StadisticsComponent } from './stadistics/stadistics.component';
     SupportComponent,
     StadisticsComponent,
     SupportComponent,
+    AgendaMedicoComponent,
+    CrearCitaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatDialogModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule

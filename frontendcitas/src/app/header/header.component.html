@@ -10,6 +10,7 @@
 
     <!-- Opciones específicas por rol -->
     <a mat-button routerLink="/history" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Historial Clínico</a>
+    <a mat-button routerLink="/agenda" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Gestionar Agenda</a>
     <a mat-button routerLink="/stadistics" *ngIf="authService.isLoggedIn() && authService.getRole() === 'ADMINISTRADOR'">Estadísticas</a>
 
     <!-- Botón de login/logout -->

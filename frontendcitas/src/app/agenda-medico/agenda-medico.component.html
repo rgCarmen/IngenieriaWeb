@@ -1,0 +1,82 @@
+<div class="appointments-container">
+    <!-- Botones de navegación -->
+    <div class="actions">
+        <button  class="btn-primary" (click)="navigateTo('create')">Crear Cita</button>
+    </div>
+
+    <h1>Agenda</h1>
+  <div class="agenda-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Paciente</th>
+          <th>Tipo de Cita</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cita of citasFuturas">
+          <td>{{ cita.fecha | date: 'short' }}</td>
+          <td>{{ cita.paciente }}</td>
+          <td>{{ cita.tipo }}</td>
+          <td>
+            <button   mat-raised-button class="btn-danger" (click)="openDialog(confirmDialog, cita.id)">
+              Cancelar
+            </button>
+            <button  class="btn-secondary">
+              Modificar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="citaEliminada" class="mensaje-exito">
+        <mat-icon>check_circle</mat-icon>
+        Cita eliminada exitosamente.
+      </div>
+  </div>
+
+  <!-- Tabla de citas pasadas -->
+  <h1>Citas Pasadas</h1>
+  <div class="agenda-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Paciente</th>
+          <th>Tipo de Cita</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cita of citasPasadas">
+          <td>{{ cita.fecha | date: 'short' }}</td>
+          <td>{{ cita.paciente }}</td>
+          <td>{{ cita.tipo }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  
+    <!-- Subcomponentes dinámicos -->
+    <router-outlet></router-outlet>
+  </div>
+
+
+  <ng-template #confirmDialog>
+    <h2 mat-dialog-title>Confirmación</h2>
+    <mat-dialog-content>
+      <p>Va a cancelar la cita. Confirme</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="cancelarDialogo()">Cancelar</button>
+      <button mat-raised-button color="warn" (click)="cancelarCita()">
+        Confirmar
+      </button>
+    </mat-dialog-actions>
+  </ng-template>
+
+
+
+
+  

@@ -58,28 +58,26 @@ public class MedicoController {
 
 
     // Ver Agenda (ver todas citas)
-    @GetMapping("/{medicoId}/citas")
-    public List<Cita> obtenerCitas(@PathVariable Long medicoId) {
-        return citaService.obtenerCitasPorMedico(medicoId);
+    @GetMapping("/{usuarioId}/citas")
+    public List<Cita> obtenerCitas(@PathVariable Long usuarioId) {
+        return citaService.obtenerCitasPorMedico(usuarioId);
     
     }
 
     // ver cita concreta (no se si será útil)
-    @GetMapping("/{medicoId}/citas/{id}")
-    public Cita obtenerCitas(@PathVariable Long medicoId, @PathVariable Long id) {
+    @GetMapping("/{usuarioId}/citas/{id}")
+    public Cita obtenerCitas(@PathVariable Long usuarioId, @PathVariable Long id) {
         return citaService.obtenerCitaPorId(id);
     
     }
 
 
     // Crear Cita
-    @PostMapping("/{medicoId}/citas")
-    public ResponseEntity<Cita> crearCita(@PathVariable Long medicoId, @RequestBody Cita cita) {
-        // encontrar en la base de datos el médico
-        Medico medico = medicoRepository.findById(medicoId)
-        .orElseThrow(() -> new EntityNotFoundException("Médico no encontrado con ID: " + medicoId));
-
+    @PostMapping("/{usuarioId}/citas")
+    public ResponseEntity<Cita> crearCita(@PathVariable Long usuarioId, @RequestBody Cita cita) {
         try {
+            // encontrar en la base de datos el médico
+            Medico medico = medicoRepository.findByUsuarioId(usuarioId);
             cita.setMedico(medico); // Asignar el ID del médico
             Cita nuevaCita = citaService.crearCita(cita);
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevaCita);
@@ -92,11 +90,11 @@ public class MedicoController {
 
 
     // Eliminar Cita
-    @DeleteMapping("/{medicoId}/citas/{id}")
-    public ResponseEntity<Void> eliminarCita(@PathVariable Long medicoId, @PathVariable Long id) {
+    @DeleteMapping("/{usuarioId}/citas/{id}")
+    public ResponseEntity<Void> eliminarCita(@PathVariable Long usuarioId, @PathVariable Long id) {
         try {
         Cita cita = citaService.obtenerCitaPorId(id);
-        if (cita.getMedico().getId() != medicoId) { //comprobar que sea una cita de ese medico
+        if (cita.getMedico().getUsuario().getId() != usuarioId) { //comprobar que sea una cita de ese medico
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); 
         }
         if (cita.getFecha().isBefore(LocalDateTime.now())) { // que no sea una cita pasada
@@ -112,13 +110,13 @@ public class MedicoController {
 
 
     // Modificar Cita (hora válida y tipo?)
-    @PutMapping(value = "/{medicoId}/citas/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> actualizarCita(@PathVariable Long id,@PathVariable Long medicoId ,@Valid @RequestBody Cita cita) {
+    @PutMapping(value = "/{usuarioId}/citas/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> actualizarCita(@PathVariable Long id,@PathVariable Long usuarioId ,@Valid @RequestBody Cita cita) {
          try{
 
              //comprobar que la cita a modificar sea de ese medico
             Cita citaExistente = citaService.obtenerCitaPorId(id);
-            if (citaExistente.getMedico().getId() != medicoId) {
+            if (citaExistente.getMedico().getUsuario().getId() != usuarioId) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); 
             }
 

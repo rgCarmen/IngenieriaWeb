@@ -1,6 +1,7 @@
 package com.aplicacion.backendcitas.model;
 
 import com.aplicacion.backendcitas.model.entidades.Cita;
+import com.aplicacion.backendcitas.model.entidades.Medico;
 import com.aplicacion.backendcitas.model.entidades.Paciente;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ public class CitaService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private MedicoRepository medicoRepository;
 
     public List<Cita> obtenerTodasLasCitas() {
         return citaRepository.findAll();
@@ -107,8 +110,9 @@ public class CitaService {
         return citaRepository.findByPacienteId(p.getId());
     }
 
-    public List<Cita> obtenerCitasPorMedico(Long medicoId) {
-        return citaRepository.findByMedicoId(medicoId);
+    public List<Cita> obtenerCitasPorMedico(Long usuarioId) {
+        Medico m= medicoRepository.findByUsuarioId(usuarioId);
+        return citaRepository.findByMedicoId(m.getId());
     }
 
     /* 

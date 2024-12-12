@@ -17,6 +17,8 @@ import { SupportComponent } from './home/support/support.component';
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
 
 import { StadisticsComponent } from './stadistics/stadistics.component';
+import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
+import { CrearCitaComponent } from './agenda-medico/crear-cita/crear-cita.component';
 
 
 
@@ -85,6 +87,20 @@ const routes: Routes = [
     data: { role: 'ADMINISTRADOR' }, // Solo accesible para administradores
   },
 
+  {
+    path: 'agenda',
+    component: AgendaMedicoComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'MEDICO' },
+    children: [
+      { 
+        path: 'create', 
+        component: CrearCitaComponent , 
+        canActivate: [AuthGuard],
+        data: { role: 'MEDICO' } 
+      }
+     ] 
+  },
   // Ruta para el login
   { path: 'login', component: LoginComponent },
 

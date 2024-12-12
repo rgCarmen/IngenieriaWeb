@@ -33,6 +33,23 @@ export class CitasService {
     }
   }
 
+
+  citasMedico(): Observable<any> {
+    const userId = this.authService.getId(); // Obtener el ID del usuario autenticado
+
+    if (userId) {
+      return this.http.get(`${this.baseUrl}/medicos/${userId}/citas`).pipe(
+        catchError((error) => {
+          console.error('Error al obtener las citas del medico:', error);
+          return throwError(() => new Error('Error al obtener las citas del medico.'));
+        })
+      );
+    } else {
+      console.error('Usuario no autenticado o ID de usuario no válido.');
+      return of([]); // Devuelve un observable vacío si no hay usuario autenticado
+    }
+  }
+
   crearCita(cita: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/citas`, cita);
   }
@@ -45,6 +62,18 @@ export class CitasService {
   // Obtener lista de especialidades únicas
   obtenerEspecialidades(): Observable<any> {
     return this.http.get(`${this.baseUrl}/medicos/especialidades`);
+  }
+
+  // medico elimina cita
+  eliminarCita(citaId: number): Observable<void> {
+    const userId = this.authService.getId();
+    if (userId){
+      return this.http.delete<void>(`${this.baseUrl}/medicos/${userId}/citas/${citaId}`);
+    } else {
+      console.error('Usuario no autenticado o ID de usuario no válido.');
+      return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
+  }
+    
   }
 
 }
