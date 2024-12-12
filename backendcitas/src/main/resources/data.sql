@@ -10,3 +10,10 @@ INSERT INTO MEDICO (nombre, apellidos, especialidad, telefono, usuario_id) VALUE
  ('Elena', 'López García', 'Cardiología', '611111111', 3);
 
 
+INSERT INTO citas (FECHA, MEDICO_ID, PACIENTE_ID, DESCRIPCION, TIPO_CITA)
+VALUES
+    ('2024-12-06 12:00:00', 1, 1, 'cardiologia', 'CONSULTA'),
+    ('2024-12-07 09:30:00', 1, 1, 'traumatologia', 'CONSULTA'),
+    ('2024-12-08 11:15:00', 1, 1, 'medicina general', 'CONSULTA'),
+    ('2024-12-09 10:00:00', 1, 1, 'nutricion', 'CONSULTA'),
+    ('2024-12-10 15:45:00', 1, 1, 'cardiologia', 'CONSULTA');
