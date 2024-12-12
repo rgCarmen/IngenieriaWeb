@@ -47,4 +47,8 @@ export class CitasService {
     return this.http.get(`${this.baseUrl}/medicos/especialidades`);
   }
 
+  obtenerCitasPorMedico(doctorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/medicos/${doctorId}/citas`);
+  }
+
 }

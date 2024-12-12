@@ -7,6 +7,7 @@
     <a mat-button routerLink="/">Inicio</a>
     <a mat-button routerLink="/appointments">Citas</a>
     <a mat-button routerLink="/account">Mi cuenta</a>
+    <a mat-button routerLink="/notifications"><i class="material-icons">notifications</i></a>
 
     <!-- Opciones específicas por rol -->
     <a mat-button routerLink="/history" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Historial Clínico</a>

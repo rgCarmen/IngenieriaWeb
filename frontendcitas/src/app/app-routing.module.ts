@@ -9,14 +9,13 @@ import { ModifyAppointmentComponent } from './appointments/modify-appointment/mo
 import { CancelAppointmentComponent } from './appointments/cancel-appointment/cancel-appointment.component';
 import { AuthGuard } from './auth.guard';
 import { ClinicalHistoryComponent } from './clinical-history/clinical-history.component';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Importar el componente de acceso no autorizado
-
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import {RegistroComponent} from './registro/registro.component';
 import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
-
 import { StadisticsComponent } from './stadistics/stadistics.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 
@@ -66,6 +65,13 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent,
+    canActivate: [AuthGuard],
+  },
+
+  // Ruta para las notificaciones
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [AuthGuard],
   },
 
