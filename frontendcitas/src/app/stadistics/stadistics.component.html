@@ -8,7 +8,7 @@
   <div class="stat-card">
     <h3><i class="material-icons">insert_chart</i> Distribución por Edad</h3>
     <div class="chart-placeholder">
-      <img src="assets/grafica_edad_barras.png" alt="Distribución por Edad" class="chart-image">
+      <img src="assets/grafica_edad_barras.jpg" alt="Distribución por Edad" class="chart-image" (click)="openFullscreen($event)">
     </div>
   </div>
 
@@ -16,7 +16,7 @@
   <div class="stat-card">
     <h3><i class="material-icons">pie_chart</i> Distribución por Género</h3>
     <div class="chart-placeholder">
-      <img src="assets/grafica_genero_dona.png" alt="Distribución por Género" class="chart-image">
+      <img src="assets/grafica_genero_dona.jpg" alt="Distribución por Género" class="chart-image" (click)="openFullscreen($event)">
     </div>
   </div>
 
@@ -24,7 +24,7 @@
   <div class="stat-card">
     <h3><i class="material-icons">calendar_today</i> Citas por Mes</h3>
     <div class="chart-placeholder">
-      <img src="assets/grafica_citas_mes.png" alt="Citas por Mes" class="chart-image">
+      <img src="assets/grafica_citas_mes.jpg" alt="Citas por Mes" class="chart-image" (click)="openFullscreen($event)">
     </div>
   </div>
 
@@ -32,7 +32,12 @@
   <div class="stat-card">
     <h3><i class="material-icons">trending_up</i> Especialidades Más Solicitadas</h3>
     <div class="chart-placeholder">
-      <img src="assets/grafica_especialidades.png" alt="Especialidades Más Solicitadas" class="chart-image">
+      <img src="assets/grafica_especialidades.jpg" alt="Especialidades Más Solicitadas" class="chart-image" (click)="openFullscreen($event)">
     </div>
   </div>
+</div>
+
+<!-- Contenedor para el modo de pantalla completa -->
+<div class="fullscreen-overlay" *ngIf="fullscreenImage" (click)="closeFullscreen()">
+  <img [src]="fullscreenImage" alt="Fullscreen Image">
 </div>
