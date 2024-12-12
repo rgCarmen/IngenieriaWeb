@@ -20,13 +20,13 @@ export class CreateAppointmentComponent {
 
   ngOnInit() {
     this.cargarEspecialidades();
-    this.filterDoctors();
   }
 
   // Cargar especialidades desde el backend
   cargarEspecialidades() {
     this.citasService.obtenerEspecialidades().subscribe(
       (data) => {
+        console.log(data)
         this.specialties = data;
       },
       (error) => {
@@ -38,9 +38,9 @@ export class CreateAppointmentComponent {
 
   // Cargar doctores desde el backend y filtra los doctores según la especialidad seleccionada
   filterDoctors() {
+    console.log(this.selectedSpecialty)
     this.citasService.obtenerMedicosPorEspecialidad(this.selectedSpecialty).subscribe(
       (doctors) => {
-        console.log(doctors)
         this.filteredDoctors = doctors;
         this.selectedDoctor = null; // Reinicia la selección del doctor
         this.availableDates = []; // Limpia las fechas disponibles

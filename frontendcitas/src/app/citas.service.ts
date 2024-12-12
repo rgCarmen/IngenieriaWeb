@@ -43,8 +43,8 @@ export class CitasService {
   }
 
   // Obtener lista de especialidades únicas
-  obtenerEspecialidades(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/medicos/especialidades`);
+  obtenerEspecialidades(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/medicos/especialidades`);
   }
 
 }
