@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CitasService } from '../../citas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-appointment',
@@ -17,6 +19,8 @@ export class CreateAppointmentComponent {
   filteredDoctors: any[] = [];
   selectedDoctor: any = null;
   availableDates: string[] = []; // Fechas disponibles para el doctor seleccionado
+
+  constructor(private citasService: CitasService, private router: Router) {}
 
   // Filtra los doctores según la especialidad seleccionada
   filterDoctors() {
@@ -37,7 +41,7 @@ export class CreateAppointmentComponent {
     const calendarDays = document.querySelectorAll('.mat-calendar-body-cell-content');
   
     calendarDays.forEach(day => {
-      const dayElement = day as HTMLElement; // Casting a HTMLElement
+      const dayElement = day as HTMLElement;
       const dayText = dayElement.textContent;
   
       if (dayText) {
@@ -54,10 +58,29 @@ export class CreateAppointmentComponent {
     });
   }  
 
-  // Lógica para seleccionar una fecha del calendario
+  // Lógica para seleccionar una fecha y enviar al backend
   selectDate(date: Date) {
     const selectedDateString = date.toISOString().split('T')[0];
-    alert(`Cita creada para el ${selectedDateString} con ${this.selectedDoctor.name}`);
-    // Aquí puedes implementar la lógica para guardar la cita en el backend
+
+    if (this.selectedDoctor && this.selectedSpecialty) {
+      const appointmentData = {
+        doctorName: this.selectedDoctor.name,
+        specialty: this.selectedSpecialty,
+        date: selectedDateString
+      };
+
+      this.citasService.createAppointment(appointmentData).subscribe(
+        () => {
+          alert(`Cita creada exitosamente para el ${selectedDateString} con ${this.selectedDoctor.name}`);
+          this.router.navigate(['/appointments']);
+        },
+        error => {
+          console.error('Error al crear la cita:', error);
+          alert('Hubo un error al crear la cita. Por favor, inténtalo de nuevo.');
+        }
+      );
+    } else {
+      alert('Por favor, selecciona un doctor y una especialidad antes de crear la cita.');
+    }
   }  
 }
