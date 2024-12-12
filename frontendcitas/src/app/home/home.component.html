@@ -46,8 +46,8 @@
       <!-- Botones de acción -->
       <div class="actions">
         <button mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" (click)="goToLogin()">Iniciar sesión</button>
-        <a mat-raised-button color="accent" routerLink="/citas" *ngIf="authService.isLoggedIn()">Mis Citas</a>
-        <a mat-raised-button color="warn" routerLink="/mi-cuenta" *ngIf="authService.isLoggedIn()">Mi Cuenta</a>
+        <a mat-raised-button color="accent" routerLink="/appointments" *ngIf="authService.isLoggedIn()">Mis Citas</a>
+        <a mat-raised-button color="warn" routerLink="/account" *ngIf="authService.isLoggedIn()">Mi Cuenta</a>
       </div>
 
       <!-- Imagen -->

@@ -17,7 +17,7 @@ import { SupportComponent } from './home/support/support.component';
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
 
 import { StadisticsComponent } from './stadistics/stadistics.component';
-import { CitasComponent } from './citas/citas.component';
+
 
 
 const routes: Routes = [
@@ -89,12 +89,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   { path: 'registro', component: RegistroComponent},
-
-  { path: 'citas', 
-    component: CitasComponent,
-    canActivate: [AuthGuard],
-    data: { role: 'PACIENTE'},
-  },
 
   // Ruta para accesos no autorizados
   { path: 'unauthorized', component: UnauthorizedComponent },
