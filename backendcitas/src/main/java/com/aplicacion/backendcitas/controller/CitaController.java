@@ -3,7 +3,6 @@ package com.aplicacion.backendcitas.controller;
 import com.aplicacion.backendcitas.model.CitaService;
 import com.aplicacion.backendcitas.model.entidades.Cita;
 import com.aplicacion.backendcitas.model.entidades.Paciente;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,12 +30,11 @@ public class CitaController {
         return citaService.obtenerTodasLasCitas();
     }
 
-    @GetMapping("/citas/disponibles")
-    public ResponseEntity<List<Cita>> obtenerCitasDisponibles() {
-        List<Cita> citasDisponibles = citaService.obtenerCitasLibres(null, null);
+    @GetMapping("/medicos/{medicoId}/citas-disponibles")
+    public ResponseEntity<List<Cita>> obtenerCitasDisponiblesPorMedico(@PathVariable Long medicoId) {
+        List<Cita> citasDisponibles = citaService.obtenerCitasPorMedico(medicoId);
         return new ResponseEntity<>(citasDisponibles, HttpStatus.OK);
     }
-
 
     @GetMapping("/citas/{id}")
     public ResponseEntity<Cita> obtenerCitaPorId(@PathVariable Long id) {

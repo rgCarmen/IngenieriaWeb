@@ -73,7 +73,15 @@ export class CitasService {
       console.error('Usuario no autenticado o ID de usuario no válido.');
       return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
   }
-    
+  }
+  
+
+  obtenerCitasPorMedico(doctorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/medicos/${doctorId}/citas`);
   }
 
 }
+  
+
+  
+

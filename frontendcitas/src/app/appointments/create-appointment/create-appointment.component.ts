@@ -53,49 +53,59 @@ export class CreateAppointmentComponent {
   }
 
   loadAvailableDates() {
-    if (this.selectedDoctor && this.selectedDoctor.citas) {
-      this.availableDates = this.selectedDoctor.citas.map((cita: any) => cita.fecha);
-      this.highlightAvailableDates();
+    if (this.selectedDoctor) {
+      this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
+        (appointments) => {
+          this.availableDates = appointments.map((appointment) => appointment.fecha.split('T')[0]);
+          this.highlightAvailableDates();
+        },
+        (error) => {
+          console.error('Error al cargar las citas disponibles:', error);
+          alert('Hubo un error al cargar las citas disponibles.');
+        }
+      );
     }
-  }
-  
+  }  
+
   // Resaltar días disponibles en el calendario
   highlightAvailableDates() {
-    const calendarDays = document.querySelectorAll('.mat-calendar-body-cell-content');
-
-    calendarDays.forEach((day) => {
-      const dayElement = day as HTMLElement;
-      const dayText = dayElement.textContent;
-
-      if (dayText) {
-        const dayString = dayText.padStart(2, '0');
-        const month = new Date().getMonth() + 1;
-        const year = new Date().getFullYear();
-        const dateStr = `${year}-${month.toString().padStart(2, '0')}-${dayString}`;
-
-        if (this.availableDates.includes(dateStr)) {
-          dayElement.style.backgroundColor = '#90ee90';
-          dayElement.style.borderRadius = '50%';
+    setTimeout(() => {
+      const calendarDays = document.querySelectorAll('.mat-calendar-body-cell-content');
+  
+      calendarDays.forEach((day) => {
+        const dayElement = day as HTMLElement;
+        const dayText = dayElement.textContent;
+  
+        if (dayText) {
+          const dayString = dayText.padStart(2, '0');
+          const month = (new Date().getMonth() + 1).toString().padStart(2, '0');
+          const year = new Date().getFullYear().toString();
+          const dateStr = `${year}-${month}-${dayString}`;
+  
+          if (this.availableDates.includes(dateStr)) {
+            dayElement.style.backgroundColor = '#90ee90';
+            dayElement.style.borderRadius = '50%';
+          }
         }
-      }
-    });
+      });
+    }, 0); // Ejecutar después de que el calendario haya sido renderizado
   }
+  
 
   // Seleccionar una fecha y enviar los datos al backend
   selectDate(date: Date) {
     const selectedDateString = date.toISOString().split('T')[0];
-
+  
     if (this.selectedDoctor && this.selectedSpecialty) {
       const appointmentData = {
-        fecha: `${selectedDateString}T10:00:00`, // Hora fija o seleccionada
-        medicoId: this.selectedDoctor.id,
-        descripcion: `Consulta de ${this.selectedDoctor.specialty}`,
-        tipoCita: 'CONSULTA'
+        doctorId: this.selectedDoctor.id,
+        specialty: this.selectedSpecialty,
+        date: selectedDateString,
       };
-
+  
       this.citasService.crearCita(appointmentData).subscribe(
         () => {
-          alert(`Cita creada exitosamente para el ${selectedDateString} con ${this.selectedDoctor.name}`);
+          alert(`Cita creada exitosamente para el ${selectedDateString} con ${this.selectedDoctor.nombre}`);
           this.router.navigate(['/appointments']);
         },
         (error) => {
@@ -106,5 +116,5 @@ export class CreateAppointmentComponent {
     } else {
       alert('Por favor, selecciona un doctor y una especialidad antes de crear la cita.');
     }
-  }
+  }  
 }

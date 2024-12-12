@@ -1,0 +1,310 @@
+---
+title: "prueba"
+format: html
+editor: visual
+---
+
+## Visualizacion de Graficas
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(scales) # For better label formatting
+
+# --- Datos de ejemplo ---
+# (Same as in your original code)
+# 1. Distribución por Edad
+set.seed(123) # Para reproducibilidad
+edades <- data.frame(
+  edad = sample(18:85, 1000, replace = TRUE),
+  categoria_edad = cut(sample(18:85, 1000, replace = TRUE), 
+                       breaks = c(18, 30, 45, 60, 75, Inf), 
+                       labels = c("18-29", "30-44", "45-59", "60-74", "75+"), 
+                       include.lowest = TRUE)
+)
+
+# 2. Distribución por Género
+generos <- data.frame(
+  genero = sample(c("Masculino", "Femenino", "Otro"), 1000, replace = TRUE, prob = c(0.45, 0.52, 0.03))
+)
+
+# 3. Citas por Mes
+fechas_citas <- seq(as.Date("2023-01-01"), as.Date("2023-12-31"), by = "day")
+citas <- data.frame(
+  fecha = sample(fechas_citas, 1000, replace = TRUE),
+  mes = month(sample(fechas_citas, 1000, replace = TRUE), label = TRUE, abbr = FALSE)
+)
+
+# 4. Especialidades Más Solicitadas
+especialidades <- data.frame(
+  especialidad = sample(c("Cardiología", "Dermatología", "Pediatría", "Ginecología", "Traumatología", "Oftalmología", "Psiquiatría"), 1000, replace = TRUE, prob = c(0.2, 0.15, 0.18, 0.12, 0.1, 0.1, 0.15))
+)
+
+# --- Color Palettes ---
+# Define some nice color palettes
+palette1 <- c("#003f5c", "#444e86", "#955196", "#dd5182", "#ff6e54", "#ffa600", "#8757a3") # Added one more color
+palette2 <- c("#665191", "#a05195", "#d45087", "#f95d6a", "#ff7c43", "#ffa600") # Pink-ish
+blue_palette <- c("#007bff", "#0056b3", "#003580") # A scale of blues
+
+# --- Enhanced Graphs ---
+
+# 1. Distribución por Edad (Histograma)
+ggplot(edades, aes(x = edad)) +
+  geom_histogram(binwidth = 5, aes(fill = after_stat(count))) +  # Use count for gradient
+  scale_fill_gradient(low = blue_palette[2], high = blue_palette[1]) +
+  labs(title = "Distribución por Edad", x = "Edad", y = "Número de Pacientes", fill = "Frecuencia") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "bottom"
+  )
+
+# O como alternativa, un gráfico de barras por categoría de edad
+ggplot(edades, aes(x = categoria_edad, fill = categoria_edad)) +
+  geom_bar() +
+  scale_fill_manual(values = palette1) + # Apply color palette
+  labs(title = "Distribución por Edad", x = "Rango de Edad", y = "Número de Pacientes") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "none"
+  )
+# 2. Distribución por Género (Gráfico de Barras)
+ggplot(generos, aes(x = genero, fill = genero)) +
+  geom_bar() +
+  scale_fill_manual(values = palette2) +
+  labs(title = "Distribución por Género", x = "Género", y = "Número de Pacientes") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "none"
+  )
+
+# 3. Citas por Mes (Serie de Tiempo)
+citas_por_mes <- citas %>%
+  group_by(mes) %>%
+  summarise(total_citas = n())
+
+ggplot(citas_por_mes, aes(x = mes, y = total_citas, group = 1)) +
+  geom_line(color = blue_palette[1], size = 1.5) +
+  geom_point(color = blue_palette[1], size = 4) +
+  geom_area(fill = blue_palette[2], alpha = 0.4) + # Area fill
+  scale_y_continuous(labels = number_format(accuracy = 1)) +
+  labs(title = "Citas por Mes", x = "Mes", y = "Número de Citas") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14)
+  )
+
+# 4. Especialidades Más Solicitadas (Gráfico de Barras)
+especialidades_counts <- especialidades %>%
+  group_by(especialidad) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+ggplot(especialidades_counts, aes(x = reorder(especialidad, total), y = total, fill = especialidad)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = palette1) + # Use a palette
+  geom_text(aes(label = total), hjust = -0.1, size = 4, color = "black") +
+  labs(title = "Especialidades Más Solicitadas", x = "Especialidad", y = "Número de Solicitudes") +
+  coord_flip() +  # Barras horizontales
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "none"
+  )
+
+# 5. Distribución por Género (Gráfico de Pastel o "Pie Chart")
+genero_counts <- generos %>%
+  group_by(genero) %>%
+  summarise(total = n())
+
+ggplot(genero_counts, aes(x = "", y = total, fill = genero)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  labs(title = "Distribución por Género", fill = "Género") +
+  theme_void(base_size = 14) + # Elimina ejes y fondo
+  geom_text(aes(label = paste0(round(total / sum(total) * 100), "%")), position = position_stack(vjust = 0.5), size = 5) +
+  scale_fill_manual(values = palette2) + # Colores personalizados
+  theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
+
+# 6. Otra alternativa: Gráfico de Dona (Donut Chart)
+ggplot(genero_counts, aes(x = 2, y = total, fill = genero)) +
+  geom_bar(stat = "identity", color = "white") +
+  coord_polar(theta = "y", start = 0) +
+  xlim(0.5, 2.5) +
+  labs(title = "Distribución por Género", fill = "Género") +
+  theme_void(base_size = 14) +
+  geom_text(aes(label = paste0(round(total / sum(total) * 100), "%")), position = position_stack(vjust = 0.5), size = 5) +
+  scale_fill_manual(values = palette2) + # Colores personalizados
+  theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
+```
+## Guardado de Graficas
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(scales) # For better label formatting
+
+# --- Datos de ejemplo ---
+# 1. Distribución por Edad
+set.seed(123) # Para reproducibilidad
+edades <- data.frame(
+  edad = sample(18:85, 1000, replace = TRUE),
+  categoria_edad = cut(sample(18:85, 1000, replace = TRUE), 
+                       breaks = c(18, 30, 45, 60, 75, Inf), 
+                       labels = c("18-29", "30-44", "45-59", "60-74", "75+"), 
+                       include.lowest = TRUE)
+)
+
+# 2. Distribución por Género
+generos <- data.frame(
+  genero = sample(c("Masculino", "Femenino", "Otro"), 1000, replace = TRUE, prob = c(0.45, 0.52, 0.03))
+)
+
+# 3. Citas por Mes
+fechas_citas <- seq(as.Date("2023-01-01"), as.Date("2023-12-31"), by = "day")
+citas <- data.frame(
+  fecha = sample(fechas_citas, 1000, replace = TRUE),
+  mes = month(sample(fechas_citas, 1000, replace = TRUE), label = TRUE, abbr = FALSE)
+)
+
+# 4. Especialidades Más Solicitadas
+especialidades <- data.frame(
+  especialidad = sample(c("Cardiología", "Dermatología", "Pediatría", "Ginecología", "Traumatología", "Oftalmología", "Psiquiatría"), 1000, replace = TRUE, prob = c(0.2, 0.15, 0.18, 0.12, 0.1, 0.1, 0.15))
+)
+
+# --- Color Palettes ---
+palette1 <- c("#003f5c", "#444e86", "#955196", "#dd5182", "#ff6e54", "#ffa600", "#8757a3")
+palette2 <- c("#665191", "#a05195", "#d45087", "#f95d6a", "#ff7c43", "#ffa600")
+blue_palette <- c("#007bff", "#0056b3", "#003580")
+
+# --- Enhanced Graphs ---
+
+# 1. Distribución por Edad (Histograma)
+grafica_edad <- ggplot(edades, aes(x = edad)) +
+  geom_histogram(binwidth = 5, aes(fill = after_stat(count))) +
+  scale_fill_gradient(low = blue_palette[2], high = blue_palette[1]) +
+  labs(title = "Distribución por Edad", x = "Edad", y = "Número de Pacientes", fill = "Frecuencia") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "bottom"
+  )
+
+# O como alternativa, un gráfico de barras por categoría de edad
+grafica_edad_barras <- ggplot(edades, aes(x = categoria_edad, fill = categoria_edad)) +
+  geom_bar() +
+  scale_fill_manual(values = palette1) +
+  labs(title = "Distribución por Edad", x = "Rango de Edad", y = "Número de Pacientes") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "none"
+  )
+
+# 2. Distribución por Género (Gráfico de Barras)
+grafica_genero <- ggplot(generos, aes(x = genero, fill = genero)) +
+  geom_bar() +
+  scale_fill_manual(values = palette2) +
+  labs(title = "Distribución por Género", x = "Género", y = "Número de Pacientes") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "none"
+  )
+
+# 3. Citas por Mes (Serie de Tiempo)
+citas_por_mes <- citas %>%
+  group_by(mes) %>%
+  summarise(total_citas = n())
+
+grafica_citas_mes <- ggplot(citas_por_mes, aes(x = mes, y = total_citas, group = 1)) +
+  geom_line(color = blue_palette[1], size = 1.5) +
+  geom_point(color = blue_palette[1], size = 4) +
+  geom_area(fill = blue_palette[2], alpha = 0.4) +
+  scale_y_continuous(labels = number_format(accuracy = 1)) +
+  labs(title = "Citas por Mes", x = "Mes", y = "Número de Citas") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14)
+  )
+
+# 4. Especialidades Más Solicitadas (Gráfico de Barras)
+especialidades_counts <- especialidades %>%
+  group_by(especialidad) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+
+grafica_especialidades <- ggplot(especialidades_counts, aes(x = reorder(especialidad, total), y = total, fill = especialidad)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = palette1) +
+  geom_text(aes(label = total), hjust = -0.1, size = 4, color = "black") +
+  labs(title = "Especialidades Más Solicitadas", x = "Especialidad", y = "Número de Solicitudes") +
+  coord_flip() +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "none"
+  )
+
+# 5. Distribución por Género (Gráfico de Pastel o "Pie Chart")
+genero_counts <- generos %>%
+  group_by(genero) %>%
+  summarise(total = n())
+
+grafica_genero_pastel <- ggplot(genero_counts, aes(x = "", y = total, fill = genero)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  labs(title = "Distribución por Género", fill = "Género") +
+  theme_void(base_size = 14) +
+  geom_text(aes(label = paste0(round(total / sum(total) * 100), "%")), position = position_stack(vjust = 0.5), size = 5) +
+  scale_fill_manual(values = palette2) +
+  theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
+
+# 6. Otra alternativa: Gráfico de Dona (Donut Chart)
+grafica_genero_dona <- ggplot(genero_counts, aes(x = 2, y = total, fill = genero)) +
+  geom_bar(stat = "identity", color = "white") +
+  coord_polar(theta = "y", start = 0) +
+  xlim(0.5, 2.5) +
+  labs(title = "Distribución por Género", fill = "Género") +
+  theme_void(base_size = 14) +
+  geom_text(aes(label = paste0(round(total / sum(total) * 100), "%")), position = position_stack(vjust = 0.5), size = 5) +
+  scale_fill_manual(values = palette2) +
+  theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
+
+# --- Guardar Gráficas con ggsave() y dpi = 400 ---
+
+# Crear una lista con las gráficas
+lista_graficas <- list(
+  grafica_edad = grafica_edad,
+  grafica_edad_barras = grafica_edad_barras,
+  grafica_genero = grafica_genero,
+  grafica_citas_mes = grafica_citas_mes,
+  grafica_especialidades = grafica_especialidades,
+  grafica_genero_pastel = grafica_genero_pastel,
+  grafica_genero_dona = grafica_genero_dona
+)
+
+# Guardar cada gráfica en formato PNG con alta resolución
+for (nombre_grafica in names(lista_graficas)) {
+  nombre_archivo <- paste0(nombre_grafica, ".jpg")
+  ggsave(nombre_archivo, plot = lista_graficas[[nombre_grafica]], width = 10, height = 6, units = "in", dpi = 400)
+  cat("Gráfica guardada como", nombre_archivo, "\n")
+}
+```
+
+
+

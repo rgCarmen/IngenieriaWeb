@@ -1,68 +1,129 @@
 /* Encabezado del componente */
 .stadistics-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .stadistics-header h1 {
-    font-size: 2.5rem;
-    color: #007bff;
-    margin-bottom: 10px;
-  }
-  
-  .stadistics-header p {
-    font-size: 1.2rem;
-    color: #555;
-  }
-  
-  /* Contenedor principal */
-  .stadistics-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 20px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Tarjetas para cada estadística */
-  .stat-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .stat-card h3 {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    color: #000;
-    margin-bottom: 15px;
-  }
-  
-  .stat-card h3 i {
-    margin-right: 10px;
-    color: #007bff;
-    font-size: 2rem;
-  }
-  
-  /* Área de gráficos */
-  .chart-placeholder {
-    height: 300px;
-    background-color: #eef2f7;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #888;
-    font-size: 1.2rem;
-  }
-  
-  /* Efecto hover en las tarjetas */
-  .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-  }
-  
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.stadistics-header h1 {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.stadistics-header p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Contenedor principal */
+.stadistics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Tarjetas para cada estadística */
+.stat-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Títulos de las tarjetas */
+.stat-card h3 {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.stat-card h3 i {
+  margin-right: 10px;
+  color: #007bff;
+  font-size: 2rem;
+}
+
+/* Área de gráficos */
+.chart-placeholder {
+  width: 100%;
+  height: 300px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Evita que las imágenes se salgan del contenedor */
+  position: relative;
+}
+
+/* Imágenes de las gráficas */
+.chart-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Escala la imagen sin recortarla */
+  border-radius: 10px;
+}
+
+/* Efecto hover en las tarjetas */
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste de texto para las descripciones o leyendas */
+.stat-description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Estilo para el contenedor principal */
+.stadistics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilo para las imágenes dentro de las tarjetas */
+.chart-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  cursor: zoom-in; /* Indica que se puede hacer clic para ampliar */
+}
+
+/* Overlay para el modo de pantalla completa */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out; /* Indica que se puede hacer clic para cerrar */
+}
+
+/* Estilo para la imagen en pantalla completa */
+.fullscreen-overlay img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+}

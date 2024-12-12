@@ -9,7 +9,8 @@ import { Component } from '@angular/core';
 export class AccountComponent {
   // Datos personales
   personalData = {
-    name: 'Juan Pérez',
+    name: 'Juan',
+    surname: 'Pérez Martínez',
     email: 'juan.perez@example.com',
     password: '',
   };

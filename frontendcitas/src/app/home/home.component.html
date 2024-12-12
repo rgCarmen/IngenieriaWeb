@@ -28,12 +28,10 @@
 
   <!-- Contenido principal -->
   <main class="main-content">
-    <!-- Mostrar contenido de bienvenida solo si no se está en una subruta -->
     <div class="home-container" *ngIf="!isSubRouteActive()">
       <h1>Bienvenido a Gestión de Citas</h1>
       <p class="highlight-message">"Tu salud, nuestra prioridad: gestiona tus citas sin complicaciones."</p>
 
-      <!-- Características -->
       <div class="features">
         <h2>¿Qué puedes hacer aquí?</h2>
         <ul class="centered-list">
@@ -43,18 +41,27 @@
         </ul>
       </div>
 
-      <!-- Botones de acción -->
       <div class="actions">
         <button mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" (click)="goToLogin()">Iniciar sesión</button>
         <a mat-raised-button color="accent" routerLink="/appointments" *ngIf="authService.isLoggedIn()">Mis Citas</a>
         <a mat-raised-button color="warn" routerLink="/account" *ngIf="authService.isLoggedIn()">Mi Cuenta</a>
       </div>
 
-      <!-- Imagen -->
       <img src="assets/medical-illustration.jpg" alt="Gestión médica" class="hero-image">
     </div>
 
-    <!-- Vista para las subrutas -->
     <router-outlet></router-outlet>
   </main>
+
+  <!-- Sección de noticias como tercera columna -->
+  <div class="news-section">
+    <h3>📰 Novedades del Hospital</h3>
+    <ul>
+      <li>🧑‍⚕️ <strong>Nuevo Especialista:</strong> Dra. Ana Martínez, especialista en Neurología.</li>
+      <li>🩺 <strong>Campaña de Vacunación:</strong> Vacunas disponibles del 20 al 25 de diciembre.</li>
+      <img src="assets/vacunacion.jpg" alt="Campaña de vacunación" class="image">
+      <li>🏥 <strong>Ampliación de Horario:</strong> Atención 24 horas en Urgencias.</li>
+      <img src="assets/urgencias.png" alt="Gestión de urgencias" class="little-image">
+    </ul>
+  </div>
 </div>
