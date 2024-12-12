@@ -1,14 +1,12 @@
 package com.aplicacion.backendcitas.model;
 
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.aplicacion.backendcitas.model.entidades.Cita;
 import com.aplicacion.backendcitas.model.entidades.Paciente;
-
+import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CitaService {
@@ -23,7 +21,6 @@ public class CitaService {
     public List<Cita> obtenerTodasLasCitas() {
         return citaRepository.findAll();
     }
-
 
     public Cita obtenerCitaPorId(Long id) {
         return citaRepository.findById(id)
@@ -105,8 +102,6 @@ public class CitaService {
         return citaRepository.save(cita);
     }
 
-
-
     public List<Cita> obtenerCitasPorPaciente(Long usuarioId) {
         Paciente p=pacienteRepository.findByUsuarioId(usuarioId);
         return citaRepository.findByPacienteId(p.getId());
@@ -115,7 +110,6 @@ public class CitaService {
     public List<Cita> obtenerCitasPorMedico(Long medicoId) {
         return citaRepository.findByMedicoId(medicoId);
     }
-
 
     /* 
     public List<Cita> obtenerCitasPorRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {

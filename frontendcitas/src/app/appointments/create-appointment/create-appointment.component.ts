@@ -9,12 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-appointment.component.css'],
 })
 export class CreateAppointmentComponent {
-  specialties = ['Cardiología', 'Pediatría', 'Dermatología', 'Odontología'];
-  doctors = [
-    { name: 'Dr. Gómez', specialty: 'Cardiología', availableDates: ['2024-12-01', '2024-12-05'] },
-    { name: 'Dra. López', specialty: 'Pediatría', availableDates: ['2024-12-02', '2024-12-06'] },
-    { name: 'Dr. Ramírez', specialty: 'Dermatología', availableDates: ['2024-12-03', '2024-12-07'] },
-  ];
+  specialties: string[] = [];
+  doctors: any[] = [];
   selectedSpecialty: string = '';
   filteredDoctors: any[] = [];
   selectedDoctor: any = null;
@@ -22,59 +18,87 @@ export class CreateAppointmentComponent {
 
   constructor(private citasService: CitasService, private router: Router) {}
 
-  // Filtra los doctores según la especialidad seleccionada
+  ngOnInit() {
+    this.cargarEspecialidades();
+    this.filterDoctors();
+  }
+
+  // Cargar especialidades desde el backend
+  cargarEspecialidades() {
+    this.citasService.obtenerEspecialidades().subscribe(
+      (data) => {
+        this.specialties = data;
+      },
+      (error) => {
+        console.error('Error al cargar las especialidades:', error);
+        alert('Error al cargar las especialidades desde el servidor.');
+      }
+    );
+  }
+
+  // Cargar doctores desde el backend y filtra los doctores según la especialidad seleccionada
   filterDoctors() {
-    this.filteredDoctors = this.doctors.filter(doctor => doctor.specialty === this.selectedSpecialty);
-    this.selectedDoctor = null; // Reinicia la selección del doctor
-    this.availableDates = []; // Limpia las fechas disponibles
+    this.citasService.obtenerMedicosPorEspecialidad(this.selectedSpecialty).subscribe(
+      (doctors) => {
+        console.log(doctors)
+        this.filteredDoctors = doctors;
+        this.selectedDoctor = null; // Reinicia la selección del doctor
+        this.availableDates = []; // Limpia las fechas disponibles
+      },
+      (error) => {
+        console.error('Error al cargar los doctores:', error);
+        alert('Error al cargar los doctores desde el servidor.');
+      }
+    );
   }
 
   loadAvailableDates() {
-    if (this.selectedDoctor) {
-      this.availableDates = this.selectedDoctor.availableDates;
+    if (this.selectedDoctor && this.selectedDoctor.citas) {
+      this.availableDates = this.selectedDoctor.citas.map((cita: any) => cita.fecha);
       this.highlightAvailableDates();
     }
   }
   
-  // Función para resaltar días disponibles
+  // Resaltar días disponibles en el calendario
   highlightAvailableDates() {
     const calendarDays = document.querySelectorAll('.mat-calendar-body-cell-content');
-  
-    calendarDays.forEach(day => {
+
+    calendarDays.forEach((day) => {
       const dayElement = day as HTMLElement;
       const dayText = dayElement.textContent;
-  
+
       if (dayText) {
         const dayString = dayText.padStart(2, '0');
         const month = new Date().getMonth() + 1;
         const year = new Date().getFullYear();
         const dateStr = `${year}-${month.toString().padStart(2, '0')}-${dayString}`;
-  
+
         if (this.availableDates.includes(dateStr)) {
-          dayElement.style.backgroundColor = '#90ee90'; // Resaltar en verde
+          dayElement.style.backgroundColor = '#90ee90';
           dayElement.style.borderRadius = '50%';
         }
       }
     });
-  }  
+  }
 
-  // Lógica para seleccionar una fecha y enviar al backend
+  // Seleccionar una fecha y enviar los datos al backend
   selectDate(date: Date) {
     const selectedDateString = date.toISOString().split('T')[0];
 
     if (this.selectedDoctor && this.selectedSpecialty) {
       const appointmentData = {
-        doctorName: this.selectedDoctor.name,
-        specialty: this.selectedSpecialty,
-        date: selectedDateString
+        fecha: `${selectedDateString}T10:00:00`, // Hora fija o seleccionada
+        medicoId: this.selectedDoctor.id,
+        descripcion: `Consulta de ${this.selectedDoctor.specialty}`,
+        tipoCita: 'CONSULTA'
       };
 
-      this.citasService.createAppointment(appointmentData).subscribe(
+      this.citasService.crearCita(appointmentData).subscribe(
         () => {
           alert(`Cita creada exitosamente para el ${selectedDateString} con ${this.selectedDoctor.name}`);
           this.router.navigate(['/appointments']);
         },
-        error => {
+        (error) => {
           console.error('Error al crear la cita:', error);
           alert('Hubo un error al crear la cita. Por favor, inténtalo de nuevo.');
         }
@@ -82,5 +106,5 @@ export class CreateAppointmentComponent {
     } else {
       alert('Por favor, selecciona un doctor y una especialidad antes de crear la cita.');
     }
-  }  
+  }
 }

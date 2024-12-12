@@ -1,8 +1,13 @@
 package com.aplicacion.backendcitas.controller;
 
+import com.aplicacion.backendcitas.model.CitaService;
+import com.aplicacion.backendcitas.model.MedicoRepository;
+import com.aplicacion.backendcitas.model.entidades.Cita;
+import com.aplicacion.backendcitas.model.entidades.Medico;
+import com.aplicacion.backendcitas.dto.MedicoDTO;
+import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,12 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aplicacion.backendcitas.model.CitaService;
-import com.aplicacion.backendcitas.model.MedicoRepository;
-import com.aplicacion.backendcitas.model.entidades.Cita;
-import com.aplicacion.backendcitas.model.entidades.Medico;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/medicos")
@@ -32,6 +31,30 @@ public class MedicoController {
 
     @Autowired
     private MedicoRepository medicoRepository;
+
+    @GetMapping
+    public List<Medico> obtenerTodosLosMedicos() {
+        return medicoRepository.findAll();
+    }
+
+    @GetMapping("/especialidad/{especialidad}")
+    public List<MedicoDTO> obtenerMedicosPorEspecialidad(@PathVariable String especialidad) {
+        return medicoRepository.findByEspecialidad(especialidad)
+                               .stream()
+                               .map(m -> new MedicoDTO(m.getId(), m.getNombre(), m.getApellidos(), m.getEspecialidad()))
+                               .toList();
+    }
+
+    @GetMapping("/especialidades")
+    public ResponseEntity<List<String>> obtenerEspecialidades() {
+        List<String> especialidades = medicoRepository.findAll()
+                .stream()
+                .map(Medico::getEspecialidad)
+                .distinct()
+                .toList();
+
+        return ResponseEntity.ok(especialidades);
+    }
 
 
     // Ver Agenda (ver todas citas)

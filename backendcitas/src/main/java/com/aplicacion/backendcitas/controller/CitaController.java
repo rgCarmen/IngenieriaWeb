@@ -1,17 +1,22 @@
 package com.aplicacion.backendcitas.controller;
 
-import java.util.List;
+import com.aplicacion.backendcitas.model.CitaService;
+import com.aplicacion.backendcitas.model.entidades.Cita;
+import com.aplicacion.backendcitas.model.entidades.Paciente;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.aplicacion.backendcitas.model.CitaService;
-import com.aplicacion.backendcitas.model.entidades.Cita;
 
 @RestController
 public class CitaController {
@@ -26,20 +31,39 @@ public class CitaController {
         return citaService.obtenerTodasLasCitas();
     }
 
+    @GetMapping("/citas/disponibles")
+    public ResponseEntity<List<Cita>> obtenerCitasDisponibles() {
+        List<Cita> citasDisponibles = citaService.obtenerCitasLibres(null, null);
+        return new ResponseEntity<>(citasDisponibles, HttpStatus.OK);
+    }
+
+
     @GetMapping("/citas/{id}")
     public ResponseEntity<Cita> obtenerCitaPorId(@PathVariable Long id) {
         return new ResponseEntity<>(citaService.obtenerCitaPorId(id), HttpStatus.OK);
     }
 
-    /* 
-
-    @PostMapping(value = "/citas",     consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/citas", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> crearCita(@Valid @RequestBody Cita cita) {
+        cita.setPaciente(null); // Asegura que la cita se crea sin paciente asignado
         Cita nuevaCita = citaService.crearCita(cita);
         return new ResponseEntity<>(nuevaCita, HttpStatus.CREATED);
     }
 
+    @PutMapping("/citas/reservar/{id}")
+    public ResponseEntity<?> reservarCita(@PathVariable Long id, @RequestParam Paciente paciente) {
+        Cita cita = citaService.obtenerCitaPorId(id);
+        if (cita.getPaciente() == null) {
+            cita.setPaciente(paciente);
+            citaService.actualizarCita(id, cita);
+            return new ResponseEntity<>("Cita reservada exitosamente", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Cita ya reservada", HttpStatus.BAD_REQUEST);
+        }
+    }
 
+
+    /*
     @PutMapping(value = "/citas/{id}",     consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> actualizarCita(@PathVariable Long id, @Valid @RequestBody Cita cita) {
 

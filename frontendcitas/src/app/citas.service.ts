@@ -33,8 +33,18 @@ export class CitasService {
     }
   }
 
-  createAppointment(appointmentData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/citas`, appointmentData);
+  crearCita(cita: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/citas`, cita);
   }
-  
+
+  // Obtener doctores por especialidad
+  obtenerMedicosPorEspecialidad(specialty: string): Observable<any> {
+    return this.http.get<any[]>(`${this.baseUrl}/medicos/especialidad/${specialty}`);
+  }
+
+  // Obtener lista de especialidades únicas
+  obtenerEspecialidades(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/medicos/especialidades`);
+  }
+
 }
