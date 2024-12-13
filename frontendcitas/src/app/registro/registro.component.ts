@@ -18,9 +18,10 @@ export class RegistroComponent {
   showPassword: boolean = false;
   confirmPassword: string='';
   passwordMismatch: boolean = false;
-dni: any;
-telefono: any;
-apellidos: any;
+  dni: any;
+  telefono: any;
+  apellidos: any;
+  errorMessage: string | null = null;
 
   constructor(private registroService: RegistroService, 
               private router: Router,
@@ -43,7 +44,8 @@ apellidos: any;
           this.router.navigate(['/login']); // Redirige al usuario a la página principal
         },
         error: (error) => {
-          console.error('Error en el registro:', error);
+          this.errorMessage= error.error.error;
+          //console.error('Error en el registro:', error);
         }
       });
    

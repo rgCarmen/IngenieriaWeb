@@ -159,6 +159,11 @@
       </div>
     </div>
 
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+
     <!-- Botón de registro -->
     <button type="submit" class="btn-primary" [disabled]="registroForm.invalid || passwordMismatch">
       Registrar

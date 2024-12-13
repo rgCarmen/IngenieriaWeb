@@ -54,7 +54,9 @@ public class RegistroController {
 
             return ResponseEntity.status(201).body(response);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(400).body("Error al registrar el paciente: " + e.getMessage());
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Error al registrar el paciente: " + e.getMessage());
+            return ResponseEntity.status(400).body(errorResponse);
         }
     }
 
