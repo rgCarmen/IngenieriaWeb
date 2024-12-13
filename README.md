@@ -1,7 +1,7 @@
 # IngeriaWeb
 
 ## Requisitos que quedan por realizar
-- [ ] RF1.01 Falta DNI y teléfono en el formulario de registro.
+- [x] RF1.01 Falta DNI y teléfono en el formulario de registro. ➡️ Se registra el usario con rol Paciente y un paciente  
 - [ ] RF1.02 Registro Médico (Especialidad y disponibilidad)
 - [ ] RF1.03 Código de verificación cuando se registra el paciente (NO HACER)
 - [x] RF1.05 Dos pacientes no pueden tener el mismo email (ENLAZAR) ➡️ Campo email en Usuario unique 

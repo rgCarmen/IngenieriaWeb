@@ -5,6 +5,9 @@ public class UsuarioDTO {
     private String email;
     private String contrasena;
     private String nombre;
+    private String apellidos;
+    private String dni;
+    private String telefono;
     //nombre, apellidos, dni, telefono, email
 
     // Getters y setters
@@ -30,5 +33,29 @@ public class UsuarioDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String  getApellidos(){
+        return this.apellidos;
+    }
+
+    public void setApellidos(String apellidos){
+        this.apellidos=apellidos;
+    }
+
+    public String getTelefono(){
+        return this.telefono;
+    }
+
+    public void setTelefono(String telefono){
+        this.telefono=telefono;
+    }
+
+    public String getDni() {
+       return this.dni;
+    }
+
+    public void setDni(String dni){
+        this.dni=dni;
     }
 }

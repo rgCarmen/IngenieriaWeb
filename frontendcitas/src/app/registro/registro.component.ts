@@ -18,6 +18,9 @@ export class RegistroComponent {
   showPassword: boolean = false;
   confirmPassword: string='';
   passwordMismatch: boolean = false;
+dni: any;
+telefono: any;
+apellidos: any;
 
   constructor(private registroService: RegistroService, 
               private router: Router,
@@ -34,7 +37,7 @@ export class RegistroComponent {
 
   registro():void{
     if(!this.passwordMismatch){
-      this.registroService.registrar(this.email, this.confirmPassword, this.nombre).subscribe({
+      this.registroService.registrar(this.email, this.confirmPassword, this.nombre, this.apellidos, this.dni, this.telefono).subscribe({
         next: (response) => {
           console.log('Registrado correctamente', response);
           this.router.navigate(['/login']); // Redirige al usuario a la página principal

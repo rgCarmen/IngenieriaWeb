@@ -1,6 +1,6 @@
 <div class="registro-container">
   <form (ngSubmit)="registro()" #registroForm="ngForm">
-    <h2>Registrate como Paciente</h2>
+    <h2>Registro de Paciente</h2>
 
     <!-- Campo de usuario -->
     <div class="form-group">
@@ -29,11 +29,68 @@
         name="nombre"
         [(ngModel)]="nombre"
         #nombreField="ngModel"
-        placeholder="Introduce su nombre y apellidos"
+        placeholder="Introduce su nombre"
         required
       />
       <div *ngIf="nombreField.invalid && nombreField.touched" class="error-message">
         El nombre es obligatorio.
+      </div>
+    </div>
+
+
+    <!-- Campo de apellidos -->
+    <div class="form-group">
+      <label for="apellidos">Apellidos</label>
+      <input
+        type="text"
+        id="apellidos"
+        name="apellidos"
+        [(ngModel)]="apellidos"
+        #apellidoField="ngModel"
+        placeholder="Introduce sus apellidos"
+        required
+      />
+      <div *ngIf="apellidoField.invalid && apellidoField.touched" class="error-message">
+        Los apellidos es obligatorio.
+      </div>
+    </div>
+
+
+    <!-- Campo de dni -->
+    <div class="form-group">
+      <label for="dni">DNI</label>
+      <input
+        type="dni"
+        id="dni"
+        name="dni"
+        [(ngModel)]="dni"
+        #dniField="ngModel"
+        placeholder="Introduce su DNI"
+        required
+        pattern="[0-9]{8}[A-Za-z]"
+        dni
+      />
+      <div *ngIf="dniField.invalid && dniField.touched" class="error-message">
+        El DNI es obligatorio y debe ser válido.
+      </div>
+    </div>
+
+    <!-- Campo de telefono -->
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input
+        type="telefono"
+        id="telefono"
+        name="telefono"
+        [(ngModel)]="telefono"
+        #telefonoField="ngModel"
+        placeholder="Introduce un teléfono"
+        required
+        pattern="[0-9]{9}"
+        telefono
+      />
+      <div *ngIf="telefonoField.invalid && telefonoField.touched" class="error-message">
+        El telefono es obligatorio y debe ser válido.
       </div>
     </div>
 

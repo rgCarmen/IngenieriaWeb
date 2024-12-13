@@ -11,9 +11,9 @@ export class RegistroService {
   constructor(private http: HttpClient) { }
 
 
-  registrar(email: string, contrasena: string, nombre:string): Observable<any> {
+  registrar(email: string, contrasena: string, nombre:string, apellidos:string, dni:string, telefono:string): Observable<any> {
       const headers = { 'Content-Type': 'application/json' };
-      const body = { email, contrasena, nombre };
+      const body = { email, contrasena, nombre, apellidos, dni, telefono };
       return this.http.post(this.baseUrl, body, { headers });
 
   }
