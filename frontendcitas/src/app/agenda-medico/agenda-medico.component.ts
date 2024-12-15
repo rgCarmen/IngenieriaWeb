@@ -93,7 +93,6 @@ export class AgendaMedicoComponent implements OnInit{
     
   }
 
-
   navigateTo(action: string) {
     this.router.navigate([`/agenda/${action}`]);
   }
@@ -150,5 +149,4 @@ export class AgendaMedicoComponent implements OnInit{
 
     }
   }
-  
 }

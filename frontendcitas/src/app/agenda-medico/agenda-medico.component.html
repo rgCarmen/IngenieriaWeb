@@ -1,87 +1,88 @@
 <div class="appointments-container">
-  
-  <div class="crear-cita-container">
-    <div class="crear-cita">
-      <form (ngSubmit)="createSchedule()">
-        <div class="form-group">
-          <label for="date">Seleccionar Día</label>
-          <input
-            type="date"
-            id="date"
-            [(ngModel)]="schedule.date"
-            name="date"
-            required
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="timeSlotStart">Hora de Inicio</label>
-          <input
-            type="time"
-            id="timeSlotStart"
-            [(ngModel)]="schedule.startTime"
-            name="startTime"
-            required
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="appointmentType">Tipo de Cita</label>
-          <select
-            id="appointmentType"
-            [(ngModel)]="schedule.tipoCita"
-            name="type"
-            required
-          >
-            <option value="REVISION">Revisión</option>
-            <option value="CONSULTA">Consulta</option>
-            <option value="URGENCIA">Urgencia</option>
-          </select>
-        </div>
-  
-        <div class="form-group">
-          <button type="submit" mat-raised-button color="primary">Crear Franja Horaria</button>
-        </div>
-      </form>
+  <div class="columns-container">
+    <!-- Columna para el formulario de creación de franja horaria -->
+    <div class="crear-cita-column">
+      <h1>Franja Horaria</h1>
+      <div class="crear-cita">
+        <form (ngSubmit)="createSchedule()">
+          <div class="form-group">
+            <label for="date">Seleccionar Día</label>
+            <input
+              type="date"
+              id="date"
+              [(ngModel)]="schedule.date"
+              name="date"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="timeSlotStart">Hora de Inicio</label>
+            <input
+              type="time"
+              id="timeSlotStart"
+              [(ngModel)]="schedule.startTime"
+              name="startTime"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="appointmentType">Tipo de Cita</label>
+            <select
+              id="appointmentType"
+              [(ngModel)]="schedule.tipoCita"
+              name="type"
+              required
+            >
+              <option value="REVISION">Revisión</option>
+              <option value="CONSULTA">Consulta</option>
+              <option value="URGENCIA">Urgencia</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" mat-raised-button color="primary">
+              Crear Franja Horaria
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Columna para la agenda -->
+    <div class="agenda-column">
+      <h1>Agenda</h1>
+      <div class="agenda-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Paciente</th>
+              <th>Tipo de Cita</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citasFuturas">
+              <td>{{ cita.fecha | date: 'short' }}</td>
+              <td>{{ cita.paciente }}</td>
+              <td>{{ cita.tipo }}</td>
+              <td>
+                <button mat-raised-button class="btn-danger" (click)="openDialog(confirmDialog, cita.id)">
+                  Cancelar
+                </button>
+                <button class="btn-secondary" (click)="modificarCita(cita)">
+                  Modificar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  
 
-
-    <h1>Agenda</h1>
-  <div class="agenda-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Paciente</th>
-          <th>Tipo de Cita</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cita of citasFuturas">
-          <td>{{ cita.fecha | date: 'short' }}</td>
-          <td>{{ cita.paciente}}</td>
-          <td>{{ cita.tipo }}</td>
-          <td>
-            <button   mat-raised-button class="btn-danger" (click)="openDialog(confirmDialog, cita.id)">
-              Cancelar
-            </button>
-            <button  class="btn-secondary" (click)="modificarCita(cita)">
-              Modificar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="citaEliminada" class="mensaje-exito">
-        <mat-icon>check_circle</mat-icon>
-        Cita eliminada exitosamente.
-      </div>
-  </div>
-
-  <!-- Tabla de citas pasadas -->
   <h1>Citas Pasadas</h1>
   <div class="agenda-container">
     <table>
@@ -100,69 +101,16 @@
         </tr>
       </tbody>
     </table>
+  </div>
 </div>
-  
-    <!-- Subcomponentes dinámicos -->
-    <router-outlet></router-outlet>
-  </div>
 
-
-  <ng-template #confirmDialog>
-    <h2 mat-dialog-title>Confirmación</h2>
-    <mat-dialog-content>
-      <p>Va a cancelar la cita. Confirme</p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="cancelarDialogo()">Cancelar</button>
-      <button mat-raised-button color="warn" (click)="cancelarCita()">
-        Confirmar
-      </button>
-    </mat-dialog-actions>
-  </ng-template>
-
-  <div *ngIf="selectedCita">
-    <h2>Editar Cita</h2>
-    <form (ngSubmit)="actualizarCita()">
-      <div class="form-group">
-        <label for="date">Fecha</label>
-        <input
-          type="date"
-          id="date"
-          [(ngModel)]="selectedCita.fecha"
-          name="date"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="timeSlotStart">Hora de Inicio</label>
-        <input
-          type="time"
-          id="timeSlotStart"
-          [(ngModel)]="selectedCita.startTime"
-          name="startTime"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="appointmentType">Tipo de Cita</label>
-        <select
-          id="appointmentType"
-          [(ngModel)]="selectedCita.tipo"
-          name="type"
-          required
-        >
-          <option value="REVISION">Revisión</option>
-          <option value="CONSULTA">Consulta</option>
-          <option value="URGENCIA">Urgencia</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <button type="submit" mat-raised-button color="primary">Actualizar Cita</button>
-      </div>
-    </form>
-  </div>
-
-
-
-
-  
+<ng-template #confirmDialog>
+  <h2 mat-dialog-title>Confirmación</h2>
+  <mat-dialog-content>
+    <p>Va a cancelar la cita. Confirme</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cancelarDialogo()">Cancelar</button>
+    <button mat-raised-button color="warn" (click)="cancelarCita()">Confirmar</button>
+  </mat-dialog-actions>
+</ng-template>
