@@ -1,69 +1,95 @@
-/* Título azul con tamaño más grande */
-h2 {
-  font-size: 2rem;
-  color: #007bff; /* Azul */
-  text-align: center;
-  margin-bottom: 20px;
+/* Contenedor principal */
+.create-appointment-container {
+  display: flex;
+  flex-direction: column; /* Disposición en columna para mejor ajuste en espacios reducidos */
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 20px;
+  background: linear-gradient(135deg, #f3f4f6, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajustes a los campos de selección */
+/* Sección del formulario */
+.form-section {
+  width: 100%; /* Ocupa el ancho completo del contenedor */
+  max-width: 400px; /* Limita el ancho para evitar estiramiento excesivo */
+  padding: 15px; /* Reducimos el padding para mayor compacidad */
+}
+
+/* Ajustar el tamaño del calendario */
+mat-calendar {
+  width: 100%;            /* El calendario ocupa todo el ancho del contenedor */
+  max-width: 100%;        /* Evitar que se desborde */
+  padding: 10px;          /* Reducimos el padding para mayor compacidad */
+  font-size: 16px;        /* Tamaño de fuente adecuado */
+  box-sizing: border-box; /* Aseguramos que el padding no afecte el tamaño total */
+}
+
+/* Título */
+h2 {
+  font-size: 2rem;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 15px; /* Reducimos el margen inferior */
+}
+
+/* Campos de selección */
 select {
   width: 100%;
-  max-width: 100%; /* Ocupa el ancho completo del contenedor */
-  padding: 12px;   /* Padding más amplio */
-  font-size: 18px; /* Texto más grande */
+  padding: 12px;
+  font-size: 16px; /* Reducimos ligeramente el tamaño de fuente */
   border: 2px solid #ccc;
   border-radius: 8px;
   margin-top: 10px;
   box-sizing: border-box;
 }
 
-/* Botón de búsqueda con tamaño acorde */
+/* Botón de búsqueda */
 button.btn-primary {
   width: 100%;
   padding: 12px;
-  font-size: 18px;
+  font-size: 16px; /* Reducimos ligeramente el tamaño de fuente */
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 15px; /* Reducimos el margen superior */
 }
 
-/* Ajustes para los nombres de los campos */
+/* Botón de búsqueda - Efecto hover */
+button.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Etiquetas */
 label {
-  display: block;           /* Asegura que la etiqueta se muestre en una línea separada */
-  text-align: left;         /* Alinea el texto a la izquierda */
-  font-size: 18px;          /* Tamaño de fuente más grande */
-  font-weight: bold;        /* Hace que las etiquetas sean más llamativas */
-  margin-bottom: 5px;       /* Espacio inferior para separar del select */
+  display: block;
+  text-align: left;
+  font-size: 16px; /* Reducimos ligeramente el tamaño de fuente */
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-/* Contenedor de la sección izquierda */
-.form-section {
-  width: 45%;
-  padding-right: 20px;
-}
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .create-appointment-container {
+    padding: 10px; /* Reducimos el padding en pantallas pequeñas */
+  }
 
-/* Ajuste del contenedor principal */
-.create-appointment-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 30px;
-  padding: 30px;
-  background: linear-gradient(135deg, #f3f4f6, #ffffff);
-  border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
+  .form-section {
+    max-width: 100%; /* Permite que el formulario ocupe todo el ancho disponible */
+    padding: 10px;   /* Reducimos el padding */
+  }
 
-/* Ajustar el tamaño y posición del calendario */
-mat-calendar {
-  width: 110%;                /* Aumenta ligeramente el ancho */
-  max-width: 700px;           /* Establece un límite máximo */
-  padding: 50px;              /* Padding adicional para un diseño más espacioso */
-  font-size: 20px;            /* Tamaño de fuente ligeramente mayor */
-  transform: translate(-80px, -50px); /* Desplaza el calendario hacia la izquierda */
-}
+  mat-calendar {
+    padding: 5px; /* Reducimos aún más el padding del calendario */
+  }
 
+  button.btn-primary {
+    font-size: 14px; /* Reducimos el tamaño de fuente en pantallas pequeñas */
+    padding: 10px;
+  }
+}

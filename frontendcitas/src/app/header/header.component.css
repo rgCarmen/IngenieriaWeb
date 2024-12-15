@@ -16,13 +16,19 @@ nav {
   color: #0056b3;
 }
 
+.custom-toolbar {
+  background-color: #e8f4ff; /* Verde */
+  color: #000000;            /* Blanco para el texto */
+}
+
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #007bff;
   padding: 10px 20px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .nav {
