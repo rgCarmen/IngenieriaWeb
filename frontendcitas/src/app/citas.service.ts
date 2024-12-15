@@ -75,10 +75,20 @@ export class CitasService {
   }
   }
   
-
   obtenerCitasPorMedico(doctorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/medicos/${doctorId}/citas`);
   }
+
+  crearCitaMedico(cita: any): Observable<any> {
+    const userId = this.authService.getId();
+    if (userId){
+    return this.http.post(`${this.baseUrl}/medicos/${userId}/citas`, cita);
+    }else {
+      console.error('Usuario no autenticado o ID de usuario no válido.');
+     return of([]); 
+    }
+  }
+
 
 }
   
