@@ -1,5 +1,5 @@
 <nav>
-  <mat-toolbar color="primary">
+  <mat-toolbar class="custom-toolbar">
     <span>Gestión de Citas</span>
     <span class="spacer"></span>
 
@@ -9,7 +9,7 @@
     <a mat-button routerLink="/account" *ngIf="authService.isLoggedIn() && (authService.getRole() === 'MEDICO' || authService.getRole() === 'PACIENTE')">Mi cuenta</a>
 
     <!-- Opciones específicas por rol -->
-    <a mat-button routerLink="/history" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Historial Clínico</a>
+    <a mat-button routerLink="/clinical-history" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Historial Clínico</a>
     <a mat-button routerLink="/agenda" *ngIf="authService.isLoggedIn() && authService.getRole() === 'MEDICO'">Gestionar Agenda</a>
     <a mat-button routerLink="/stadistics" *ngIf="authService.isLoggedIn() && authService.getRole() === 'ADMINISTRADOR'">Estadísticas</a>
     

@@ -65,3 +65,70 @@
     background-color: #9cccff;
   }
   
+  .search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  .search-bar .search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    pointer-events: none;
+  }
+
+  /* Contenedor del botón "Volver" */
+.go-back-container {
+  width: 100%;            /* Ocupa todo el ancho disponible */
+  display: flex;          /* Usa flexbox para centrar el botón */
+  justify-content: center; /* Centra el botón horizontalmente */
+  margin-top: 20px;       /* Espacio superior */
+}
+
+/* Botón "Volver" */
+.go-back-button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.go-back-button:hover {
+  background-color: #0056b3;
+}
+
+.patient-info-container h2 {
+  text-align: center;       /* Centra el texto horizontalmente */
+  font-size: 2rem;          /* Tamaño de fuente más adecuado */
+  color: #0056b3;           /* Color azul para el encabezado */
+  margin: 20px 0;           /* Margen superior e inferior */
+}
+
+/* Encabezados de tabla */
+th {
+  background-color: #007bff; /* Color azul llamativo */
+  color: white;              /* Texto en color blanco para contraste */
+  padding: 15px;
+  text-align: left;
+  font-size: 1rem;
+}

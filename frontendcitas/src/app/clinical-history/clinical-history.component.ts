@@ -4,19 +4,34 @@ import { Component } from '@angular/core';
   selector: 'app-clinical-history',
   standalone: false,
   templateUrl: './clinical-history.component.html',
-  styleUrls: ['./clinical-history.component.css'],
+  styleUrls: ['./clinical-history.component.css']
 })
 export class ClinicalHistoryComponent {
-  clinicalRecords = [
-    { patient: 'Juan Pérez', date: '2023-12-01', diagnosis: 'Gripe', details: 'Detalles del diagnóstico de gripe.' },
-    { patient: 'María López', date: '2023-11-15', diagnosis: 'Hipertensión', details: 'Detalles del diagnóstico de hipertensión.' },
+  patients = [
+    { name: 'Juan Pérez', lastVisit: '2023-12-01' },
+    { name: 'María López', lastVisit: '2023-11-15' },
+    { name: 'Carlos Martínez', lastVisit: '2023-10-05' },
+    { name: 'Ana González', lastVisit: '2023-09-20' }
   ];
 
-  selectedRecord: any = null;
+  filteredPatients = this.patients;
+  searchTerm: string = '';
+  showPatientTable: boolean = false;
+  selectedPatient: any = null;
 
-  viewDetails(record: any) {
-    this.selectedRecord = record;
-    // Lógica para abrir un modal con detalles
-    alert(`Detalles: ${record.details}`);
+  viewPatientHistory(patient: any) {
+    this.showPatientTable = true;
+    this.selectedPatient = patient;
+  }
+
+  goBack() {
+    this.showPatientTable = false;
+    this.selectedPatient = null;
+  }
+
+  filterPatients() {
+    this.filteredPatients = this.patients.filter(patient =>
+      patient.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

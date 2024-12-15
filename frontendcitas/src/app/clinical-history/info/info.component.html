@@ -1,0 +1,33 @@
+<div class="patient-info-container">
+    <h2>Historial de Consultas de {{ selectedPatient.name }}</h2>
+  
+    <div class="table-and-button-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Especialidad</th>
+            <th>Diagnóstico</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2023-12-01</td>
+            <td>Cardiología</td>
+            <td>Gripe</td>
+            <td><button mat-raised-button color="primary">Ver</button></td>
+          </tr>
+          <tr>
+            <td>2023-11-15</td>
+            <td>Medicina General</td>
+            <td>Hipertensión</td>
+            <td><button mat-raised-button color="primary">Ver</button></td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <button class="go-back-button" (click)="goBack()">Volver</button>
+    </div>
+  </div>
+  

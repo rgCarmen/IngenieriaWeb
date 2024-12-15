@@ -37,6 +37,7 @@ import { StadisticsComponent } from './stadistics/stadistics.component';
 import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
 import { CrearCitaComponent } from './agenda-medico/crear-cita/crear-cita.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { InfoComponent } from './clinical-history/info/info.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     AgendaMedicoComponent,
     CrearCitaComponent,
     NotificationsComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,3 +17,8 @@ VALUES
     ('2024-12-08 11:15:00', 1, 1, 'medicina general', 'CONSULTA'),
     ('2024-12-09 10:00:00', 1, 1, 'nutricion', 'CONSULTA'),
     ('2024-12-10 15:45:00', 1, 1, 'cardiologia', 'CONSULTA');
+
+INSERT INTO notificaciones (usuario_id, mensaje)  VALUES 
+(1, 'Tu próxima cita médica está programada para el 2024-12-20 a las 10:00 AM.'),
+(1, 'Tu próxima cita médica está programada para el 2024-12-21 a las 11:00 AM.'),
+(1, 'Tu próxima cita médica está programada para el 2024-12-22 a las 09:00 AM.');
