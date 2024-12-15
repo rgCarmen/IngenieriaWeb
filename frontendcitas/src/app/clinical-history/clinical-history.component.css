@@ -65,3 +65,29 @@
     background-color: #9cccff;
   }
   
+  .search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  .search-bar .search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    pointer-events: none;
+  }

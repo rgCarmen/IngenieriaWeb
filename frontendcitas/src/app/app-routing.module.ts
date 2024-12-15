@@ -18,6 +18,7 @@ import { StadisticsComponent } from './stadistics/stadistics.component';
 import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
 import { CrearCitaComponent } from './agenda-medico/crear-cita/crear-cita.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { InfoComponent } from './clinical-history/info/info.component';
 
 
 
@@ -79,10 +80,18 @@ const routes: Routes = [
 
   // Ruta para el historial clínico, protegida por RoleGuard (solo doctores)
   {
-    path: 'history',
+    path: 'clinical-history',
     component: ClinicalHistoryComponent,
-    canActivate: [AuthGuard],
-    data: { role: 'MEDICO' }, // Solo accesible para médicos
+    canActivate: [AuthGuard], 
+    data: { role: 'MEDICO' }, 
+    children: [
+      {
+        path: 'patient-info/:name',
+        component: InfoComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'MEDICO' }
+      }
+    ]
   },
 
   // Ruta para estadisticas, protegida por RoleGuard (solo admins)

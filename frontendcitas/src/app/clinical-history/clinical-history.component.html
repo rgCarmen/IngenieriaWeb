@@ -1,32 +1,74 @@
-<div class="clinical-history-container">
-    <!-- Encabezado -->
-    <h1>Historial Clínico</h1>
-    <p class="description">
-      Consulta el historial clínico de tus pacientes asignados. Haz clic en "Ver" para obtener más detalles sobre cada diagnóstico.
-    </p>
-  
-    <!-- Tabla -->
-    <table>
-      <thead>
-        <tr>
-          <th>Paciente</th>
-          <th>Fecha</th>
-          <th>Diagnóstico</th>
-          <th>Detalles</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let record of clinicalRecords">
-          <td>{{ record.patient }}</td>
-          <td>{{ record.date }}</td>
-          <td>{{ record.diagnosis }}</td>
-          <td>
-            <button mat-raised-button color="primary" (click)="viewDetails(record)">
-              Ver
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="clinical-history-container" *ngIf="!showPatientTable">
+  <!-- Encabezado -->
+  <h1>Historial Clínico</h1>
+  <p class="description">
+    Consulta el historial clínico de tus pacientes asignados. Haz clic en un paciente para ver más detalles sobre sus consultas.
+  </p>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar por nombre de paciente..."
+      [(ngModel)]="searchTerm"
+      (input)="filterPatients()"
+    />
+    <span class="search-icon">
+      🔍
+    </span>
   </div>
-  
+
+  <!-- Tabla de pacientes -->
+  <table>
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Última Consulta</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of filteredPatients">
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.lastVisit }}</td>
+        <td>
+          <button mat-raised-button color="primary" (click)="viewPatientHistory(patient)">
+            Ver Historial
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Tabla del paciente seleccionado -->
+<div class="patient-info-container" *ngIf="showPatientTable">
+  <h2>Historial de Consultas de {{ selectedPatient.name }}</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Especialidad</th>
+        <th>Diagnóstico</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2023-12-01</td>
+        <td>Cardiología</td>
+        <td>Gripe</td>
+        <td><button mat-raised-button color="primary">Ver</button></td>
+      </tr>
+      <tr>
+        <td>2023-11-15</td>
+        <td>Medicina General</td>
+        <td>Hipertensión</td>
+        <td><button mat-raised-button color="primary">Ver</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button mat-raised-button color="accent" (click)="goBack()">Volver</button>
+</div>
