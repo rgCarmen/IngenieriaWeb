@@ -2,7 +2,7 @@
   <div class="columns-container">
     <!-- Columna para el formulario de creación de franja horaria -->
     <div class="crear-cita-column">
-      <h1>Franja Horaria</h1>
+      <h1>{{ selectedCita ? 'Modificar Cita' : 'Franja Horaria' }}</h1>
       <div class="crear-cita">
         <form (ngSubmit)="createSchedule()">
           <div class="form-group">
@@ -43,7 +43,16 @@
 
           <div class="form-group">
             <button type="submit" mat-raised-button color="primary">
-              Crear Franja Horaria
+              {{ selectedCita ? 'Guardar Cambios' : 'Crear Franja Horaria' }}
+            </button>
+            <button
+              *ngIf="selectedCita"
+              type="button"
+              mat-raised-button
+              color="warn"
+              (click)="cancelarModificacion()"
+            >
+              Cancelar
             </button>
           </div>
         </form>
@@ -107,7 +116,7 @@
 <ng-template #confirmDialog>
   <h2 mat-dialog-title>Confirmación</h2>
   <mat-dialog-content>
-    <p>Va a cancelar la cita. Confirme</p>
+    <p>Está a punto de cancelar su cita. Por favor confirme que está de acuerdo.</p>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button (click)="cancelarDialogo()">Cancelar</button>

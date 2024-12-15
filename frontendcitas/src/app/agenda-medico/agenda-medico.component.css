@@ -26,6 +26,7 @@
   h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #0056b3;
   }
 
   
@@ -138,11 +139,19 @@
   padding: 10px;          /* Ajusta el padding para evitar que el icono se salga */
 }
 
+.form-group button[color="warn"] {
+  background-color: #ffcccc;
+  color: #a71d2a;
+}
+
+.form-group button[color="warn"]:hover {
+  background-color: #f5bcbc;
+}
 
 /* Estilo para el botón de crear */
 .form-group button {
   width: 100%;             /* Botón ocupa todo el ancho del formulario */
-  padding: 12px;
+  padding: 12px 20px;
   font-size: 18px;
   background-color: #007bff;
   color: white;
