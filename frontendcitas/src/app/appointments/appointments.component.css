@@ -10,7 +10,7 @@
 /* Contenedor principal con dos columnas */
 .content-wrapper {
   display: flex;
-  gap: 20px; /* Reducimos el espacio entre columnas */
+  gap: 40px; /* Reducimos el espacio entre columnas */
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 20px;
@@ -31,7 +31,7 @@
 /* Columna de acciones */
 .actions-column {
   flex: 1; /* Más espacio para los botones */
-  max-width: 500px; /* Reducimos el tamaño máximo */
+  max-width: 1500px; /* Reducimos el tamaño máximo */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +39,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 /* Botones de navegación */
@@ -51,7 +52,7 @@
 }
 
 .actions button {
-  width: 100%;
+  width: 50%;
   padding: 15px 0;
   font-size: 18px;
   font-weight: bold;
