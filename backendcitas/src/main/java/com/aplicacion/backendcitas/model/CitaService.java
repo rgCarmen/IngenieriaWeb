@@ -6,6 +6,8 @@ import com.aplicacion.backendcitas.model.entidades.Paciente;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class CitaService {
 
     @Autowired
     private MedicoRepository medicoRepository;
+
+    @Autowired
+    private notificacionRepository notificacionRepository;
 
     public List<Cita> obtenerTodasLasCitas() {
         return citaRepository.findAll();
@@ -104,15 +109,27 @@ public class CitaService {
         cita.setPaciente(null); 
         return citaRepository.save(cita);
     }
-
+    /* 
     public List<Cita> obtenerCitasPorPaciente(Long usuarioId) {
         Paciente p=pacienteRepository.findByUsuarioId(usuarioId);
         return citaRepository.findByPacienteId(p.getId());
     }
 
+     */
+
+    public List<Cita> obtenerCitasPorPaciente(Long pacienteId) {
+        return citaRepository.findByPacienteId(pacienteId);
+    }
+
     public List<Cita> obtenerCitasPorMedico(Long usuarioId) {
         Medico m= medicoRepository.findByUsuarioId(usuarioId);
         return citaRepository.findByMedicoId(m.getId());
+    }
+
+     public List<Paciente> obtenerPacientesConCitas() {
+        return pacienteRepository.findAll().stream()
+                .filter(paciente -> !citaRepository.findByPacienteId(paciente.getId()).isEmpty())
+                .collect(Collectors.toList());
     }
 
     /* 

@@ -16,7 +16,6 @@ import { SupportComponent } from './home/support/support.component';
 import { MedicalServicesComponent } from './home/medical-services/medical-services.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
-import { CrearCitaComponent } from './agenda-medico/crear-cita/crear-cita.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { InfoComponent } from './clinical-history/info/info.component';
 
@@ -106,15 +105,7 @@ const routes: Routes = [
     path: 'agenda',
     component: AgendaMedicoComponent,
     canActivate: [AuthGuard],
-    data: { role: 'MEDICO' },
-    children: [
-      { 
-        path: 'create', 
-        component: CrearCitaComponent , 
-        canActivate: [AuthGuard],
-        data: { role: 'MEDICO' } 
-      }
-     ] 
+    data: { role: 'MEDICO' }
   },
   // Ruta para el login
   { path: 'login', component: LoginComponent },

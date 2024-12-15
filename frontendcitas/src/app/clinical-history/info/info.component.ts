@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ClinicalHistoryComponent } from '../clinical-history.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClinicalHistoryService } from '../../clinical-history.service';
 
 @Component({
   selector: 'app-patient-info',
@@ -7,17 +9,27 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.css']
 })
-export class InfoComponent {
-  selectedPatient: any;
-  patientAppointments = [
-    { date: '2023-12-01', specialty: 'Cardiología', diagnosis: 'Gripe', details: 'Informe detallado sobre gripe' },
-    { date: '2023-11-15', specialty: 'Medicina General', diagnosis: 'Hipertensión', details: 'Informe detallado sobre hipertensión' }
-  ];
+export class InfoComponent implements OnInit {
+  appointments: any[] = [];
+  patientName: string = '';
   selectedReport: any = null;
+  selectedPatient: any;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    const patientName = this.route.snapshot.paramMap.get('name');
-    this.selectedPatient = { name: patientName };
+  constructor(
+    private clinicalHistoryService: ClinicalHistoryService,
+    private route: ActivatedRoute,
+    private router: Router 
+  ) {}
+
+  ngOnInit(): void {
+    const pacienteId = this.route.snapshot.params['id'];
+    this.patientName = this.route.snapshot.params['name'];
+
+    this.clinicalHistoryService
+      .getPatientAppointments(pacienteId)
+      .subscribe((data) => {
+        this.appointments = data;
+      });
   }
 
   viewReport(appointment: any) {

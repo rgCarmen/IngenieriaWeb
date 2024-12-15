@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aplicacion.backendcitas.model.CitaService;
@@ -36,6 +37,16 @@ public class PacienteController {
         List<Cita> citas = citaService.obtenerCitasPorPaciente(usuarioId);
         System.out.println(citas);
         return citas;
+    }
+
+    @GetMapping("/pacientes/usuario-id")
+    public ResponseEntity<Long> obtenerUsuarioIdPorNombre(@RequestParam String nombre, @RequestParam String apellidos) {
+        Paciente paciente = pacienteRepository.findByNombreAndApellidos(nombre, apellidos);
+        if (paciente != null) {
+            return ResponseEntity.ok(paciente.getUsuario().getId());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     // Ver citas libres????
