@@ -1,43 +1,49 @@
-<div class="appointments-container">
-    <div class="content-wrapper">
-      <!-- Columna de Agenda de Citas -->
-      <div class="agenda-column">
-        <h2>Agenda de Citas</h2>
-        <div class="agenda-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Medico</th>
-                <th>Especialidad</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let cita of citas">
-                <td>{{ cita.fecha }}</td>
-                <td>{{ cita.medico }}</td>
-                <td>{{ cita.especialidad }}</td>
-                <td>
-                  <button (click)="navigateTo('cancel')" mat-raised-button class="btn-danger">
-                    Cancelar
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+<div class="appointments-container" style="display: flex; justify-content: center;">
+  <div class="content-wrapper" style="display: flex; width: 90%; justify-content: space-between;">
+    <!-- Columna de Agenda de Citas -->
+    <div class="agenda-column" style="width: 40%;">
+      <h2>Agenda de Citas</h2>
+      <div class="agenda-container">
+        <table>
+          <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Medico</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cita of citas">
+            <td>{{ cita.fecha }}</td>
+            <td>{{ cita.medico }}</td>
+            <td>{{ cita.especialidad }}</td>
+            <td>
+              <button (click)="navigateTo('cancel')" mat-raised-button class="btn-danger">
+                Cancelar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-  
-      <!-- Columna de Gestión de Citas -->
-      <div class="actions-column">
-        <h2>Gestión de Citas</h2>
-        <div class="actions">
-          <button (click)="navigateTo('create')" class="btn-primary">Pedir Cita</button>
-          <button (click)="navigateTo('modify')" class="btn-secondary">Modificar Cita</button>
-        </div>
+    </div>
+
+    <!-- Columna de Gestión de Citas -->
+    <div class="actions-column" style="text-align: center; width: 58%;margin-right: -150px;">
+      <h2>Gestión de Citas</h2>
+      <div class="actions" style="display: flex; flex-direction: column; align-items: center;">
+        <button (click)="navigateTo('create')" class="btn-primary" style="margin-bottom: -10px;">Pedir Cita</button>
+        <button (click)="navigateTo('modify')" class="btn-secondary">Modificar Cita</button>
+      </div>
+
+      <!--  Crear Nueva Cita Module -->
+      <div class="create-appointment-module" style="margin-top: 20px; width: 80%; margin-left: auto; margin-right: +80px;">
         <router-outlet></router-outlet>
       </div>
     </div>
   </div>
-  
+</div>
+
+
+
