@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: false,
   
   templateUrl: './agenda-medico.component.html',
-  styleUrl: './agenda-medico.component.scss'
+  styleUrl: './agenda-medico.component.css'
 })
 export class AgendaMedicoComponent implements OnInit{
 

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: false,
   
   templateUrl: './crear-cita.component.html',
-  styleUrl: './crear-cita.component.scss'
+  styleUrl: './crear-cita.component.css'
 })
 export class CrearCitaComponent {
 
