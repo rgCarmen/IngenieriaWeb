@@ -9,6 +9,7 @@ import { AccountService } from '../account.service';
 })
 export class AccountComponent implements OnInit{
 
+
   // Datos personales
   personalData: any={};
 
@@ -20,6 +21,8 @@ export class AccountComponent implements OnInit{
 
   // Historial de actividad (opcional)
   activityHistory: any[] = [];
+  showPassword: boolean = false;
+  password: any;
 
   constructor(private accountService: AccountService) {}
 
@@ -49,5 +52,9 @@ export class AccountComponent implements OnInit{
   updatePreferences() {
     alert('Preferencias guardadas: ' + JSON.stringify(this.preferences));
     // Aquí puedes integrar la lógica para guardar las preferencias en el backend.
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }
