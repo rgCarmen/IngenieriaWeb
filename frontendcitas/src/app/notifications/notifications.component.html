@@ -1,12 +1,11 @@
 <div class="notifications-page">
-    <h2 class="page-title">🔔 Notificaciones</h2>
-    <div class="notifications-list">
-      <div class="notification-item" *ngFor="let notification of notifications">
-        <div class="notification-content">
-          <p class="notification-message">{{ notification.message }}</p>
-          <span class="notification-date">{{ notification.date | date:'medium' }}</span>
-        </div>
+  <h2 class="page-title">🔔 Notificaciones</h2>
+  <div class="notifications-list">
+    <div class="notification-item" *ngFor="let notification of notifications">
+      <div class="notification-content">
+        <p class="notification-message">{{ notification.message }}</p>
+        <span class="notification-date">{{ notification.date | date:'medium' }}</span>
       </div>
     </div>
   </div>
-  
+</div>

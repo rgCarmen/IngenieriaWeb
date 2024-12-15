@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationsService } from '../notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -7,13 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notifications.component.css'],
 })
 export class NotificationsComponent implements OnInit {
-  notifications = [
-    { message: 'Cita creada con éxito para el 2024-12-05.', date: new Date() },
-    { message: 'Tu cita ha sido cancelada.', date: new Date() },
-    { message: 'Nueva cita disponible para Cardiología.', date: new Date() },
-  ];
+  notifications: any[] = [];
 
-  constructor() {}
+  constructor(private notificationsService: NotificationsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const usuarioId = 1; // Puedes cambiarlo dinámicamente si es necesario
+    this.notificationsService.getNotifications(usuarioId).subscribe(
+      (data) => {
+        // Ajusta el formato de los datos recibidos para incluir el mensaje correctamente
+        this.notifications = data.map((item: any) => ({
+          message: item.mensaje, // Accede a la propiedad 'mensaje' del objeto
+          date: new Date(),      // Puedes asignar una fecha si no viene en los datos
+        }));
+      },
+      (error) => {
+        console.error('Error al obtener las notificaciones:', error);
+      }
+    );
+  }
 }

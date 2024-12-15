@@ -23,6 +23,9 @@ public class CitaService {
     @Autowired
     private MedicoRepository medicoRepository;
 
+    @Autowired
+    private notificacionRepository notificacionRepository;
+
     public List<Cita> obtenerTodasLasCitas() {
         return citaRepository.findAll();
     }
