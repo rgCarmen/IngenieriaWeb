@@ -1,15 +1,24 @@
 package com.aplicacion.backendcitas.model;
 
+import com.aplicacion.backendcitas.model.entidades.Medico;
+import com.aplicacion.backendcitas.model.entidades.Paciente;
+import com.aplicacion.backendcitas.model.entidades.Usuario;
+import jakarta.transaction.Transactional;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.aplicacion.backendcitas.model.entidades.Usuario;
 
 @Service
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private MedicoRepository medicoRepository;
 
     public UsuarioRol obtenerRol(String email, String hashcontrasena) {
         // Buscar el usuario en la base de datos
@@ -54,6 +63,45 @@ public class UsuarioService {
         return crearUsuario(usuario);
     }
     
+    @Transactional
+    public Usuario actualizarUsuario(Long id, Usuario updatedUsuario, String nombre, String apellidos, String telefono) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+
+            // Actualizar email y contraseña del usuario
+            usuario.setEmail(updatedUsuario.getEmail());
+            if (updatedUsuario.getContrasena() != null && !updatedUsuario.getContrasena().isEmpty()) {
+                int contrasenaHashed = updatedUsuario.getContrasena().hashCode();
+                usuario.setContrasena(String.valueOf(contrasenaHashed));
+            }
+
+            // Actualizar nombre, apellidos y teléfono según el rol del usuario
+            if (usuario.getRol() == UsuarioRol.PACIENTE) {
+                Paciente paciente = pacienteRepository.findByUsuarioId(id);
+                if (paciente != null) {
+                    paciente.setNombre(nombre);
+                    paciente.setApellidos(apellidos);
+                    paciente.setTelefono(telefono);
+                    pacienteRepository.save(paciente);
+                }
+            } else if (usuario.getRol() == UsuarioRol.MEDICO) {
+                Medico medico = medicoRepository.findByUsuarioId(id);
+                if (medico != null) {
+                    medico.setNombre(nombre);
+                    medico.setApellidos(apellidos);
+                    medico.setTelefono(telefono);
+                    medicoRepository.save(medico);
+                }
+            }
+
+            // Guardar los cambios en el usuario
+            return usuarioRepository.save(usuario);
+        } else {
+            throw new RuntimeException("Usuario no encontrado con ID: " + id);
+        }
+    }
 
 }
 

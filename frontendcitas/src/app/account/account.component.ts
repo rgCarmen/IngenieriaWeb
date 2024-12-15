@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -8,7 +9,6 @@ import { AccountService } from '../account.service';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit{
-
 
   // Datos personales
   personalData: any={};
@@ -24,7 +24,9 @@ export class AccountComponent implements OnInit{
   showPassword: boolean = false;
   password: any;
 
-  constructor(private accountService: AccountService) {}
+  @ViewChild('updateConfirmDialog') updateConfirmDialog!: TemplateRef<any>;
+
+  constructor(private accountService: AccountService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadPersonalData();
@@ -45,8 +47,18 @@ export class AccountComponent implements OnInit{
 
   // Métodos para actualizar los datos
   updatePersonalInfo() {
-    alert('Datos personales actualizados: ' + JSON.stringify(this.personalData));
-    // Aquí puedes integrar la lógica para enviar los datos al backend.
+    const { nombre, apellidos, telefono, usuario } = this.personalData;
+
+    this.accountService.updateUsuario(this.personalData, nombre, apellidos, telefono).subscribe(
+      (response) => {
+        console.log('Datos actualizados correctamente:', response);
+        this.openConfirmDialog(this.updateConfirmDialog);
+      },
+      (error) => {
+        console.error('Error al actualizar los datos personales:', error);
+        alert('Error al actualizar los datos personales.');
+      }
+    );
   }
 
   updatePreferences() {
@@ -56,5 +68,17 @@ export class AccountComponent implements OnInit{
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  // Abrir diálogo de confirmación
+  openConfirmDialog(template: TemplateRef<any>) {
+    this.dialog.open(template, {
+      width: '300px'
+    });
+  }
+
+  // Cerrar diálogo
+  closeDialog() {
+    this.dialog.closeAll();
   }
 }

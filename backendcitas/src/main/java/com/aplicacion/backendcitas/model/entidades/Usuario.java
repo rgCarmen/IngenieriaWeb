@@ -1,8 +1,6 @@
 package com.aplicacion.backendcitas.model.entidades;
 
 import com.aplicacion.backendcitas.model.UsuarioRol;
-
-
 import jakarta.persistence.*;
 //import jakarta.validation.constraints.*;
 
@@ -24,6 +22,7 @@ public class Usuario {
     private String confirmarContrasena;
 
     // Getters y Setters
+    
     public Long getId() {
         return id;
     }

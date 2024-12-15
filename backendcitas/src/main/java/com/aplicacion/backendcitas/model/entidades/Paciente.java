@@ -23,7 +23,6 @@ public class Paciente extends Persona {
     public Paciente(String nombre, String apellidos, String telefono, String dni, Usuario usuario){
         super(nombre, apellidos, telefono, usuario);
         this.dni=dni;
-       
     }
 
     public long getId(){
