@@ -4,7 +4,7 @@
     <div class="crear-cita-column">
       <h1>{{ selectedCita ? 'Modificar Cita' : 'Franja Horaria' }}</h1>
       <div class="crear-cita">
-        <form (ngSubmit)="createSchedule()">
+        <form (ngSubmit)="selectedCita ? actualizarCita() : createSchedule()">
           <div class="form-group">
             <label for="date">Seleccionar Día</label>
             <input

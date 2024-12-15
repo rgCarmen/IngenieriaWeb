@@ -132,28 +132,15 @@ export class AgendaMedicoComponent implements OnInit{
         tipoCita: this.schedule.tipoCita,
       };
   
-      // Eliminar la cita antigua primero
-      this.citasService.eliminarCita(this.selectedCita.id).subscribe({
-        next: () => {
-          console.log('Cita antigua eliminada exitosamente');
-  
-          // Crear la nueva cita
-          this.citasService.crearCitaMedico(cita).subscribe({
-            next: (response) => {
-              console.log('Cita modificada exitosamente:', response);
-              this.selectedCita = null;
-              this.schedule = { date: '', startTime: '', tipoCita: '' }; // Limpiar el formulario
-              this.citasMedico(); // Refrescar la lista de citas
-            },
-            error: (err) => {
-              console.error('Error al crear la cita modificada:', err.message);
-              alert(`No se ha podido crear la cita modificada: ${err.message}`);
-            },
-          });
+      this.citasService.actualizarCita(cita).subscribe({
+        next: (response) => {
+          console.log('Cita modificada exitosamente:', response);
+          this.selectedCita=null;
+          this.citasMedico();
         },
         error: (err) => {
-          console.error('Error al eliminar la cita antigua:', err.message);
-          alert(`No se pudo eliminar la cita antigua: ${err.message}`);
+          console.error('Error al modificar la cita:', err.message);
+          alert("No se ha podido modificar")
         },
       });
     }
@@ -162,11 +149,23 @@ export class AgendaMedicoComponent implements OnInit{
 
   modificarCita(cita: any) {
     this.selectedCita = { ...cita }; // Copia de la cita seleccionada
+
+    const year = this.selectedCita.fecha.getFullYear();
+    const month = (this.selectedCita.fecha.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = this.selectedCita.fecha.getDate().toString().padStart(2, '0');
+    const fecha = `${year}-${month}-${day}`;
+
+    const hours = this.selectedCita.fecha.getHours().toString().padStart(2, '0');
+    const minutes = this.selectedCita.fecha.getMinutes().toString().padStart(2, '0');
+    const hora = `${hours}:${minutes}`;
+
+
     this.schedule = {
-      date: this.selectedCita.fecha.toISOString().split('T')[0], // Formato YYYY-MM-DD
-      startTime: this.selectedCita.fecha.toISOString().split('T')[1].substring(0, 5), // Formato HH:MM
+      date: fecha ,// Formato YYYY-MM-DD
+      startTime: hora,
       tipoCita: this.selectedCita.tipo,
     };
+
   }
   
   cancelarModificacion() {
