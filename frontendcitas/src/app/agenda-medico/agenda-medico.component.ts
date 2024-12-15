@@ -14,10 +14,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AgendaMedicoComponent implements OnInit{
 
 
+
+
   citasFuturas: any[] = [];
   citasPasadas: any[] = [];
   selectedCitaId: number | null =null;
   citaEliminada: boolean=false;
+  selectedCita: any = null; 
 
   schedule = {
     date: '',
@@ -116,6 +119,34 @@ export class AgendaMedicoComponent implements OnInit{
         },
       });
 
+
+    }
+  }
+
+  modificarCita(cita:any) {
+    this.selectedCita = { ...cita };  
+    }
+
+  actualizarCita() {
+    if (this.selectedCita) {
+      const dateTime = `${this.selectedCita.fecha} ${this.selectedCita.startTime}:00`; //formato LocalDateTime
+
+      const cita = {
+        id: this.selectedCita.id,
+        fecha: dateTime,
+        tipoCita: this.selectedCita.tipo,
+      };
+      this.citasService.actualizarCita(cita).subscribe({
+        next: (response) => {
+          console.log('Cita modificada exitosamente:', response);
+          this.selectedCita=null;
+          this.citasMedico();
+        },
+        error: (err) => {
+          console.error('Error al modificar la cita:', err.message);
+          alert("No se ha podido modificar")
+        },
+      });
 
     }
   }

@@ -89,6 +89,17 @@ export class CitasService {
     }
   }
 
+  actualizarCita(cita: any): Observable<any> {
+    const userId = this.authService.getId();
+    if (userId){
+    const url = `${this.baseUrl}/medicos/${userId}/citas/${cita.id}`;
+    return this.http.put(url, cita);
+    }else {
+      console.error('Usuario no autenticado o ID de usuario no válido.');
+     return of([]); 
+    }
+  }
+
 
 }
   
