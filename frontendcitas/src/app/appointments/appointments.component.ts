@@ -21,11 +21,11 @@ export class AppointmentsComponent implements OnInit {
   cargarCitas() {
     this.citasService.citasPaciente().subscribe({
       next: (data) => {
-        console.log(data); // Imprime la respuesta en la consola
+        console.log('Datos recibidos:', data); // Verifica la respuesta recibida
         this.citas = data.map((cita: any) => ({
-          fecha: cita.fecha,
-          medico: `${cita.medico.nombre} ${cita.medico.apellidos}`,
-          especialidad: cita.medico.especialidad
+          fecha: cita.fecha,  // Asegúrate de que 'fecha' existe en los datos
+          medico: `${cita.medico.nombre} ${cita.medico.apellidos}`,  // Verifica que la estructura es correcta
+          especialidad: cita.medico.especialidad // Verifica que 'medico' y 'especialidad' estén bien estructurados
         }));
       },
       error: (err) => {
@@ -33,6 +33,7 @@ export class AppointmentsComponent implements OnInit {
       }
     });
   }
+  
 
   // Navegación a los subcomponentes
   navigateTo(action: string) {

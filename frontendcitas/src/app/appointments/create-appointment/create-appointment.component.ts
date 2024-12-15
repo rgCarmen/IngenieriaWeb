@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CitasService } from '../../citas.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-create-appointment',
@@ -16,7 +17,7 @@ export class CreateAppointmentComponent {
   selectedDoctor: any = null;
   availableDates: string[] = []; // Fechas disponibles para el doctor seleccionado
 
-  constructor(private citasService: CitasService, private router: Router) {}
+  constructor(private citasService: CitasService, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.cargarEspecialidades();
@@ -56,7 +57,13 @@ export class CreateAppointmentComponent {
     if (this.selectedDoctor) {
       this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
         (appointments) => {
-          this.availableDates = appointments.map((appointment) => appointment.fecha.split('T')[0]);
+          // Filtra solo las citas donde PACIENTE_ID es NULL
+          const availableAppointments = appointments.filter((appointment: any) => appointment.paciente_id === null);
+          
+          // Extrae las fechas de las citas disponibles
+          this.availableDates = availableAppointments.map((appointment: any) => appointment.fecha.split('T')[0]);
+          
+          // Llama a la función para resaltar las fechas disponibles en el calendario
           this.highlightAvailableDates();
         },
         (error) => {
@@ -65,7 +72,8 @@ export class CreateAppointmentComponent {
         }
       );
     }
-  }  
+  }
+  
 
   // Resaltar días disponibles en el calendario
   highlightAvailableDates() {
@@ -95,26 +103,33 @@ export class CreateAppointmentComponent {
   // Seleccionar una fecha y enviar los datos al backend
   selectDate(date: Date) {
     const selectedDateString = date.toISOString().split('T')[0];
+    const userId = this.authService.getId(); // Asegúrate de que se obtiene el usuarioId
+  
+    if (!userId) {
+      alert('No se ha encontrado el ID de usuario. Asegúrate de estar autenticado.');
+      return;
+    }
   
     if (this.selectedDoctor && this.selectedSpecialty) {
       const appointmentData = {
         doctorId: this.selectedDoctor.id,
         specialty: this.selectedSpecialty,
         date: selectedDateString,
+        userId: userId
       };
   
-      this.citasService.crearCita(appointmentData).subscribe(
+      this.citasService.pedirCita(appointmentData, userId).subscribe(
         () => {
           alert(`Cita creada exitosamente para el ${selectedDateString} con ${this.selectedDoctor.nombre}`);
           this.router.navigate(['/appointments']);
         },
         (error) => {
-          console.error('Error al crear la cita:', error);
-          alert('Hubo un error al crear la cita. Por favor, inténtalo de nuevo.');
+          console.error('Error al pedir la cita:', error);
+          alert('Hubo un error al pedir la cita. Por favor, inténtalo de nuevo.');
         }
       );
     } else {
-      alert('Por favor, selecciona un doctor y una especialidad antes de crear la cita.');
+      alert('Por favor, selecciona un doctor y una especialidad antes de pedir la cita.');
     }
-  }  
+  }
 }

@@ -33,8 +33,9 @@ public class PacienteController {
     // Ver sus citas Agendadas
     @GetMapping("/{usuarioId}/citas")
     public List<Cita> obtenerCitas(@PathVariable Long usuarioId) {
-        return citaService.obtenerCitasPorPaciente(usuarioId);
-
+        List<Cita> citas = citaService.obtenerCitasPorPaciente(usuarioId);
+        System.out.println(citas);
+        return citas;
     }
 
     // Ver citas libres????
@@ -70,7 +71,6 @@ public class PacienteController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-
     }
 
     // Cancelar cita

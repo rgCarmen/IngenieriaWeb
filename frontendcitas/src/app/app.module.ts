@@ -11,6 +11,7 @@ import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -35,10 +36,9 @@ import { GuidesComponent } from './home/guides/guides.component';
 import { SupportComponent } from './home/support/support.component';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
-import { CrearCitaComponent } from './agenda-medico/crear-cita/crear-cita.component';
+
 import { NotificationsComponent } from './notifications/notifications.component';
 import { InfoComponent } from './clinical-history/info/info.component';
-
 
 @NgModule({
   declarations: [
@@ -60,7 +60,6 @@ import { InfoComponent } from './clinical-history/info/info.component';
     StadisticsComponent,
     SupportComponent,
     AgendaMedicoComponent,
-    CrearCitaComponent,
     NotificationsComponent,
     InfoComponent,
   ],
@@ -77,7 +76,8 @@ import { InfoComponent } from './clinical-history/info/info.component';
     MatIconModule,
     FormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),

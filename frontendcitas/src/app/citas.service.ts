@@ -50,9 +50,11 @@ export class CitasService {
     }
   }
 
-  crearCita(cita: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/citas`, cita);
+  pedirCita(appointmentData: any, usuarioId: String): Observable<any> {
+    const url = `${this.baseUrl}/paciente/${usuarioId}/citas/pedir/${appointmentData.doctorId}`;
+    return this.http.put(url, appointmentData);
   }
+  
 
   // Obtener doctores por especialidad
   obtenerMedicosPorEspecialidad(specialty: string): Observable<any> {
