@@ -14,4 +14,8 @@ public class PacienteService {
     public Paciente crearPaciente(Paciente paciente){
         return pacienteRepository.saveAndFlush(paciente);
     }
+
+    public Paciente obtenerPaciente(long id){
+        return pacienteRepository.findByUsuarioId(id);
+    }
 }

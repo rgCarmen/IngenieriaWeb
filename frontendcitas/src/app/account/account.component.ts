@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-account',
@@ -6,14 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit{
+
   // Datos personales
-  personalData = {
-    name: 'Juan',
-    surname: 'Pérez Martínez',
-    email: 'juan.perez@example.com',
-    password: '',
-  };
+  personalData: any={};
+
 
   // Preferencias
   preferences = {
@@ -21,11 +19,26 @@ export class AccountComponent {
   };
 
   // Historial de actividad (opcional)
-  activityHistory = [
-    'Cita con el Dr. Gómez - 01/12/2024',
-    'Cita cancelada con la Dra. López - 25/11/2024',
-    'Cita con el Dr. Ramírez - 15/11/2024',
-  ];
+  activityHistory: any[] = [];
+
+  constructor(private accountService: AccountService) {}
+
+  ngOnInit(): void {
+    this.loadPersonalData();
+  }
+
+  loadPersonalData() {
+   this.accountService.getUsuario().subscribe(
+      (data) => {
+        console.log(data);
+        this.personalData = data;
+        console.log(this.personalData);
+      },
+      (error) => {
+        console.error('Error al obtener los datos:', error);
+      }
+    );
+  }
 
   // Métodos para actualizar los datos
   updatePersonalInfo() {

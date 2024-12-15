@@ -10,7 +10,7 @@
           <input
             type="text"
             id="name"
-            [(ngModel)]="personalData.name"
+            [(ngModel)]="personalData.nombre"
             name="name"
             placeholder="Introduce tu nombre"
             required
@@ -21,7 +21,7 @@
           <input
             type="text"
             id="surname"
-            [(ngModel)]="personalData.surname"
+            [(ngModel)]="personalData.apellidos"
             name="surname"
             placeholder="Introduce tus apellidos"
             required
@@ -32,9 +32,21 @@
           <input
             type="email"
             id="email"
-            [(ngModel)]="personalData.email"
+            [(ngModel)]="personalData.usuario.email"
             name="email"
             placeholder="Introduce tu correo"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Telefono</label>
+          <input
+            type="telefono"
+            id="telefono"
+            [(ngModel)]="personalData.telefono"
+            name="telefono"
+            placeholder="Introduce tu telefono"
             required
           />
         </div>
@@ -43,7 +55,6 @@
           <input
             type="password"
             id="password"
-            [(ngModel)]="personalData.password"
             name="password"
             placeholder="Introduce tu nueva contraseña"
           />
