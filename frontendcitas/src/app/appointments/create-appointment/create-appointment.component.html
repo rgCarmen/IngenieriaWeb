@@ -17,9 +17,9 @@
     </div>
   </div>
 
-  <div class="calendar-section" *ngIf="selectedDoctor">
+  <div class="calendar-section" *ngIf="selectedDoctor && !isLoading">
     <h3>📅 Seleccione una fecha</h3>
-    <mat-calendar (selectedChange)="selectDate($event)"></mat-calendar>
+    <mat-calendar (selectedChange)="selectDate($event)" [dateClass]="dateClass"></mat-calendar>
   </div>
 
   <!-- Selector de horas disponibles -->
