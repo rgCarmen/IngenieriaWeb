@@ -27,7 +27,7 @@ export class NotificationsComponent implements OnInit {
         this.notifications = data.map((item: any) => ({
           message: item.mensaje, // Accede a la propiedad 'mensaje' del objeto
           date: item.date,      // Puedes asignar una fecha si no viene en los datos
-        }));
+        })).reverse();
       },
       (error) => {
         console.error('Error al obtener las notificaciones:', error);
