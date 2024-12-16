@@ -34,6 +34,7 @@ export class AgendaMedicoComponent implements OnInit{
   ngOnInit(): void {
     this.citasMedico();
   }
+
   citasMedico() {
     this.citasService.citasMedico().subscribe({
       next: (data) => {
@@ -57,27 +58,50 @@ export class AgendaMedicoComponent implements OnInit{
   }
 
   groupCitas() {
-    const groupBy = this.viewMode === 'day' ? 'day' : 'week';
-    const grouped = new Map();
-
+    const grouped = new Map<string, any[]>();
+  
     this.citasFuturas.forEach((cita) => {
-      const key = groupBy === 'day'
-        ? this.getFormattedDate(cita.fecha) // Día
-        : this.getWeekNumber(cita.fecha); // Semana
-
+      let key: string;
+  
+      if (this.viewMode === 'day') {
+        key = this.getFormattedDate(cita.fecha); // Agrupar por día
+      } else {
+        key = this.getWeekStartDate(cita.fecha); // Agrupar por semana
+      }
+  
       if (!grouped.has(key)) {
         grouped.set(key, []);
       }
-      grouped.get(key).push(cita);
+      grouped.get(key)?.push(cita);
     });
-
-    // Convertir Map en un array de objetos para usar en la plantilla
+  
+    // Convertir el Map en un array de objetos para usar en la plantilla
     this.citasAgrupadas = Array.from(grouped.entries()).map(([label, citas]) => ({
-      label, // Día o semana
-      citas, // Citas de este grupo
-      isExpanded: false // Por defecto, el grupo está cerrado
+      label,    // Día o semana
+      citas,    // Citas de este grupo
+      isExpanded: true  // Por defecto, el grupo está expandido
     }));
   }
+  
+  // Obtener la fecha formateada (DD/MM/YYYY)
+  getFormattedDate(date: Date): string {
+    return new Intl.DateTimeFormat('es-ES', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(date);
+  }
+  
+  // Obtener el lunes de la semana como clave para agrupar
+  getWeekStartDate(date: Date): string {
+    const day = date.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Ajustar para que el lunes sea el inicio
+    const weekStart = new Date(date);
+    weekStart.setDate(diff);
+  
+    return `del ${weekStart.toLocaleDateString('es-ES')}`;
+  }
+  
 
   // Alternar entre día y semana
   toggleViewMode(mode: string): void {
@@ -88,15 +112,6 @@ export class AgendaMedicoComponent implements OnInit{
   // Alternar el estado de expansión de un grupo
   toggleGroup(index: number): void {
     this.citasAgrupadas[index].isExpanded = !this.citasAgrupadas[index].isExpanded;
-  }
-
-  // Formatear fechas a 'DD/MM/YYYY'
-  getFormattedDate(date: Date): string {
-    return new Intl.DateTimeFormat('es-ES', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    }).format(date);
   }
 
   // Obtener el número de semana

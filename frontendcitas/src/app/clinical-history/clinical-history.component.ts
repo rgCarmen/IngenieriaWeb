@@ -22,7 +22,9 @@ export class ClinicalHistoryComponent implements OnInit {
     this.clinicalHistoryService.getPatients().subscribe(
       (data) => {
         this.patients = data;
-        this.filteredPatients = data; // Inicializamos el filtro con todos los pacientes
+        console.log(this.patients);
+        this.filterPatients(); // Inicializamos el filtro con todos los pacientes
+        
       },
       (error) => {
         console.error('Error al obtener los pacientes:', error);
@@ -32,19 +34,13 @@ export class ClinicalHistoryComponent implements OnInit {
 
   filterPatients(): void {
     this.filteredPatients = this.patients.filter((patient) =>
-      patient.NOMBRE.toLowerCase().includes(this.searchTerm.toLowerCase())
+      patient.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
   viewPatientHistory(patient: any): void {
-    this.clinicalHistoryService.getUsuarioIdByNombre(patient.NOMBRE, patient.APELLIDOS).subscribe(
-      (usuarioId) => {
-        this.router.navigate(['/historial', usuarioId]);
-      },
-      (error) => {
-        console.error('Error al obtener el usuarioId:', error);
-      }
-    );
+      console.log(patient.id);
+      this.router.navigate(['/patient-info/', patient.id]);
   }
 
   goBack(): void {

@@ -10,7 +10,7 @@ describe('SupportComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SupportComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SupportComponent);
     component = fixture.componentInstance;

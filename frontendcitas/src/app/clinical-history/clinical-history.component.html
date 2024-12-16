@@ -29,8 +29,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let patient of filteredPatients">
-        <td>{{ patient.name }}</td>
-        <td>{{ patient.lastVisit }}</td>
+        <td>{{ patient.nombre }} {{ patient.apellidos }}</td>
+        <td>Cita</td> <!--{{ patient.lastVisit }}-->
         <td>
           <button mat-raised-button color="primary" (click)="viewPatientHistory(patient)">
             Ver Historial
