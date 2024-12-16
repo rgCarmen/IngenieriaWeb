@@ -97,6 +97,7 @@ public class MedicoController {
         if (cita.getMedico().getUsuario().getId() != usuarioId) { //comprobar que sea una cita de ese medico
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); 
         }
+
         if (cita.getFecha().isBefore(LocalDateTime.now())) { // que no sea una cita pasada
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
         }
