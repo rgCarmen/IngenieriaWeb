@@ -138,5 +138,25 @@ public class MedicoController {
         
     }
 
+
+    @PutMapping(value = "/{usuarioId}/citasDiagnostico/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> actualizarDiagnostico(@PathVariable Long id,@PathVariable Long usuarioId ,@Valid @RequestBody Cita cita) {
+         try{
+
+             //comprobar que la cita a modificar sea de ese medico
+            Cita citaExistente = citaService.obtenerCitaPorId(id);
+            if (citaExistente.getMedico().getUsuario().getId() != usuarioId) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); 
+            }
+
+            Cita citaActualizada = citaService.actualizarDiagnostico(id, cita);
+            return new ResponseEntity<>(citaActualizada, HttpStatus.OK);
+
+         } catch (EntityNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+        }    
+        
+    }
+
     
 }

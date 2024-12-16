@@ -64,6 +64,18 @@ public class CitaService {
         return citaRepository.save(citaExistente);
     }
 
+    public Cita actualizarDiagnostico(Long id, Cita citaActualizada) {
+        Cita citaExistente = obtenerCitaPorId(id);
+
+       
+        citaExistente.setDiagnostico(citaActualizada.getDiagnostico());
+        citaExistente.setDescripcion(citaActualizada.getDescripcion());
+       
+
+
+        return citaRepository.save(citaExistente);
+    }
+
     public void eliminarCita(Long id) {
         Cita cita = obtenerCitaPorId(id);
         if (cita.getFecha().isBefore(LocalDateTime.now())) {
@@ -110,13 +122,7 @@ public class CitaService {
         cita.setPaciente(null); 
         return citaRepository.save(cita);
     }
-    /* 
-    public List<Cita> obtenerCitasPorPaciente(Long usuarioId) {
-        Paciente p=pacienteRepository.findByUsuarioId(usuarioId);
-        return citaRepository.findByPacienteId(p.getId());
-    }
 
-     */
 
     public List<Cita> obtenerCitasPorPaciente(Long pacienteId) {
         return citaRepository.findByPacienteId(pacienteId);
@@ -142,23 +148,7 @@ public class CitaService {
 
     }
 
-    /* 
-    public List<Cita> obtenerCitasPorRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-
-        Specification<Cita> spec = Specification.where(null);
-
-        if (fechaInicio != null) {
-            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("fechaHora"), fechaInicio));
-        }
-        if (fechaFin != null) {
-            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("fechaHora"), fechaFin));
-        }
-
-        return citaRepository.findAll(spec);
-
-    }
-        */
-
+   
 
 
 }
