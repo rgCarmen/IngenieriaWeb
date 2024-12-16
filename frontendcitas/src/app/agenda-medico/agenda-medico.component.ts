@@ -46,6 +46,8 @@ export class AgendaMedicoComponent implements OnInit{
           fecha: new Date(cita.fecha),
           paciente:  cita.paciente ? `${cita.paciente.nombre} ${cita.paciente.apellidos}` : '-',
           tipo: cita.tipoCita,
+          diagnostico: cita.diagnostico,
+          detalles: cita.descripcion,
           id: cita.id
         }));
 
@@ -273,7 +275,37 @@ export class AgendaMedicoComponent implements OnInit{
       interval:'', tipoCita: '' }; // Limpiar el formulario
   }
 
-  filterCitas() {
-    throw new Error('Method not implemented.');
+  cancelarEdicion(cita: any) {
+    cita.diagnostico = cita.originalDiagnostico; 
+    delete cita.originalDiagnostico; 
+    cita.editing = false;
     }
+
+
+  editarCita(cita: any) {
+    cita.editing = true; 
+    cita.originalDiagnostico = cita.diagnostico; 
+    }
+
+  guardarEdicion(cita: any) {
+    cita.editing = false;
+    console.log(cita);
+    const camposModificados={
+      diagnostico:cita.diagnostico,
+      descripcion:cita.detalles
+    };
+
+    this.citasService.actualizarDiagnosticoCita(camposModificados, cita.id).subscribe({
+      next: (response) => {
+        console.log('Diagnostico modificado exitosamente:', response);
+        this.citasMedico();
+      },
+      error: (err) => {
+        console.error('Error al modificar la cita:', err.message);
+        alert("No se ha podido modificar")
+      },
+    });
+
+      
+  }
 }
