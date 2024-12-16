@@ -27,7 +27,7 @@ public class HistorialController {
         return new ResponseEntity<>(pacientes, HttpStatus.OK);
     }
 
-    @GetMapping("/historial/{pacienteId}")
+    @GetMapping("/{pacienteId}")
     public ResponseEntity<List<Cita>> obtenerCitasPorPaciente(@PathVariable Long pacienteId) {
         List<Cita> citas = citaService.obtenerCitasPorPaciente(pacienteId);
         if (citas.isEmpty()) {
@@ -37,3 +37,4 @@ public class HistorialController {
     }
 
 }
+
