@@ -38,38 +38,48 @@ mat-calendar {
   flex-direction: column;
   height: 100%;
 }
-.mat-calendar-body-wrapper{
+/* .mat-calendar-body-wrapper{
   flex-grow: 1;
 }
 
 .mat-calendar-table {
   width: 100%;
   height: 100%;
-}
+} */
 
-.mat-calendar-body{
-  width: 100%;
-  height: 100%;
-}
-
-.mat-calendar-body-cell{
-  width: auto; /* The cell takes its size by its content */
+.mat-calendar-body-cell {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
+
+/* Estilo global para resaltar fechas disponibles en el calendario */
+::ng-deep button.mat-calendar-body-cell.highlight-date .mat-calendar-body-cell-content {
+  background-color: #90ee90 !important; /* Verde claro */
+  color: #000 !important; /* Texto en negro */
+  border-radius: 50%; /* Círculo */
+  font-weight: bold; /* Negrita */
+  border: 2px solid #90ee90; /* Borde verde */
+}
+
+/* Hover para fechas disponibles */
+::ng-deep button.mat-calendar-body-cell.highlight-date:hover .mat-calendar-body-cell-content {
+  background-color: #76c776 !important; /* Verde oscuro */
+  cursor: pointer;
+}
+
 .calendar-container{
   display: flex;
   justify-content: center;
   width: 100%;
 }
+
 /* Título */
 h2 {
   font-size: 2rem;
   color: #007bff;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 25px;  /* Aumentar separación inferior */
 }
 
 /* Campos de selección */
@@ -107,7 +117,8 @@ label {
   text-align: left;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 5px;  /* Mayor espacio debajo de cada etiqueta */
+  margin-top: 5px;     /* Espacio adicional encima de cada etiqueta */
 }
 
 /* Ajustes para pantallas pequeñas */
@@ -128,4 +139,20 @@ label {
     font-size: 14px;
     padding: 10px;
   }
+}
+
+/* Estilo para los campos de texto no modificables */
+input[readonly] {
+  width: 100%;           /* Igualar el ancho al del desplegable */
+  height: 40px;          /* Ajustar la altura para que coincida con el desplegable */
+  padding: 8px;          /* Espaciado interno similar al desplegable */
+  font-size: 16px;       /* Tamaño de fuente coherente */
+  box-sizing: border-box; /* Incluir el padding y el borde en el ancho y alto */
+}
+
+/* Opcional: Estilo adicional para mejorar la apariencia */
+input[readonly] {
+  background-color: #f5f5f5; /* Color de fondo para indicar que es no modificable */
+  border: 1px solid #ccc;     /* Borde similar al del desplegable */
+  border-radius: 4px;         /* Bordes redondeados para coherencia */
 }
