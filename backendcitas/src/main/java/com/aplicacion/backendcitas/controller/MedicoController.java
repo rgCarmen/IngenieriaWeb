@@ -64,6 +64,14 @@ public class MedicoController {
     
     }
 
+    // Citas Libres
+    @GetMapping("/{medicoId}/citas/libres")
+    public List<Cita> obtenerCitasLibres(@PathVariable Long medicoId) {
+        return citaService.obtenerCitasLibresMedico(medicoId);
+    
+    }
+
+
     // ver cita concreta (no se si será útil)
     @GetMapping("/{usuarioId}/citas/{id}")
     public Cita obtenerCitas(@PathVariable Long usuarioId, @PathVariable Long id) {

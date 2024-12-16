@@ -55,6 +55,7 @@ export class CreateAppointmentComponent {
 
   loadAvailableDates() {
     if (this.selectedDoctor) {
+      console.log(this.selectedDoctor);
       this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
         (appointments) => {
           // Filtra solo las citas donde PACIENTE_ID es NULL
