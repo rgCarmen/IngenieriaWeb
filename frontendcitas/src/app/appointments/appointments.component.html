@@ -1,47 +1,72 @@
 <div class="appointments-container" style="display: flex; justify-content: center;">
-  <div class="content-wrapper" style="display: flex; width: 90%; justify-content: space-between;">
-    <!-- Columna de Agenda de Citas -->
-    <div class="agenda-column" style="width: 40%;">
-      <h2>Agenda de Citas</h2>
+  <div class="content-wrapper" style="display: flex; width: 90%; flex-direction: column; gap: 40px;">
+
+    <!-- Sección de Citas Próximas -->
+    <div class="agenda-column" style="width: 100%;">
+      <h2>Citas Próximas</h2>
       <div class="agenda-container">
         <table>
           <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Medico</th>
-            <th>Especialidad</th>
-            <th>Acciones</th>
-          </tr>
+            <tr>
+              <th>Fecha</th>
+              <th>Médico</th>
+              <th>Especialidad</th>
+              <th>Acciones</th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let cita of citas">
-            <td>{{ cita.fecha }}</td>
-            <td>{{ cita.medico }}</td>
-            <td>{{ cita.especialidad }}</td>
-            <td>
-              <button (click)="openConfirmDialog(cita.id)" mat-raised-button class="btn-danger">
-                Cancelar
-              </button>
-            </td>
-          </tr>
+            <tr *ngFor="let cita of citasProximas">
+              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.medico }}</td>
+              <td>{{ cita.especialidad }}</td>
+              <td>
+                <button (click)="openConfirmDialog(cita.id)" mat-raised-button class="btn-danger">
+                  Cancelar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sección de Citas Pasadas -->
+    <div class="agenda-column" style="width: 100%;">
+      <h2>Citas Pasadas</h2>
+      <div class="agenda-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Médico</th>
+              <th>Especialidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citasPasadas">
+              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.medico }}</td>
+              <td>{{ cita.especialidad }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <!-- Columna de Gestión de Citas -->
-    <div class="actions-column" style="text-align: center; width: 58%;margin-right: -150px;">
+    <div class="actions-column" style="text-align: center; width: 100%; margin-top: 20px;">
       <h2>Gestión de Citas</h2>
       <div class="actions" style="display: flex; flex-direction: column; align-items: center;">
-        <button (click)="navigateTo('create')" class="btn-primary" style="margin-bottom: -10px;">Pedir Cita</button>
+        <button (click)="navigateTo('create')" class="btn-primary" style="margin-bottom: 10px;">Pedir Cita</button>
         <button (click)="navigateTo('modify')" class="btn-secondary">Modificar Cita</button>
       </div>
 
-      <!--  Crear Nueva Cita Module -->
-      <div class="create-appointment-module" style="margin-top: 20px; width: 80%; margin-left: auto; margin-right: +80px;">
+      <!-- Crear Nueva Cita Module -->
+      <div class="create-appointment-module" style="margin-top: 20px; width: 80%; margin-left: auto; margin-right: auto;">
         <router-outlet></router-outlet>
       </div>
     </div>
+
   </div>
 </div>
 

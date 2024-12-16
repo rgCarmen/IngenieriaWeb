@@ -11,11 +11,13 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 })
 export class AppointmentsComponent implements OnInit {
   citas: any[] = []; // Arreglo para almacenar las citas
+  citasPasadas: any[] = []; // Arreglo para almacenar las citas
+  citasProximas: any[] = []; // Arreglo para almacenar las citas
   selectedCitaId: number | null = null; // Variable para almacenar el ID de la cita seleccionada
 
   @ViewChild('confirmDialog') confirmDialog!: TemplateRef<any>; // Referencia al template del diálogo
 
-  constructor(private citasService: CitasService, private router: Router, private dialog: MatDialog) {}
+  constructor(private citasService: CitasService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.cargarCitas();  // Llama al método al inicializar el componente
@@ -26,18 +28,48 @@ export class AppointmentsComponent implements OnInit {
     this.citasService.citasPaciente().subscribe({
       next: (data) => {
         console.log('Datos recibidos:', data); // Verifica la respuesta recibida
+
+        // Asigna todas las citas con formato de fecha adecuado
         this.citas = data.map((cita: any) => ({
           id: cita.id,
-          fecha: cita.fecha,  // Asegúrate de que 'fecha' existe en los datos
-          medico: `${cita.medico.nombre} ${cita.medico.apellidos}`,  // Verifica que la estructura es correcta
-          especialidad: cita.medico.especialidad // Verifica que 'medico' y 'especialidad' estén bien estructurados
+          fecha: this.formatearFecha(cita.fecha), // Formatea la fecha
+          medico: `${cita.medico.nombre} ${cita.medico.apellidos}`,
+          especialidad: cita.medico.especialidad
         }));
+
+        // Fecha actual para comparar
+        const hoy = new Date();
+
+        // Filtra citas futuras y pasadas
+        this.citasProximas = this.citas.filter(cita => new Date(cita.fecha) > hoy);
+        this.citasPasadas = this.citas.filter(cita => new Date(cita.fecha) <= hoy);
       },
       error: (err) => {
         console.error('Error al obtener las citas:', err);
       }
     });
   }
+
+  // Método para formatear fechas en el formato 'YYYY-MM-DD HH:MM:SS'
+  formatearFecha(fecha: string): string {
+    const date = new Date(fecha);
+    
+    const year = date.getFullYear();
+    const month = this.agregarCero(date.getMonth() + 1);
+    const day = this.agregarCero(date.getDate());
+    const hours = this.agregarCero(date.getHours());
+    const minutes = this.agregarCero(date.getMinutes());
+    const seconds = this.agregarCero(date.getSeconds());
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+  // Método auxiliar para agregar ceros a los números menores de 10
+  agregarCero(valor: number): string {
+    return valor < 10 ? `0${valor}` : `${valor}`;
+  }
+
+
 
   // Navegación a los subcomponentes
   navigateTo(action: string) {
