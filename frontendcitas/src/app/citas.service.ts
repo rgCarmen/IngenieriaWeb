@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
 import { AuthService } from './auth.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -129,11 +129,15 @@ export class CitasService {
     }
   }
 
-  actualizarCitaPaciente(cita: any): Observable<any> {
+  actualizarCitaPaciente(id: any, cita: any): Observable<any> {
     const userId = this.authService.getId();
     if (userId) {
-      const url = `${this.baseUrl}/citas/modificar/${cita.id}`;
-      return this.http.put(url, cita).pipe(
+      // Cancelar cita actual
+      return this.cancelarCita(id).pipe(
+        // Pedir la nueva
+        switchMap(() => {
+          return this.pedirCita(cita, userId);
+        }),
         catchError((error) => {
           console.error('Error al actualizar la cita:', error);
           return throwError(() => new Error('Error al actualizar la cita.'));

@@ -104,18 +104,28 @@ export class ModifyAppointmentComponent implements OnInit {
       alert('No se ha encontrado el ID de usuario. Asegúrate de estar autenticado.');
       return;
     }
+
+    console.log(this.selectedAppointment);
+    console.log(this.availableAppointments);
   
     // Crear el objeto de cita actualizada con la fecha y hora seleccionadas
-    const updatedAppointment = {
-      ...this.selectedAppointment,
-      date: `${this.selectedAppointment.date.toISOString().split('T')[0]} ${this.selectedHour}`,
-    };
+   
+    const fecha=`${this.selectedAppointment.date.toISOString().split('T')[0]} ${this.selectedHour}`;
 
-    console.log('Updated Appointment:', updatedAppointment);
-    this.citasService.actualizarCitaPaciente(updatedAppointment).subscribe(
+    const filteredAppointments = this.availableAppointments.find((appointment: any) => {
+      return appointment.fecha === fecha; // Comparar solo la parte de la fecha
+    });
+
+
+    const updated = {citaId: filteredAppointments.id};
+    console.log("Updated", updated)
+
+    this.citasService.actualizarCitaPaciente(this.selectedAppointment.id,updated).subscribe(
       () => {
         alert('Cita modificada exitosamente.');
         this.router.navigate(['/appointments']);
+        window.location.reload();
+
       },
       (error) => {
         console.error('Error al modificar la cita:', error);

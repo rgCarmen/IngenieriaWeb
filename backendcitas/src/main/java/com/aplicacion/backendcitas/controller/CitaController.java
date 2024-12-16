@@ -60,12 +60,6 @@ public class CitaController {
         }
     }
 
-    @PutMapping(value = "/citas/modificar/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> actualizarCita(@PathVariable Long id, @Valid @RequestBody Cita cita) {
-        Cita citaActualizada = citaService.actualizarCita(id, cita);
-        return new ResponseEntity<>(citaActualizada, HttpStatus.OK);
-    }
-
     @DeleteMapping("/citas/{id}")
     public ResponseEntity<Void> eliminarCita(@PathVariable Long id) {
         citaService.eliminarCita(id);
