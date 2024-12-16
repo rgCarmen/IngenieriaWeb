@@ -29,7 +29,7 @@ public class NotificationController {
         List<Map<String, Object>> response = notifications.stream().map(notification -> {
             Map<String, Object> item = new HashMap<>();
             item.put("mensaje", notification.getMensaje());
-            item.put("date", LocalDateTime.now()); // Ejemplo de fecha actual
+            item.put("date", notification.getFechaEnvio()); // Ejemplo de fecha actual
             return item;
         }).collect(Collectors.toList());
 
