@@ -15,10 +15,12 @@ export class CreateAppointmentComponent {
   selectedSpecialty: string = '';
   filteredDoctors: any[] = [];
   selectedDoctor: any = null;
-  availableDates: string[] = []; // Fechas disponibles para el doctor seleccionado
-  availableAppointments: any[] = []; // Citas disponibles con fecha y hora
-  availableHours: string[] = []; // Horas disponibles para el día seleccionado
-  selectedHour: string = ''; // Hora seleccionada por el usuario
+  availableDates: string[] = [];
+  availableAppointments: any[] = [];
+  availableHours: { hour: string, citaId: number }[] = [];
+  selectedHour: string = '';
+  selectedDate: Date | null = null;
+  selectedCitaId: number | null = null;
 
   constructor(private citasService: CitasService, private router: Router, private authService: AuthService) {}
 
@@ -54,6 +56,7 @@ export class CreateAppointmentComponent {
     if (this.selectedDoctor) {
       this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
         (appointments) => {
+          console.log("Raw appointments from backend:", appointments);
           this.availableAppointments = appointments.filter((appointment: any) => appointment.paciente === null);
           this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0]);
           this.highlightAvailableDates();
@@ -69,23 +72,20 @@ export class CreateAppointmentComponent {
     setTimeout(() => {
       const calendarDays = document.querySelectorAll('.mat-calendar-body-cell');
       const calendarHeader = document.querySelector('.mat-calendar-period-button') as HTMLElement;
-  
+
       if (!calendarHeader) return;
-  
-      // Obtener el mes y año actuales del calendario
+
       const [monthName, year] = calendarHeader.textContent?.trim().split(' ') || [];
-  
-      // Convertir el nombre del mes a número (ej: 'DEC' -> '12')
       const month = this.getMonthNumber(monthName).padStart(2, '0');
-  
+
       calendarDays.forEach((day) => {
         const dayElement = day as HTMLElement;
         const dayText = dayElement.querySelector('.mat-calendar-body-cell-content')?.textContent;
-  
+
         if (dayText) {
           const dayString = dayText.padStart(2, '0');
           const dateStr = `${year}-${month}-${dayString}`;
-  
+
           if (this.availableDates.includes(dateStr)) {
             dayElement.style.backgroundColor = '#90ee90';
             dayElement.style.borderRadius = '50%';
@@ -110,25 +110,30 @@ export class CreateAppointmentComponent {
       'Noviembre': 11, 'November': 11,
       'Diciembre': 12, 'December': 12,
     };
-  
+
     return months[monthName]?.toString() || '0';
   }
-  
+
 
   selectDate(date: Date) {
+<<<<<<< HEAD
+    this.selectedDate = date;
+=======
     console.log(date)
     date.setHours(date.getHours() + 1);
+>>>>>>> 36192923491e7a402bb7af998a16f966027bf519
     const selectedDateString = date.toISOString().split('T')[0];
     
     console.log(selectedDateString);
 
-    // Filtra las citas disponibles que coincidan con la fecha seleccionada
     const appointmentsForDate = this.availableAppointments.filter(
       (appointment: any) => appointment.fecha.split(' ')[0] === selectedDateString
     );
 
-    // Extrae las horas disponibles para esa fecha
-    this.availableHours = appointmentsForDate.map((appointment: any) => appointment.fecha.split(' ')[1]);
+    this.availableHours = appointmentsForDate.map(appointment => ({
+      hour: appointment.fecha.split(' ')[1],
+      citaId: appointment.id
+    }));
 
     console.log('Available Hours:', this.availableHours);
   }
@@ -140,19 +145,29 @@ export class CreateAppointmentComponent {
       return;
     }
 
-    if (this.selectedDoctor && this.selectedSpecialty && this.selectedHour) {
-      const selectedDate = new Date().toISOString().split('T')[0];
+    if (this.selectedDoctor && this.selectedSpecialty && this.selectedHour && this.selectedDate) {
+      const selectedDateString = this.selectedDate.toISOString().split('T')[0];
+
+      const selectedAppointment = this.availableHours.find(availableHour => availableHour.hour === this.selectedHour);
+
+      if (!selectedAppointment){
+        alert("No se ha podido obtener la id de la cita");
+        return;
+      }
+
       const appointmentData = {
         doctorId: this.selectedDoctor.id,
         specialty: this.selectedSpecialty,
-        date: `${selectedDate} ${this.selectedHour}`,
-        userId: userId
+        date: `${selectedDateString} ${this.selectedHour}`,
+        userId: userId,
+        citaId: selectedAppointment.citaId,
       };
 
       this.citasService.pedirCita(appointmentData, userId).subscribe(
         () => {
-          alert(`Cita creada exitosamente para el ${selectedDate} a las ${this.selectedHour} con ${this.selectedDoctor.nombre}`);
+          alert(`Cita creada exitosamente para el ${selectedDateString} a las ${this.selectedHour} con ${this.selectedDoctor.nombre}`);
           this.router.navigate(['/appointments']);
+          window.location.reload()
         },
         (error) => {
           console.error('Error al pedir la cita:', error);
@@ -160,7 +175,7 @@ export class CreateAppointmentComponent {
         }
       );
     } else {
-      alert('Por favor, selecciona una hora antes de confirmar la cita.');
+      alert('Por favor, selecciona una hora y fecha antes de confirmar la cita.');
     }
   }
 }
