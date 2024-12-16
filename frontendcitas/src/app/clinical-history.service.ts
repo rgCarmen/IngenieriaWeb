@@ -15,7 +15,7 @@ export class ClinicalHistoryService {
   }
 
   getPatientAppointments(pacienteId: number): Observable<any> {
-    return this.http.get<any[]>(`/${pacienteId}`);
+    return this.http.get<any[]>(`${this.baseUrl}/${pacienteId}`);
   }
 }
 
