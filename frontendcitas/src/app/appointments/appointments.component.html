@@ -1,20 +1,21 @@
-<div class="appointments-container" style="display: flex; justify-content: center;">
-  <div class="content-wrapper" style="display: flex; width: 90%; flex-direction: column; gap: 40px;">
+<div class="appointments-container" style="display: flex; width: 100%; justify-content: center;">
+  <div class="content-wrapper" style="display: flex; width: 90%; gap: 40px; align-items: flex-start; flex-direction: row;">
 
-    <!-- Sección de Citas Próximas -->
-    <div class="agenda-column" style="width: 100%;">
-      <h2>Citas Próximas</h2>
-      <div class="agenda-container">
-        <table>
-          <thead>
+    <!-- Sección de Agenda (Ocupa el resto del espacio disponible) - Izquierda -->
+    <div style="width: 60%; display: flex; flex-direction: column; gap: 20px;">
+      <div class="agenda-column" style="background: #e8f4ff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h2>Citas Próximas</h2>
+        <div class="agenda-container">
+          <table>
+            <thead>
             <tr>
               <th>Fecha</th>
               <th>Médico</th>
               <th>Especialidad</th>
               <th>Acciones</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr *ngFor="let cita of citasProximas">
               <td>{{ cita.fecha }}</td>
               <td>{{ cita.medico }}</td>
@@ -25,36 +26,36 @@
                 </button>
               </td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
-    <!-- Sección de Citas Pasadas -->
-    <div class="agenda-column" style="width: 100%;">
-      <h2>Citas Pasadas</h2>
-      <div class="agenda-container">
-        <table>
-          <thead>
+      <div class="agenda-column" style="background: #e8f4ff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h2>Citas Pasadas</h2>
+        <div class="agenda-container">
+          <table>
+            <thead>
             <tr>
               <th>Fecha</th>
               <th>Médico</th>
               <th>Especialidad</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr *ngFor="let cita of citasPasadas">
               <td>{{ cita.fecha }}</td>
               <td>{{ cita.medico }}</td>
               <td>{{ cita.especialidad }}</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- Columna de Gestión de Citas -->
-    <div class="actions-column" style="text-align: center; width: 100%; margin-top: 20px;">
+    <!-- Columna de Gestión de Citas (Lateral Derecho) -->
+    <div class="actions-column" style="text-align: center; width: 40%; margin-top: 0px; min-width: 200px;">
       <h2>Gestión de Citas</h2>
       <div class="actions" style="display: flex; flex-direction: column; align-items: center;">
         <button (click)="navigateTo('create')" class="btn-primary" style="margin-bottom: 10px;">Pedir Cita</button>
@@ -66,6 +67,7 @@
         <router-outlet></router-outlet>
       </div>
     </div>
+
 
   </div>
 </div>

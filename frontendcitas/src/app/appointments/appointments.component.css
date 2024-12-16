@@ -10,7 +10,7 @@
 /* Contenedor principal con dos columnas */
 .content-wrapper {
   display: flex;
-  gap: 40px; /* Reducimos el espacio entre columnas */
+  gap: 40px; /* Espacio entre columnas */
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 20px;
@@ -18,20 +18,17 @@
 
 /* Columna de la agenda */
 .agenda-column {
-  flex: 1; /* Reducimos el espacio de la agenda */
-  min-width: 400px; /* Reducimos el tamaño mínimo de la tabla */
-  max-width: 600px; /* Limitamos el tamaño máximo */
+  /* La agenda toma el espacio restante */
   background: #e8f4ff; /* Fondo azul claro */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: -150px; /* Desplazamos la agenda hacia la izquierda */
 }
 
 /* Columna de acciones */
 .actions-column {
-  flex: 1; /* Más espacio para los botones */
-  max-width: 1500px; /* Reducimos el tamaño máximo */
+  /* Establece un ancho fijo para la columna de acciones */
+  width: 40%; /* Ampliamos el ancho de la columna de acciones */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,6 +143,7 @@ tr:hover {
   .actions-column {
     min-width: 100%;
     max-width: 100%;
+    width: 100%;
   }
 }
 

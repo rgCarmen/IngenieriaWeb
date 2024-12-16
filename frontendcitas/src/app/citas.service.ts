@@ -54,7 +54,7 @@ export class CitasService {
     const url = `${this.baseUrl}/paciente/${usuarioId}/citas/pedir/${appointmentData.doctorId}`;
     return this.http.put(url, appointmentData);
   }
-  
+
 
   // Obtener doctores por especialidad
   obtenerMedicosPorEspecialidad(specialty: string): Observable<any> {
@@ -87,7 +87,7 @@ export class CitasService {
       return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
     }
   }
-  
+
   obtenerCitasPorMedico(doctorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/medicos/${doctorId}/citas/libres`);
   }
@@ -98,7 +98,7 @@ export class CitasService {
     return this.http.post(`${this.baseUrl}/medicos/${userId}/citas`, cita);
     }else {
       console.error('Usuario no autenticado o ID de usuario no válido.');
-     return of([]); 
+     return of([]);
     }
   }
 
@@ -109,13 +109,13 @@ export class CitasService {
     return this.http.put(url,cita);
     }else {
       console.error('Usuario no autenticado o ID de usuario no válido.');
-     return of([]); 
+     return of([]);
     }
   }
 
 
 }
-  
 
-  
+
+
 
