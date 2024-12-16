@@ -28,6 +28,29 @@
           </div>
 
           <div class="form-group">
+            <label for="timeSlotEnd">Hora de Fin</label>
+            <input
+              type="time"
+              id="timeSlotEnd"
+              [(ngModel)]="schedule.endTime"
+              name="endTime"
+              required
+            />
+          </div>
+         
+          <div class="form-group">
+            <label for="interval">Intervalo (en minutos)</label>
+            <input
+              type="number"
+              id="interval"
+              [(ngModel)]="schedule.interval"
+              name="interval"
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="form-group">
             <label for="appointmentType">Tipo de Cita</label>
             <select
               id="appointmentType"

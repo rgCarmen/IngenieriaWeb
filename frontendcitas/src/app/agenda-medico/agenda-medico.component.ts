@@ -23,6 +23,8 @@ export class AgendaMedicoComponent implements OnInit{
   schedule = {
     date: '',
     startTime: '',
+    endTime:'',
+    interval:'',
     tipoCita: ''
   };
 
@@ -167,20 +169,40 @@ export class AgendaMedicoComponent implements OnInit{
   }
 
   createSchedule():void {
-    if (this.schedule.date && this.schedule.startTime && this.schedule.tipoCita) {
+    if (this.schedule.date && this.schedule.startTime && this.schedule.tipoCita && this.schedule.endTime && this.schedule.interval) {
       const dateTime = `${this.schedule.date} ${this.schedule.startTime}:00`; //formato LocalDateTime
+      const dateTimeFin = new Date(`${this.schedule.date} ${this.schedule.endTime}:00`); //formato LocalDateTime
+      const intervalMinutes = parseInt(this.schedule.interval, 10);
 
-      const cita = {
-        fecha: dateTime,
-        tipoCita: this.schedule.tipoCita,
+      if (isNaN(intervalMinutes) || intervalMinutes <= 0) {
+        alert("El intervalo debe ser un número mayor que cero.");
+        return;
+      }
+
+      const citas = [];
+      let currentDateTime = new Date(dateTime);
+
+      const formatDateTime = (date: Date): string => {
+        const pad = (n: number) => (n < 10 ? `0${n}` : n);
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
       };
 
-      console.log(cita);
+      while (currentDateTime < dateTimeFin) {
+      const cita = {
+        fecha: formatDateTime(currentDateTime),
+        tipoCita: this.schedule.tipoCita,
+      };
+      citas.push(cita);
+      currentDateTime.setMinutes(currentDateTime.getMinutes() + intervalMinutes);
+      console.log(currentDateTime.getMinutes() + intervalMinutes);
+    }
+    
+    console.log("Citas", citas);
+    citas.forEach((cita) => {
 
       this.citasService.crearCitaMedico(cita).subscribe({
         next: (response) => {
           console.log('Cita creada exitosamente:', response);
-          this.schedule = { date: '', startTime: '', tipoCita: '' };
           this.citasMedico();
         },
         error: (err) => {
@@ -188,7 +210,11 @@ export class AgendaMedicoComponent implements OnInit{
           alert("No se ha podido crear la cita en esta franja horaria")
         },
       });
-
+    
+    });
+    this.schedule = { date: '', startTime: '',  endTime:'',
+      interval:'', tipoCita: '' };
+   
 
     }
   }
@@ -235,13 +261,16 @@ export class AgendaMedicoComponent implements OnInit{
       date: fecha ,// Formato YYYY-MM-DD
       startTime: hora,
       tipoCita: this.selectedCita.tipo,
+      endTime:'',
+      interval:'',
     };
 
   }
   
   cancelarModificacion() {
     this.selectedCita = null;
-    this.schedule = { date: '', startTime: '', tipoCita: '' }; // Limpiar el formulario
+    this.schedule = { date: '', startTime: '', endTime:'',
+      interval:'', tipoCita: '' }; // Limpiar el formulario
   }
 
   filterCitas() {
