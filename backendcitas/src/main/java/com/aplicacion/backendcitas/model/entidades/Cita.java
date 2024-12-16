@@ -35,6 +35,9 @@ public class Cita {
     @Column(nullable = true)
     private String descripcion;
 
+    @Column(nullable = true)
+    private String diagnositico;
+
     public Cita() {}
 
     public long getId() {
@@ -97,5 +100,13 @@ public class Cita {
 
     public void setDescripcion(String descripcion){
         this.descripcion=descripcion;
+    }
+
+    public String getDiagnostico(){
+        return this.diagnositico;
+    }
+
+    public void setDiagnostico(String diagnostico){
+        this.diagnositico=diagnostico;
     }
 }

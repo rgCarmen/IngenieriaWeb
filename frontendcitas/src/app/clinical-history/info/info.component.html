@@ -1,5 +1,4 @@
 <div class="patient-info-container">
-  <h2>Historial de Consultas de {{ selectedPatient.name }}</h2>
 
   <div class="table-and-button-wrapper">
     <table>
@@ -12,21 +11,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>2023-12-01</td>
-          <td>Cardiología</td>
-          <td>Gripe</td>
-          <td><button mat-raised-button color="primary">Ver</button></td>
-        </tr>
-        <tr>
-          <td>2023-11-15</td>
-          <td>Medicina General</td>
-          <td>Hipertensión</td>
-          <td><button mat-raised-button color="primary">Ver</button></td>
+        <tr *ngFor="let appointment of appointments">
+          <td>{{ appointment.fecha }}</td>
+          <td>{{ appointment.medico.especialidad }}</td>
+          <td>{{ appointment.diagnostico }}</td>
+          <td><button mat-raised-button color="primary" (click)="viewReport(appointment)">Ver</button></td>
         </tr>
       </tbody>
     </table>
 
+    <!--appintment.description van a ser los detalles-->
+
     <button class="go-back-button" (click)="goBack()">Volver</button>
   </div>
+
+  <ng-template #updateConfirmDialog let-data>
+    <h1 mat-dialog-title>Detalles de la Cita</h1>
+    <div mat-dialog-content>
+      <p>{{ data.descripcion }}</p>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialog.closeAll()">Cerrar</button>
+    </div>
+  </ng-template>
 </div>
