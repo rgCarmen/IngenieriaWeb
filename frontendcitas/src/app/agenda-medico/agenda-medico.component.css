@@ -131,10 +131,12 @@ tr:hover {
 }
 
 .form-group input[type="date"],
-.form-group input[type="time"] {
+.form-group input[type="time"],
+.form-group input[type="number"] {
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
+  text-align: center;
 }
 
 .form-group button[color="warn"] {
@@ -180,14 +182,14 @@ tr:hover {
 .crear-cita-column {
   flex: 3;
   max-width: 350px;
-  margin-left: 150px;
+  margin-left: 180px;
   margin-top: 50px;
 }
 
 /* Columna para la agenda */
 .agenda-column {
   flex: 2;
-  max-width: 900px;
+  max-width: 1000px;
   margin-right: 150px;
   margin-top: 50px;
 }
@@ -220,7 +222,7 @@ h1 {
 /* Contenedor para el selector de vista */
 .view-selector {
   display: flex;
-  margin: 20px 0; /* Keep vertical margins, remove horizontal and set to auto */
+  margin: 20px 20px; /* Keep vertical margins, remove horizontal and set to auto */
   padding: 10px;
   background-color: #f8f9fa;
   border-radius: 10px;
@@ -259,4 +261,30 @@ h1 {
 .view-selector select:focus {
   outline: none;
   box-shadow: 0 0 5px #007bff;
+}
+
+/* Estilo mejorado para los inputs */
+.diagnostico-input,
+.detalles-input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efecto hover */
+.diagnostico-input:hover,
+.detalles-input:hover {
+  border-color: #007bff;
+}
+
+/* Efecto focus */
+.diagnostico-input:focus,
+.detalles-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  outline: none;
 }

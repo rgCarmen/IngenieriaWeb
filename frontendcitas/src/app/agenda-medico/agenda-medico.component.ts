@@ -83,7 +83,7 @@ export class AgendaMedicoComponent implements OnInit{
     this.citasAgrupadas = Array.from(grouped.entries()).map(([label, citas]) => ({
       label,    // Día o semana
       citas,    // Citas de este grupo
-      isExpanded: true  // Por defecto, el grupo está expandido
+      isExpanded: false  // Por defecto, el grupo está expandido
     }));
   }
   

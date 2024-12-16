@@ -82,16 +82,19 @@
       </div>
     </div>
 
-    <div class="view-selector">
-      <label for="viewMode">Ver citas por:</label>
-      <select id="viewMode" [(ngModel)]="viewMode" (change)="groupCitas()">
-        <option value="day">Día</option>
-        <option value="week">Semana</option>
-      </select>
-    </div>
+   
 
     <!-- Columna para la agenda -->
     <div class="agenda-column">
+      
+      <div class="view-selector">
+        <label for="viewMode">Ver citas por:</label>
+        <select id="viewMode" [(ngModel)]="viewMode" (change)="groupCitas()">
+          <option value="day">Día</option>
+          <option value="week">Semana</option>
+        </select>
+      </div>
+
       <h1>Agenda</h1>
       <div class="agenda-container">
         <table>
