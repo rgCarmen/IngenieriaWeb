@@ -63,7 +63,7 @@ public class UsuarioService {
         return crearUsuario(usuario);
     }
     
-    @Transactional
+    
     public Usuario actualizarUsuario(Long id, Usuario updatedUsuario, String nombre, String apellidos, String telefono) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
 
