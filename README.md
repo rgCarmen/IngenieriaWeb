@@ -20,7 +20,7 @@
 - [ ] RF4.03 Notificar al médico cambio en la cita (al módulo notificaciones)
 - [ ] RF4.04 Poder configurar cuanto antes se quiere recibir ese recordatorio (NO HACER)
 
-- [ ] RF5.01 Que el médico pueda modificar su franja de disponibilidad
+- [x] RF5.01 Que el médico pueda modificar su franja de disponibilidad
 - [ ] RF5.02 Que el médico pueda ver sus citas por día o semana (agregar en Mi Cuenta)
 - [ ] RF5.03 El médico pueda ver todas las citas de un paciente (como sugerencia se podría poner en el historial clínico)
 

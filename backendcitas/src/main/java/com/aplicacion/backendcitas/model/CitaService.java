@@ -57,7 +57,7 @@ public class CitaService {
         }
         citaExistente.setFecha(citaActualizada.getFecha());
         citaExistente.setTipoCita(citaActualizada.getTipoCita());
-        citaExistente.setPaciente(citaActualizada.getPaciente());
+        //citaExistente.setPaciente(citaActualizada.getPaciente());
 
 
         return citaRepository.save(citaExistente);

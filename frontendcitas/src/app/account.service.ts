@@ -27,6 +27,7 @@ export class AccountService {
       .set('apellidos', apellidos)
       .set('telefono', telefono);
 
+
     return this.http.put<any>(`${this.apiUrl}/registro/usuario/${userId}`, data, { params });
   }
 }
