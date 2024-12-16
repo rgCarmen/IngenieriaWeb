@@ -22,12 +22,13 @@ export class AccountService {
 
   updateUsuario(data: any, nombre: string, apellidos: string, telefono: string): Observable<any> {
     const userId = this.authService.getId();
+    
     const params = new HttpParams()
       .set('nombre', nombre)
       .set('apellidos', apellidos)
       .set('telefono', telefono);
 
 
-    return this.http.put<any>(`${this.apiUrl}/registro/usuario/${userId}`, data, { params });
+    return this.http.put<any>(`${this.apiUrl}/registro/usuario/${userId}`, data.usuario, { params });
   }
 }
