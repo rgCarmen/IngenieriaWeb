@@ -23,10 +23,7 @@ export class CreateAppointmentComponent {
   selectedCitaId: number | null = null;
   isLoading: boolean = true;
 
-  constructor(
-    private citasService: CitasService,
-    private router: Router,
-    private authService: AuthService) {}
+  constructor(private citasService: CitasService, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.cargarEspecialidades();
@@ -60,59 +57,18 @@ export class CreateAppointmentComponent {
     if (this.selectedDoctor) {
       this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
         (appointments) => {
-          // Filtra citas disponibles (paciente null o undefined)
-          this.availableAppointments = appointments.filter(
-            (appointment: any) => !appointment.paciente || appointment.paciente === null
-          );
-  
-          // Extrae solo fechas únicas en formato YYYY-MM-DD
-          this.availableDates = Array.from(
-            new Set(
-              this.availableAppointments.map((appointment: any) =>
-                appointment.fecha.split(' ')[0].trim()
-              )
-            )
-          );
-  
-          console.log('Fechas disponibles (limpias y únicas):', this.availableDates);
-          this.isLoading = false; // Finaliza la carga
+          console.log("Raw appointments from backend:", appointments);
+          this.availableAppointments = appointments.filter((appointment: any) => appointment.paciente === null);
+          this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
+          //this.highlightAvailableDates();
+          this.isLoading = false;
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
-          this.isLoading = false; // Asegura que finalice incluso si hay error
+          this.isLoading = false;
         }
       );
     }
-  } 
-
-  highlightAvailableDates() {
-    setTimeout(() => {
-      const calendarDays = document.querySelectorAll('.mat-calendar-body-cell');
-      const calendarHeader = document.querySelector('.mat-calendar-period-button') as HTMLElement;
-  
-      if (!calendarHeader) return;
-  
-      // Obtener el mes y año actuales del calendario
-      const [monthName, year] = calendarHeader.textContent?.trim().split(' ') || [];
-  
-      // Convertir el nombre del mes a número (ej: 'DEC' -> '12')
-      const month = this.getMonthNumber(monthName).padStart(2, '0');
-  
-      calendarDays.forEach((day) => {
-        const dayElement = day as HTMLElement;
-        const dayText = dayElement.querySelector('.mat-calendar-body-cell-content')?.textContent;
-  
-        if (dayText) {
-          const dayString = dayText.padStart(2, '0');
-          const dateStr = `${year}-${month}-${dayString}`;
-  
-          if (this.availableDates.includes(dateStr)) {
-            dayElement.style.backgroundColor = '#90ee90';
-            dayElement.style.borderRadius = '50%';
-          }
-        }
-      });
-    }, 100);
   }
 
   getMonthNumber(monthName: string): string {
@@ -134,22 +90,27 @@ export class CreateAppointmentComponent {
     return months[monthName]?.toString() || '0';
   }
 
-
   selectDate(date: Date | null): void {
     if (!date) {
       console.warn('La fecha seleccionada es null.');
-      return; // Evita ejecutar lógica si date es null
+      return;
     }
+  
+    // Ajusta la hora y guarda la fecha seleccionada
     date.setHours(date.getHours() + 1);
+    this.selectedDate = date;
     const selectedDateString = date.toISOString().split('T')[0];
   
-    // Filtra las citas disponibles que coincidan con la fecha seleccionada
+    // Filtra las citas disponibles para la fecha seleccionada
     const appointmentsForDate = this.availableAppointments.filter(
       (appointment: any) => appointment.fecha.split(' ')[0] === selectedDateString
     );
   
-    // Extrae las horas disponibles para esa fecha
-    this.availableHours = appointmentsForDate.map((appointment: any) => appointment.fecha.split(' ')[1]);
+    // Extrae las horas disponibles con citaId para el desplegable
+    this.availableHours = appointmentsForDate.map((appointment: any) => ({
+      hour: appointment.fecha.split(' ')[1],
+      citaId: appointment.id
+    }));
   
     console.log('Available Hours:', this.availableHours);
   }
@@ -201,7 +162,7 @@ export class CreateAppointmentComponent {
     const dateString = date.toISOString().split('T')[0];
   
     // Depura la comparación detalladamente
-    console.log(`Revisando fecha del calendario: "${dateString}"`);
+    console.log(`"Revisando fecha del calendario: "${dateString}"`);
 
     // Compara correctamente y verifica
     const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);
@@ -213,4 +174,5 @@ export class CreateAppointmentComponent {
     }
     return '';
   }
+
 }
