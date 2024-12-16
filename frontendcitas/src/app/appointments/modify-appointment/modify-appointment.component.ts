@@ -125,22 +125,28 @@ export class ModifyAppointmentComponent implements OnInit {
   }  
   
   dateClass = (date: Date): string => {
-    // Normaliza la fecha actual
     date.setHours(date.getHours() + 1);
     const dateString = date.toISOString().split('T')[0];
   
-    // Depura la comparación detalladamente
     console.log(`Revisando fecha del calendario: "${dateString}"`);
   
-    // Compara correctamente y verifica si la fecha está disponible
+    this.availableDates.forEach((availableDate) => {
+      console.log(`Comparando "${availableDate.trim()}" con "${dateString}"`);
+      if (availableDate.trim() === dateString) {
+        console.log(`%c ¡Coincidencia encontrada!: ${dateString}`, 'color: green; font-weight: bold;');
+      }
+    });
+  
     const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);
   
-    // Log para depurar la clase que se devuelve
     if (isAvailable) {
       console.log(`%c highlight-date aplicado a: ${dateString}`, 'color: green; font-weight: bold;');
       return 'highlight-date';
     }
     return '';
-  };
+  }
+  
+  
+  
   
 }
