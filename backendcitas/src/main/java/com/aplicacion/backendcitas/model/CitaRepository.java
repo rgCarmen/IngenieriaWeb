@@ -17,4 +17,5 @@ public interface CitaRepository extends JpaRepository<Cita, Long>, JpaSpecificat
     List<Cita> findByMedicoIdAndPacienteIsNull(Long medicoId);
     List<Cita> findByMedicoEspecialidadAndPacienteIsNull(String especialidad);
     List<Cita> findByPacienteIsNull();
+    
 }
