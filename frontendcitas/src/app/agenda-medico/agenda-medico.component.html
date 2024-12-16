@@ -61,7 +61,7 @@
 
     <div class="view-selector">
       <label for="viewMode">Ver citas por:</label>
-      <select id="viewMode" [(ngModel)]="viewMode" (change)="filterCitas()">
+      <select id="viewMode" [(ngModel)]="viewMode" (change)="groupCitas()">
         <option value="day">Día</option>
         <option value="week">Semana</option>
       </select>
