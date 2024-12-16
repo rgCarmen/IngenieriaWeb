@@ -28,7 +28,7 @@
     <div class="form-group">
       <label for="available-time">Seleccione una hora</label>
       <select id="available-time" [(ngModel)]="selectedHour">
-        <option *ngFor="let hour of availableHours" [value]="hour">{{ hour }}</option>
+        <option *ngFor="let hourObj of availableHours" [value]="hourObj.hour">{{ hourObj.hour }}</option>
       </select>
     </div>
     <button class="btn-primary" (click)="confirmAppointment()">✅ Confirmar Cita</button>

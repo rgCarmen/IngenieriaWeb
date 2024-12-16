@@ -51,8 +51,13 @@ export class CitasService {
   }
 
   pedirCita(appointmentData: any, usuarioId: String): Observable<any> {
-    const url = `${this.baseUrl}/paciente/${usuarioId}/citas/pedir/${appointmentData.doctorId}`;
-    return this.http.put(url, appointmentData);
+    const url = `${this.baseUrl}/paciente/${usuarioId}/citas/pedir/${appointmentData.citaId}`;
+    return this.http.put(url, appointmentData).pipe(
+      catchError(error => {
+        console.error('Error al pedir cita', error);
+        return throwError(() => new Error('Error al pedir cita.'));
+      })
+    );
   }
 
 
