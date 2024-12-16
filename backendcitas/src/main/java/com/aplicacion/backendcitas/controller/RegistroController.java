@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.aplicacion.backendcitas.dto.RegistroMedicoRequest;
 import com.aplicacion.backendcitas.dto.UsuarioDTO;
 import com.aplicacion.backendcitas.model.MedicoService;
 import com.aplicacion.backendcitas.model.PacienteService;
@@ -38,6 +38,35 @@ public class RegistroController {
 
     @Autowired
     private MedicoService medicoService;
+
+    @PostMapping("/medico")
+    public ResponseEntity<?> registrarMedico(@RequestBody RegistroMedicoRequest request) {
+        try {
+            // Crear Usuario
+            Usuario usuario = new Usuario();
+            usuario.setEmail(request.getCorreo());
+            usuario.setContrasena(request.getPassword());
+            usuario.setRol(UsuarioRol.MEDICO); // Asignar rol "MEDICO"
+
+            Usuario usuarioCreado = usuarioService.crearUsuario(usuario);
+
+            // Crear Médico asociado al Usuario
+            Medico medico = new Medico();
+            medico.setNombre(request.getNombre());
+            medico.setApellidos(request.getApellidos());
+            medico.setTelefono(request.getTelefono());
+            medico.setEspecialidad(request.getEspecialidad());
+            medico.setUsuario(usuarioCreado);
+            medico.setUsuario(usuarioCreado);
+
+            Medico medicoCreado = medicoService.crearMedico(medico);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(medicoCreado);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error al registrar el médico: " + ex.getMessage());
+        }
+    }
 
     @PostMapping(value="/registrar", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> registrarPaciente(@RequestBody UsuarioDTO usuarioDTO) {
