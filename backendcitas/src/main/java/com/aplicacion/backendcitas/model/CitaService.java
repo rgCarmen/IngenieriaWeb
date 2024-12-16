@@ -69,7 +69,7 @@ public class CitaService {
         if (cita.getFecha().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("No se pueden eliminar citas pasadas.");
         }
-    
+        
         citaRepository.delete(cita);
     }
 

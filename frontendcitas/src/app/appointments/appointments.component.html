@@ -19,7 +19,7 @@
             <td>{{ cita.medico }}</td>
             <td>{{ cita.especialidad }}</td>
             <td>
-              <button (click)="navigateTo('cancel')" mat-raised-button class="btn-danger">
+              <button (click)="cancelarCita(cita.id)" mat-raised-button class="btn-danger">
                 Cancelar
               </button>
             </td>

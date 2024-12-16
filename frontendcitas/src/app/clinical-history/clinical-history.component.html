@@ -1,4 +1,4 @@
-<div class="clinical-history-container" *ngIf="!showPatientTable">
+<div class="clinical-history-container">
   <!-- Encabezado -->
   <h1>Historial Clínico</h1>
   <p class="description">
@@ -6,16 +6,14 @@
   </p>
 
   <!-- Barra de búsqueda -->
-  <div class="search-bar">
+  <div class="search-bar" *ngIf="showPatientTable">
     <input
       type="text"
       placeholder="Buscar por nombre de paciente..."
       [(ngModel)]="searchTerm"
       (input)="filterPatients()"
     />
-    <span class="search-icon">
-      🔍
-    </span>
+    <span class="search-icon">🔍</span>
   </div>
 
   <!-- Tabla de pacientes -->
@@ -30,7 +28,7 @@
     <tbody>
       <tr *ngFor="let patient of filteredPatients">
         <td>{{ patient.nombre }} {{ patient.apellidos }}</td>
-        <td>Cita</td> <!--{{ patient.lastVisit }}-->
+        <td>Cita</td>
         <td>
           <button mat-raised-button color="primary" (click)="viewPatientHistory(patient)">
             Ver Historial
@@ -41,37 +39,5 @@
   </table>
 </div>
 
-<!-- Tabla del paciente seleccionado -->
-<div class="patient-info-container" *ngIf="showPatientTable">
-  <h2>Historial de Consultas de {{ selectedPatient.name }}</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Especialidad</th>
-        <th>Diagnóstico</th>
-        <th>Detalles</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>2023-12-01</td>
-        <td>Cardiología</td>
-        <td>Gripe</td>
-        <td><button mat-raised-button color="primary">Ver</button></td>
-      </tr>
-      <tr>
-        <td>2023-11-15</td>
-        <td>Medicina General</td>
-        <td>Hipertensión</td>
-        <td><button mat-raised-button color="primary">Ver</button></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Botón Volver centrado -->
-  <div class="go-back-container">
-    <button mat-raised-button color="accent" (click)="goBack()">Volver</button>
-  </div>
-</div>
+<!-- Router outlet para mostrar el subcomponente info -->
+<router-outlet></router-outlet>

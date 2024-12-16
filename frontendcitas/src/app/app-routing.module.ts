@@ -85,7 +85,7 @@ const routes: Routes = [
     data: { role: 'MEDICO' }, 
     children: [
       {
-        path: 'patient-info/:name',
+        path: 'patient-info/:id',
         component: InfoComponent,
         canActivate: [AuthGuard],
         data: { role: 'MEDICO' }

@@ -67,10 +67,10 @@ export class CitasService {
   }
 
   // medico elimina cita
-  eliminarCita(citaId: number): Observable<void> {
+  eliminarCita(citaId: number): Observable<any> {
     const userId = this.authService.getId();
     if (userId){
-      return this.http.delete<void>(`${this.baseUrl}/medicos/${userId}/citas/${citaId}`);
+      return this.http.put(`${this.baseUrl}/paciente/${userId}/citas/cancelar/${citaId}`, {});
     } else {
       console.error('Usuario no autenticado o ID de usuario no válido.');
       return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
