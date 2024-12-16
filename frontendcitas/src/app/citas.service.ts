@@ -70,11 +70,22 @@ export class CitasService {
   eliminarCita(citaId: number): Observable<any> {
     const userId = this.authService.getId();
     if (userId){
+      return this.http.delete<any>(`${this.baseUrl}/medicos/${userId}/citas/${citaId}`);
+    } else {
+      console.error('Usuario no autenticado o ID de usuario no válido.');
+      return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
+    }
+  }
+
+   // paciente cancela cita
+   cancelarCita(citaId: number): Observable<any> {
+    const userId = this.authService.getId();
+    if (userId){
       return this.http.put(`${this.baseUrl}/paciente/${userId}/citas/cancelar/${citaId}`, {});
     } else {
       console.error('Usuario no autenticado o ID de usuario no válido.');
       return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
-  }
+    }
   }
   
   obtenerCitasPorMedico(doctorId: number): Observable<any[]> {

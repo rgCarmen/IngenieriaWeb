@@ -56,7 +56,7 @@ export class AppointmentsComponent implements OnInit {
   // Método para cancelar la cita
   cancelarCita() {
     if (this.selectedCitaId !== null) {
-      this.citasService.eliminarCita(this.selectedCitaId).subscribe(
+      this.citasService.cancelarCita(this.selectedCitaId).subscribe(
         response => {
           console.log('Cita cancelada con éxito');
           this.cargarCitas(); // Recargar las citas después de la cancelación
