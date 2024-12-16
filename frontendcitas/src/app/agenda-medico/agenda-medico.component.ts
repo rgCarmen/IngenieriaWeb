@@ -49,8 +49,8 @@ export class AgendaMedicoComponent implements OnInit{
           id: cita.id
         }));
 
-        this.citasFuturas = citas.filter((cita: any) => cita.fecha >= now);
-        this.citasPasadas = citas.filter((cita: any) => cita.fecha < now);
+        this.citasFuturas = citas.filter((cita: any) => cita.fecha >= now).sort((a:any, b:any) => a.fecha.getTime() - b.fecha.getTime());;
+        this.citasPasadas = citas.filter((cita: any) => cita.fecha < now).sort((a:any, b:any) => b.fecha.getTime() - a.fecha.getTime());
         this.groupCitas();
       },
       error: (err) => {
