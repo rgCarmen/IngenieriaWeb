@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../notifications.service';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-notifications',
@@ -10,10 +11,16 @@ import { NotificationsService } from '../notifications.service';
 export class NotificationsComponent implements OnInit {
   notifications: any[] = [];
 
-  constructor(private notificationsService: NotificationsService) {}
+  constructor(private notificationsService: NotificationsService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    const usuarioId = 1; // Puedes cambiarlo dinámicamente si es necesario
+    const usuarioId = this.authService.getId();
+
+    if (!usuarioId) {
+      alert('No se ha encontrado el ID de usuario. Asegúrate de estar autenticado.');
+      return;
+    }
+
     this.notificationsService.getNotifications(usuarioId).subscribe(
       (data) => {
         // Ajusta el formato de los datos recibidos para incluir el mensaje correctamente

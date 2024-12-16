@@ -10,7 +10,7 @@ export class NotificationsService {
 
   constructor(private http: HttpClient) {}
 
-  getNotifications(usuarioId: number): Observable<any> {
+  getNotifications(usuarioId: String): Observable<any> {
     return this.http.get(`${this.baseUrl}?usuarioId=${usuarioId}`);
   }
 }
