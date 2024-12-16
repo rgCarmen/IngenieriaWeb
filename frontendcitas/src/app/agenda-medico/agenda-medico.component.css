@@ -1,119 +1,117 @@
 .agenda-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
 }
 
-  
-  .actions {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
-  }
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
 
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #0056b3;
-  }
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0056b3;
+}
 
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #495057;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #a71d2a;
-  }
-  
-  /* Estilos de la tabla */
-  .agenda-container {
-    margin-top: 20px;
-  }
 
-  .agenda-container td button {
-    margin: 0 10px; /* Añade margen horizontal de 5px entre los botones */
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  tr:hover {
-    background-color: #ddd;
-  }
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
 
-  
-  /* Contenedor principal para el formulario */
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #495057;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #a71d2a;
+}
+
+/* Estilos de la tabla */
+.agenda-container {
+  margin-top: 20px;
+}
+
+.agenda-container td button {
+  margin: 0 10px; /* Añade margen horizontal de 5px entre los botones */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+
+/* Contenedor principal para el formulario */
 .crear-cita-container {
   display: flex;
-  justify-content: center; /* Centra el formulario horizontalmente */
-  align-items: center;     /* Centra el formulario verticalmente si hay suficiente altura */
-  min-height: 300px;       /* Da una altura mínima al contenedor */
-  margin-bottom: 40px;     /* Añade margen inferior para separación con la agenda */
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  margin-bottom: 40px;
 }
 
 /* Estiliza el formulario para hacerlo más grande */
 .crear-cita {
   width: 100%;
-  max-width: 600px;        /* Define un ancho máximo para el formulario */
-  background-color: #f8f9fa; /* Color de fondo suave */
-  padding: 30px;           /* Espaciado interno */
-  border-radius: 10px;     /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el formulario */
-  text-align: center;      /* Centra los elementos del formulario */
+  max-width: 600px;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 /* Estilos para los campos del formulario */
 .form-group {
-  margin-bottom: 20px;     /* Espacio entre los campos */
+  margin-bottom: 20px;
 }
 
 .form-group label {
@@ -134,9 +132,9 @@
 
 .form-group input[type="date"],
 .form-group input[type="time"] {
-  width: 100%;            /* Asegura que el input no exceda el contenedor */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-  padding: 10px;          /* Ajusta el padding para evitar que el icono se salga */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .form-group button[color="warn"] {
@@ -150,7 +148,7 @@
 
 /* Estilo para el botón de crear */
 .form-group button {
-  width: 100%;             /* Botón ocupa todo el ancho del formulario */
+  width: 100%;
   padding: 12px 20px;
   font-size: 18px;
   background-color: #007bff;
@@ -165,9 +163,13 @@
 }
 
 /* Contenedor principal para las columnas */
+.appointments-container{
+  display:flex;
+  flex-direction:column;
+}
 .columns-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;/*Space elements horizontally*/
   align-items: flex-start;
   gap: 40px; /* Aumenta el espacio entre las columnas */
   margin-bottom: 40px;
@@ -176,15 +178,15 @@
 
 /* Columna para el formulario de creación de franja horaria */
 .crear-cita-column {
-  flex: 3; /* Ocupa menos espacio */
-  max-width: 350px; /* Reduce el ancho máximo */
-  margin-left: 150px; /* Aumenta el margen izquierdo */
+  flex: 3;
+  max-width: 350px;
+  margin-left: 150px;
   margin-top: 50px;
 }
 
 /* Columna para la agenda */
 .agenda-column {
-  flex: 2; /* Ocupa más espacio que el formulario */
+  flex: 2;
   max-width: 900px;
   margin-right: 150px;
   margin-top: 50px;
@@ -218,15 +220,15 @@ h1 {
 /* Contenedor para el selector de vista */
 .view-selector {
   display: flex;
-  border: 2px solid #007bff;
-  justify-content: center;
-  align-items: center;
-  margin: 20px auto;
+  margin: 20px 0; /* Keep vertical margins, remove horizontal and set to auto */
   padding: 10px;
   background-color: #f8f9fa;
   border-radius: 10px;
   max-width: 300px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #007bff;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Estilo para la etiqueta del selector */
