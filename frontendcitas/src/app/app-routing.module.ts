@@ -18,6 +18,7 @@ import { StadisticsComponent } from './stadistics/stadistics.component';
 import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { InfoComponent } from './clinical-history/info/info.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
 
@@ -101,6 +102,15 @@ const routes: Routes = [
     data: { role: 'ADMINISTRADOR' }, // Solo accesible para administradores
   },
 
+  // Ruta para el Panel Administrativo
+  {
+    path: 'admin-panel',
+    component: AdminPanelComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'ADMINISTRADOR' }, // Protegida para ADMINISTRADOR
+  },
+
+  // Ruta para agenda de médicos
   {
     path: 'agenda',
     component: AgendaMedicoComponent,
@@ -110,11 +120,13 @@ const routes: Routes = [
   // Ruta para el login
   { path: 'login', component: LoginComponent },
 
+  // Registro de usuario
   { path: 'registro', component: RegistroComponent},
 
   // Ruta para accesos no autorizados
   { path: 'unauthorized', component: UnauthorizedComponent },
 
+  // Redirecciones
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirección por defecto
   { path: '**', redirectTo: '/home' }, // Redirección para rutas no encontradas
 ];

@@ -1,0 +1,88 @@
+// Variables globales para colores y tamaños
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$background-color: #f8f9fa;
+$border-radius: 8px;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Mixin para botones
+@mixin button-style($bg-color) {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: $bg-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($bg-color, 10%);
+  }
+
+  &:disabled {
+    background-color: $secondary-color;
+    cursor: not-allowed;
+  }
+}
+
+// Estilo del contenedor principal
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $background-color;
+
+  // Tarjeta estilizada
+  .card {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    padding: 2rem;
+    box-sizing: border-box;
+
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: $primary-color;
+    }
+
+    // Estilo para grupos de formulario
+    .form-group {
+      margin-bottom: 1rem;
+
+      label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
+        color: #555;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+      }
+    }
+
+    // Botón de formulario
+    .btn {
+      @include button-style($primary-color);
+    }
+  }
+}
