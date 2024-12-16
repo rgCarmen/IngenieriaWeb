@@ -19,7 +19,7 @@
             <td>{{ cita.medico }}</td>
             <td>{{ cita.especialidad }}</td>
             <td>
-              <button (click)="cancelarCita(cita.id)" mat-raised-button class="btn-danger">
+              <button (click)="openConfirmDialog(cita.id)" mat-raised-button class="btn-danger">
                 Cancelar
               </button>
             </td>
@@ -45,5 +45,13 @@
   </div>
 </div>
 
-
-
+<ng-template #confirmDialog>
+  <h2 mat-dialog-title>Confirmación</h2>
+  <mat-dialog-content>
+    <p>Está a punto de cancelar su cita. Por favor confirme que está de acuerdo.</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cancelarDialogo()">Cancelar</button>
+    <button mat-raised-button color="warn" (click)="cancelarCita()">Confirmar</button>
+  </mat-dialog-actions>
+</ng-template>
