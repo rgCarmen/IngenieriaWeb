@@ -93,21 +93,37 @@ public class PacienteController {
             String nombreCompletoMedico = String.format("%s %s", medico.getNombre(), medico.getApellidos());
     
             // Crear una notificación para el paciente
-            String mensaje = String.format(
+            String mensajePaciente = String.format(
                 "Tu cita médica ha sido programada para el %s a las %s con el Dr./Dra. %s.",
                 citaExistente.getFecha().toLocalDate(),
                 citaExistente.getFecha().toLocalTime(),
                 nombreCompletoMedico
             );
     
-            Notificaciones notificacion = new Notificaciones(
+            Notificaciones notificacionPaciente = new Notificaciones(
                 paciente.getUsuario(),
-                mensaje,
+                mensajePaciente,
                 LocalDateTime.now() // Fecha actual como fecha de envío
             );
     
-            // Guardar la notificación en la base de datos
-            notificacionRepository.save(notificacion);
+            // Crear una notificación para el médico
+            String mensajeMedico = String.format(
+                "Se ha programado una nueva cita para el %s a las %s con el paciente %s %s.",
+                citaExistente.getFecha().toLocalDate(),
+                citaExistente.getFecha().toLocalTime(),
+                paciente.getNombre(),
+                paciente.getApellidos()
+            );
+    
+            Notificaciones notificacionMedico = new Notificaciones(
+                medico.getUsuario(),
+                mensajeMedico,
+                LocalDateTime.now() // Fecha actual como fecha de envío
+            );
+    
+            // Guardar las notificaciones en la base de datos
+            notificacionRepository.save(notificacionPaciente);
+            notificacionRepository.save(notificacionMedico);
     
             // Devolver la cita asignada como respuesta
             return new ResponseEntity<>(citaAsignada, HttpStatus.OK);
@@ -118,8 +134,7 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor.");
         }
     }
-
-
+    
     // Cancelar cita
     @PutMapping("/{usuarioId}/citas/cancelar/{id}")
     public ResponseEntity<Void> cancelarCita(@PathVariable Long usuarioId, @PathVariable Long id) {
