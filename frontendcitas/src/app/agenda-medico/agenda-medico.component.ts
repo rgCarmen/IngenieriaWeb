@@ -14,8 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AgendaMedicoComponent implements OnInit{
 
 
-
-
   citasFuturas: any[] = [];
   citasPasadas: any[] = [];
   selectedCitaId: number | null =null;
@@ -27,6 +25,9 @@ export class AgendaMedicoComponent implements OnInit{
     startTime: '',
     tipoCita: ''
   };
+
+  viewMode: any= 'day';
+  citasAgrupadas: any[] = [];
 
   constructor(private dialog: MatDialog, private citasService: CitasService, private router: Router) {}
 
@@ -47,11 +48,63 @@ export class AgendaMedicoComponent implements OnInit{
 
         this.citasFuturas = citas.filter((cita: any) => cita.fecha >= now);
         this.citasPasadas = citas.filter((cita: any) => cita.fecha < now);
+        this.groupCitas();
       },
       error: (err) => {
         console.error('Error al obtener las citas:', err);
       }
     });
+  }
+
+  groupCitas() {
+    const groupBy = this.viewMode === 'day' ? 'day' : 'week';
+    const grouped = new Map();
+
+    this.citasFuturas.forEach((cita) => {
+      const key = groupBy === 'day'
+        ? this.getFormattedDate(cita.fecha) // Día
+        : this.getWeekNumber(cita.fecha); // Semana
+
+      if (!grouped.has(key)) {
+        grouped.set(key, []);
+      }
+      grouped.get(key).push(cita);
+    });
+
+    // Convertir Map en un array de objetos para usar en la plantilla
+    this.citasAgrupadas = Array.from(grouped.entries()).map(([label, citas]) => ({
+      label, // Día o semana
+      citas, // Citas de este grupo
+      isExpanded: false // Por defecto, el grupo está cerrado
+    }));
+  }
+
+  // Alternar entre día y semana
+  toggleViewMode(mode: string): void {
+    this.viewMode = mode;
+    this.groupCitas();
+  }
+
+  // Alternar el estado de expansión de un grupo
+  toggleGroup(index: number): void {
+    this.citasAgrupadas[index].isExpanded = !this.citasAgrupadas[index].isExpanded;
+  }
+
+  // Formatear fechas a 'DD/MM/YYYY'
+  getFormattedDate(date: Date): string {
+    return new Intl.DateTimeFormat('es-ES', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(date);
+  }
+
+  // Obtener el número de semana
+  getWeekNumber(date: Date): number {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
+
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
   }
 
 
@@ -80,6 +133,7 @@ export class AgendaMedicoComponent implements OnInit{
             this.citaEliminada = false; 
           }, 3000); // se quita el mensaje en 3 seg
           this.selectedCitaId = null;
+          this.citasMedico();
         },
         error: (err: HttpErrorResponse) => {
           console.error('Error al eliminar la cita:', err);
@@ -105,6 +159,8 @@ export class AgendaMedicoComponent implements OnInit{
         fecha: dateTime,
         tipoCita: this.schedule.tipoCita,
       };
+
+      console.log(cita);
 
       this.citasService.crearCitaMedico(cita).subscribe({
         next: (response) => {
@@ -172,4 +228,8 @@ export class AgendaMedicoComponent implements OnInit{
     this.selectedCita = null;
     this.schedule = { date: '', startTime: '', tipoCita: '' }; // Limpiar el formulario
   }
+
+  filterCitas() {
+    throw new Error('Method not implemented.');
+    }
 }

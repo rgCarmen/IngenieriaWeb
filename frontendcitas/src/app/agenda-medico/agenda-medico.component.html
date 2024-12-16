@@ -59,6 +59,14 @@
       </div>
     </div>
 
+    <div class="view-selector">
+      <label for="viewMode">Ver citas por:</label>
+      <select id="viewMode" [(ngModel)]="viewMode" (change)="filterCitas()">
+        <option value="day">Día</option>
+        <option value="week">Semana</option>
+      </select>
+    </div>
+
     <!-- Columna para la agenda -->
     <div class="agenda-column">
       <h1>Agenda</h1>
@@ -73,19 +81,34 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cita of citasFuturas">
-              <td>{{ cita.fecha | date: 'short' }}</td>
-              <td>{{ cita.paciente }}</td>
-              <td>{{ cita.tipo }}</td>
-              <td>
-                <button mat-raised-button class="btn-danger" (click)="openDialog(confirmDialog, cita.id)">
-                  Cancelar
-                </button>
-                <button class="btn-secondary" (click)="modificarCita(cita)">
-                  Modificar
-                </button>
-              </td>
-            </tr>
+            <ng-container *ngFor="let group of citasAgrupadas; let i = index">
+              <!-- Cabeza del Grupo (Día o Semana) -->
+              <tr class="group-header" (click)="toggleGroup(i)">
+                <td colspan="4">
+                  <strong>
+                    {{ viewMode === 'day' ? group.label : 'Semana ' + group.label }}
+                  </strong>
+                  <span>{{ group.isExpanded ? '▲' : '▼' }}</span>
+                </td>
+              </tr>
+        
+              <!-- Citas dentro del Grupo -->
+              <ng-container *ngIf="group.isExpanded">
+                <tr *ngFor="let cita of group.citas">
+                  <td>{{ cita.fecha | date: 'short' }}</td>
+                  <td>{{ cita.paciente }}</td>
+                  <td>{{ cita.tipo }}</td>
+                  <td>
+                    <button mat-raised-button class="btn-danger" (click)="openDialog(confirmDialog, cita.id)">
+                      Cancelar
+                    </button>
+                    <button class="btn-secondary" (click)="modificarCita(cita)">
+                      Modificar
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
           </tbody>
         </table>
       </div>
