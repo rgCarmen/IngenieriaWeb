@@ -118,6 +118,21 @@ export class CitasService {
     }
   }
 
+  actualizarCitaPaciente(cita: any): Observable<any> {
+    const userId = this.authService.getId();
+    if (userId) {
+      const url = `${this.baseUrl}/paciente/${userId}/citas/actualizar/${cita.id}`;
+      return this.http.put(url, cita).pipe(
+        catchError((error) => {
+          console.error('Error al actualizar la cita:', error);
+          return throwError(() => new Error('Error al actualizar la cita.'));
+        })
+      );
+    } else {
+      console.error('Usuario no autenticado o ID de usuario no válido.');
+      return throwError(() => new Error('Usuario no autenticado o ID de usuario no válido.'));
+    }
+  }  
 
 }
 
