@@ -23,14 +23,14 @@ export class InfoComponent implements OnInit {
 
   ngOnInit(): void {
     const pacienteId = this.route.snapshot.params['id'];
-    this.patientName = this.route.snapshot.params['name'];
-
+    this.patientName = this.route.snapshot.params['nombre'];
+  
     this.clinicalHistoryService
       .getPatientAppointments(pacienteId)
       .subscribe((data) => {
         this.appointments = data;
       });
-  }
+  }  
 
   viewReport(appointment: any) {
     this.selectedReport = appointment;
