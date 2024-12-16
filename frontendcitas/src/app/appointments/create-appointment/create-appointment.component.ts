@@ -116,7 +116,11 @@ export class CreateAppointmentComponent {
   
 
   selectDate(date: Date) {
+    console.log(date)
+    date.setHours(date.getHours() + 1);
     const selectedDateString = date.toISOString().split('T')[0];
+    
+    console.log(selectedDateString);
 
     // Filtra las citas disponibles que coincidan con la fecha seleccionada
     const appointmentsForDate = this.availableAppointments.filter(
