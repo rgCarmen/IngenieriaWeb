@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="card">
+      <h2 class="title">Registro de Médicos</h2>
+      <form (ngSubmit)="onSubmit()" #doctorForm="ngForm">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" class="form-control" name="nombre" ngModel required />
+        </div>
+        <div class="form-group">
+          <label for="apellidos">Apellidos:</label>
+          <input type="text" id="apellidos" class="form-control" name="apellidos" ngModel required />
+        </div>
+        <div class="form-group">
+          <label for="dni">DNI:</label>
+          <input type="text" id="dni" class="form-control" name="dni" ngModel required />
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo Electrónico:</label>
+          <input type="email" id="correo" class="form-control" name="correo" ngModel required />
+        </div>
+        <div class="form-group">
+          <label for="especialidad">Especialidad:</label>
+          <select id="especialidad" class="form-control" name="especialidad" ngModel required>
+            <option value="">Seleccione una especialidad</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Pediatría">Pediatría</option>
+            <option value="Psiquiatría">Psiquiatría</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Ginecología">Ginecología</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" [disabled]="!doctorForm.valid">Registrar</button>
+      </form>
+    </div>
+  </div>
+  
