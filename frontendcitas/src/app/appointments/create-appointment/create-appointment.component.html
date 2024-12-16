@@ -12,15 +12,25 @@
     <div class="form-group" *ngIf="filteredDoctors.length > 0">
       <label for="doctor">👩‍⚕️ Doctor</label>
       <select id="doctor" [(ngModel)]="selectedDoctor" (change)="loadAvailableDates()">
-        <option *ngFor="let doctor of filteredDoctors" [value]="doctor">{{ doctor.nombreCompleto }}</option>
+        <option *ngFor="let doctor of filteredDoctors" [ngValue]="doctor">{{ doctor.nombreCompleto }}</option>
       </select>
     </div>
-
-    <button class="btn-primary" (click)="loadAvailableDates()">🔍 Buscar</button>
   </div>
 
   <div class="calendar-section" *ngIf="selectedDoctor">
     <h3>📅 Seleccione una fecha</h3>
     <mat-calendar (selectedChange)="selectDate($event)"></mat-calendar>
+  </div>
+
+  <!-- Selector de horas disponibles -->
+  <div class="hours-section" *ngIf="availableHours.length > 0">
+    <h3>🕒 Horas Disponibles</h3>
+    <div class="form-group">
+      <label for="available-time">Seleccione una hora</label>
+      <select id="available-time" [(ngModel)]="selectedHour">
+        <option *ngFor="let hour of availableHours" [value]="hour">{{ hour }}</option>
+      </select>
+    </div>
+    <button class="btn-primary" (click)="confirmAppointment()">✅ Confirmar Cita</button>
   </div>
 </div>

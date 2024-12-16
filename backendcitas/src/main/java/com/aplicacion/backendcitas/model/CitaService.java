@@ -6,6 +6,7 @@ import com.aplicacion.backendcitas.model.entidades.Paciente;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,6 +131,15 @@ public class CitaService {
         return pacienteRepository.findAll().stream()
                 .filter(paciente -> !citaRepository.findByPacienteId(paciente.getId()).isEmpty())
                 .collect(Collectors.toList());
+    }
+
+    public List<Cita> obtenerCitasLibresMedico(Long medicoId) {
+        List<Cita> citas= citaRepository.findByMedicoIdAndPacienteIsNull(medicoId);
+        return citas.stream()
+        .filter(cita -> cita.getFecha().isAfter(LocalDateTime.now())) // Fecha es futura
+        .collect(Collectors.toList());
+
+
     }
 
     /* 

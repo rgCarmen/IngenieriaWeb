@@ -39,6 +39,7 @@ import { AgendaMedicoComponent } from './agenda-medico/agenda-medico.component';
 
 import { NotificationsComponent } from './notifications/notifications.component';
 import { InfoComponent } from './clinical-history/info/info.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { InfoComponent } from './clinical-history/info/info.component';
     AgendaMedicoComponent,
     NotificationsComponent,
     InfoComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { CitasService } from '../citas.service';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,9 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 })
 export class AppointmentsComponent implements OnInit {
   citas: any[] = []; // Arreglo para almacenar las citas
+  selectedCitaId: number | null = null; // Variable para almacenar el ID de la cita seleccionada
+
+  @ViewChild('confirmDialog') confirmDialog!: TemplateRef<any>; // Referencia al template del diálogo
 
   constructor(private citasService: CitasService, private router: Router, private dialog: MatDialog) {}
 
@@ -35,55 +38,40 @@ export class AppointmentsComponent implements OnInit {
       }
     });
   }
-  
 
   // Navegación a los subcomponentes
   navigateTo(action: string) {
     this.router.navigate([`/appointments/${action}`]);
   }
 
-  // Método para cancelar la cita
-  cancelarCita(id: number) {
-    console.log(this.citas);
-    this.citasService.eliminarCita(id).subscribe(
-      response => {
-        // Al cancelar con éxito, actualizamos las citas
-        this.cargarCitas();
-        // Mostrar el popup de confirmación
-        this.mostrarConfirmacion('Cita cancelada exitosamente');
-      },
-      error => {
-        console.error('Error al cancelar la cita:', error);
-        // Si hay error, mostrar mensaje de error
-        this.mostrarConfirmacion('Hubo un error al cancelar la cita');
-      }
-    );
-  }
-
-  // Mostrar el mensaje de confirmación (puedes usar MatDialog o alert)
-  mostrarConfirmacion(mensaje: string) {
-    // Si usas MatDialog:
-    this.dialog.open(DialogContentExampleDialog, {
-      data: { mensaje }
+  // Método para abrir el popup de confirmación
+  openConfirmDialog(citaId: number): void {
+    this.selectedCitaId = citaId;
+    this.dialog.open(this.confirmDialog, {
+      width: '400px', // Tamaño personalizado para el diálogo
+      hasBackdrop: true // Fondo opaco detrás del diálogo
     });
+  }
 
-    // Si prefieres usar un simple alert:
-    // alert(mensaje);
+  // Método para cancelar la cita
+  cancelarCita() {
+    if (this.selectedCitaId !== null) {
+      this.citasService.eliminarCita(this.selectedCitaId).subscribe(
+        response => {
+          console.log('Cita cancelada con éxito');
+          this.cargarCitas(); // Recargar las citas después de la cancelación
+          this.dialog.closeAll(); // Cerrar el diálogo
+        },
+        error => {
+          console.error('Error al cancelar la cita:', error);
+          this.dialog.closeAll(); // Cerrar el diálogo aunque haya error
+        }
+      );
+    }
+  }
+
+  // Método para cerrar el diálogo sin cancelar la cita
+  cancelarDialogo() {
+    this.dialog.closeAll(); // Cerrar el diálogo sin hacer nada
   }
 }
-  
-// Este es el componente para el dialogo de confirmación
-@Component({
-  selector: 'dialog-content-example-dialog',
-  template: `<h1 mat-dialog-title>Confirmación</h1>
-              <div mat-dialog-content>
-                <p>{{ data.mensaje }}</p>
-              </div>
-              <div mat-dialog-actions>
-                <button mat-button mat-dialog-close>Aceptar</button>
-              </div>`
-})
-export class DialogContentExampleDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-}
-
