@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aplicacion.backendcitas.model.CitaService;
 import com.aplicacion.backendcitas.model.PacienteRepository;
+import com.aplicacion.backendcitas.model.notificacionRepository;
 import com.aplicacion.backendcitas.model.entidades.Cita;
+import com.aplicacion.backendcitas.model.entidades.Medico;
+import com.aplicacion.backendcitas.model.entidades.Notificaciones;
 import com.aplicacion.backendcitas.model.entidades.Paciente;
 
 import jakarta.persistence.EntityNotFoundException;
+
+import java.time.LocalDateTime;
 
 @RestController
 // Lo del rol se puede poner con @PreAutorize
@@ -30,6 +35,9 @@ public class PacienteController {
     
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private notificacionRepository notificacionRepository;
 
     // Ver sus citas Agendadas
     @GetMapping("/{usuarioId}/citas")
@@ -58,31 +66,59 @@ public class PacienteController {
     @PutMapping("/{usuarioId}/citas/pedir/{id}")
     public ResponseEntity<?> pedirCita(@PathVariable Long usuarioId, @PathVariable Long id) {
         try {
+            // Obtener la cita existente
             Cita citaExistente = citaService.obtenerCitaPorId(id);
-
-            // cita esta libre
+    
+            // Verificar si la cita ya está ocupada
             if (citaExistente.getPaciente() != null) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("La cita ya está ocupada.");
             }
-
+    
+            // Buscar el paciente por su usuarioId
             Paciente paciente = pacienteRepository.findByUsuarioId(usuarioId);
-            // comprobar que no es una cita pasada
+    
+            // Verificar si la cita es una cita pasada
             if (citaExistente.getFecha().isBefore(LocalDateTime.now())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puede reservar una cita pasada.");
             }
-
-            // paciente existe se comprueba en el servicio
+    
+            // Asignar el paciente a la cita
             citaExistente.setPaciente(paciente);
-
+    
+            // Actualizar la cita en la base de datos
             Cita citaAsignada = citaService.actualizarCita(id, citaExistente);
+    
+            // Obtener el nombre completo del médico
+            Medico medico = citaExistente.getMedico(); // Relación directa con la tabla Medico
+            String nombreCompletoMedico = String.format("%s %s", medico.getNombre(), medico.getApellidos());
+    
+            // Crear una notificación para el paciente
+            String mensaje = String.format(
+                "Tu cita médica ha sido programada para el %s a las %s con el Dr./Dra. %s.",
+                citaExistente.getFecha().toLocalDate(),
+                citaExistente.getFecha().toLocalTime(),
+                nombreCompletoMedico
+            );
+    
+            Notificaciones notificacion = new Notificaciones(
+                paciente.getUsuario(),
+                mensaje,
+                LocalDateTime.now() // Fecha actual como fecha de envío
+            );
+    
+            // Guardar la notificación en la base de datos
+            notificacionRepository.save(notificacion);
+    
+            // Devolver la cita asignada como respuesta
             return new ResponseEntity<>(citaAsignada, HttpStatus.OK);
-
+    
         } catch (EntityNotFoundException ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la cita o el paciente.");
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor.");
         }
     }
+
 
     // Cancelar cita
     @PutMapping("/{usuarioId}/citas/cancelar/{id}")

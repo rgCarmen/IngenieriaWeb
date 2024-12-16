@@ -26,7 +26,7 @@ export class NotificationsComponent implements OnInit {
         // Ajusta el formato de los datos recibidos para incluir el mensaje correctamente
         this.notifications = data.map((item: any) => ({
           message: item.mensaje, // Accede a la propiedad 'mensaje' del objeto
-          date: new Date(),      // Puedes asignar una fecha si no viene en los datos
+          date: item.date,      // Puedes asignar una fecha si no viene en los datos
         }));
       },
       (error) => {
