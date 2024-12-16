@@ -84,7 +84,7 @@ public class UsuarioService {
                     paciente.setNombre(nombre);
                     paciente.setApellidos(apellidos);
                     paciente.setTelefono(telefono);
-                    pacienteRepository.save(paciente);
+                    pacienteRepository.saveAndFlush(paciente);
                 }
             } else if (usuario.getRol() == UsuarioRol.MEDICO) {
                 Medico medico = medicoRepository.findByUsuarioId(id);
@@ -92,12 +92,12 @@ public class UsuarioService {
                     medico.setNombre(nombre);
                     medico.setApellidos(apellidos);
                     medico.setTelefono(telefono);
-                    medicoRepository.save(medico);
+                    medicoRepository.saveAndFlush(medico);
                 }
             }
 
             // Guardar los cambios en el usuario
-            return usuarioRepository.save(usuario);
+            return usuarioRepository.saveAndFlush(usuario);
         } else {
             throw new RuntimeException("Usuario no encontrado con ID: " + id);
         }
