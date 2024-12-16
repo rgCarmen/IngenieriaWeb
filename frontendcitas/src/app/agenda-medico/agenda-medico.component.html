@@ -27,7 +27,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <div class="form-group" *ngIf="!selectedCita">
             <label for="timeSlotEnd">Hora de Fin</label>
             <input
               type="time"
@@ -38,7 +38,7 @@
             />
           </div>
          
-          <div class="form-group">
+          <div class="form-group" *ngIf="!selectedCita">
             <label for="interval">Intervalo (en minutos)</label>
             <input
               type="number"
@@ -146,6 +146,9 @@
           <th>Fecha</th>
           <th>Paciente</th>
           <th>Tipo de Cita</th>
+          <th>Diagnóstico</th>
+          <th>Detalles</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -153,6 +156,47 @@
           <td>{{ cita.fecha | date: 'short' }}</td>
           <td>{{ cita.paciente }}</td>
           <td>{{ cita.tipo }}</td>
+          <td>
+            <div *ngIf="cita.editing; else staticDiagnostico">
+              <input
+                type="text"
+                [(ngModel)]="cita.diagnostico"
+                class="diagnostico-input"
+              />
+            </div>
+            <ng-template #staticDiagnostico>
+              <span>{{ cita.diagnostico }}</span>
+            </ng-template>
+          </td>
+          <!-- Detalles -->
+          <td>
+            <div *ngIf="cita.editing; else staticDetalles">
+              <input
+                type="text"
+                [(ngModel)]="cita.detalles"
+                class="detalles-input"
+              />
+            </div>
+            <ng-template #staticDetalles>
+              <span>{{ cita.detalles }}</span>
+            </ng-template>
+          </td>
+          <!-- Botones Compartidos -->
+          <td>
+            <div *ngIf="cita.editing; else staticActions">
+              <button mat-icon-button color="primary" (click)="guardarEdicion(cita)">
+                💾
+              </button>
+              <button mat-icon-button color="warn" (click)="cancelarEdicion(cita)">
+                ❌
+              </button>
+            </div>
+            <ng-template #staticActions>
+              <button mat-icon-button (click)="editarCita(cita)">
+                ✏️
+              </button>
+            </ng-template>
+          </td>
         </tr>
       </tbody>
     </table>
