@@ -52,21 +52,26 @@ export class ModifyAppointmentComponent implements OnInit {
   // Cargar detalles de la cita seleccionada
   loadAppointmentDetails() {
     if (this.selectedAppointment) {
-      // Asignar la especialidad y el nombre del doctor a variables locales
       this.selectedSpecialty = this.selectedAppointment.medico.especialidad;
       this.selectedDoctor = `${this.selectedAppointment.medico.nombre} ${this.selectedAppointment.medico.apellidos}`;
+      
+      // Asignar una fecha por defecto si `selectedAppointment.date` es null
+      this.selectedAppointment.date = this.selectedAppointment.date ? new Date(this.selectedAppointment.date) : new Date();
+      
+      this.loadAvailableDates(); // Cargar las fechas disponibles
     }
   }  
 
   // Cargar citas disponibles para el doctor seleccionado
   loadAvailableDates() {
-    if (this.selectedAppointment.doctor) {
-      this.citasService.obtenerCitasPorMedico(this.selectedAppointment.doctor.id).subscribe(
+    if (this.selectedAppointment) {
+      this.citasService.obtenerCitasPorMedico(this.selectedAppointment.medico.id).subscribe(
         (appointments) => {
           this.availableAppointments = appointments.filter(
             (appointment: any) => appointment.paciente === null
           );
-          this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0]);
+          this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
+          console.log('Fechas disponibles:', this.availableDates);
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
@@ -76,13 +81,21 @@ export class ModifyAppointmentComponent implements OnInit {
   }
 
   // Actualizar la fecha seleccionada
-  selectDate(date: Date) {
+  selectDate(date: Date | null) {
+    if (!date) {
+      console.warn('Fecha seleccionada es null.');
+      return;
+    }
+    date.setHours(date.getHours() + 1);
+    this.selectedAppointment.date = date;
     const selectedDateString = date.toISOString().split('T')[0];
+    
     const appointmentsForDate = this.availableAppointments.filter(
       (appointment: any) => appointment.fecha.split(' ')[0] === selectedDateString
     );
     this.availableHours = appointmentsForDate.map((appointment: any) => appointment.fecha.split(' ')[1]);
   }
+  
 
   // Guardar cambios realizados en la cita
   saveChanges() {
@@ -97,7 +110,8 @@ export class ModifyAppointmentComponent implements OnInit {
       ...this.selectedAppointment,
       date: `${this.selectedAppointment.date.toISOString().split('T')[0]} ${this.selectedHour}`,
     };
-  
+
+    console.log('Updated Appointment:', updatedAppointment);
     this.citasService.actualizarCitaPaciente(updatedAppointment).subscribe(
       () => {
         alert('Cita modificada exitosamente.');
@@ -109,4 +123,24 @@ export class ModifyAppointmentComponent implements OnInit {
       }
     );
   }  
+  
+  dateClass = (date: Date): string => {
+    // Normaliza la fecha actual
+    date.setHours(date.getHours() + 1);
+    const dateString = date.toISOString().split('T')[0];
+  
+    // Depura la comparación detalladamente
+    console.log(`Revisando fecha del calendario: "${dateString}"`);
+  
+    // Compara correctamente y verifica si la fecha está disponible
+    const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);
+  
+    // Log para depurar la clase que se devuelve
+    if (isAvailable) {
+      console.log(`%c highlight-date aplicado a: ${dateString}`, 'color: green; font-weight: bold;');
+      return 'highlight-date';
+    }
+    return '';
+  };
+  
 }

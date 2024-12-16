@@ -29,7 +29,7 @@
   <div class="calendar-section" *ngIf="selectedAppointment">
     <h3>📅 Seleccione una nueva fecha</h3>
     <div class="calendar-container">
-      <mat-calendar [(selected)]="selectedAppointment.date" (selectedChange)="selectDate($event)"></mat-calendar>
+      <mat-calendar *ngIf="selectedAppointment.date" [(selected)]="selectedAppointment.date" (selectedChange)="selectDate($event)" [dateClass]="dateClass"></mat-calendar>
     </div>
   </div>
 
