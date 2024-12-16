@@ -116,8 +116,15 @@ export class CreateAppointmentComponent {
 
 
   selectDate(date: Date) {
+<<<<<<< HEAD
     this.selectedDate = date;
+=======
+    console.log(date)
+    date.setHours(date.getHours() + 1);
+>>>>>>> 36192923491e7a402bb7af998a16f966027bf519
     const selectedDateString = date.toISOString().split('T')[0];
+    
+    console.log(selectedDateString);
 
     const appointmentsForDate = this.availableAppointments.filter(
       (appointment: any) => appointment.fecha.split(' ')[0] === selectedDateString
