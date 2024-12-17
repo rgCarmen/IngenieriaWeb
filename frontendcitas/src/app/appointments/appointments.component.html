@@ -17,7 +17,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let cita of citasProximas">
-              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.fecha |date: 'dd/MM/yyyy HH:mm' }}</td>
               <td>{{ cita.medico }}</td>
               <td>{{ cita.especialidad }}</td>
               <td>
@@ -44,7 +44,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let cita of citasPasadas">
-              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.fecha| date: 'dd/MM/yyyy HH:mm' }}</td>
               <td>{{ cita.medico }}</td>
               <td>{{ cita.especialidad }}</td>
             </tr>
