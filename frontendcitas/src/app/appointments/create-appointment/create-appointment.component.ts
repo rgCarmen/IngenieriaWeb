@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CitasService } from '../../citas.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { ViewChild } from '@angular/core';
+import { MatCalendar } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-create-appointment',
@@ -24,6 +26,9 @@ export class CreateAppointmentComponent {
   selectedCitaId: number | null = null;
   selectedType: string = ''; // Tipo de cita seleccionado
   isLoading: boolean = true;
+  selectedDateCalendar: string = '';
+
+  @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
 
   constructor(private citasService: CitasService, private router: Router, private authService: AuthService) {}
 
@@ -111,10 +116,20 @@ export class CreateAppointmentComponent {
   
 
   selectDate(date: Date | null): void {
-    if (!date) return;
+    if (!date) {
+      console.warn('La fecha seleccionada es null.');
+      return;
+    }
+
+    // Ajusta la hora y guarda la fecha seleccionada
+    date.setHours(date.getHours() + 1);
 
     this.selectedDate = date;
     const selectedDateString = date.toISOString().split('T')[0];
+
+    // Actualiza la propiedad auxiliar con la fecha seleccionada
+    this.selectedDateCalendar = date.toISOString().split('T')[0];
+    console.log('%cFecha seleccionada en selectDate:', 'color: blue; font-weight: bold;', this.selectedDateCalendar);
 
     // Filtrar citas para la fecha seleccionada
     const appointmentsForDate = this.filteredAppointments.filter(
@@ -181,6 +196,11 @@ export class CreateAppointmentComponent {
     date.setHours(date.getHours() + 1);
     const dateString = date.toISOString().split('T')[0];
 
+    // Clase para la fecha seleccionada
+    if (this.selectedDateCalendar === dateString) {
+      console.log('%cFecha seleccionada encontrada:', 'color: orange; font-weight: bold;', dateString);
+      return 'selected-date';
+    }
  
     // Compara correctamente y verifica
     const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);
