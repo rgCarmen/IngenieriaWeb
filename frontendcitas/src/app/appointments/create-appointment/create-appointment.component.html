@@ -1,7 +1,9 @@
 <div class="create-appointment-container">
+  <!-- Sección del formulario -->
   <div class="form-section">
-    <h2>🗓️ Pedir Nueva Cita</h2>
+    <h2>🗓️ Crear Nueva Cita</h2>
 
+    <!-- Especialidad -->
     <div class="form-group">
       <label for="specialty">🩺 Especialidad</label>
       <select id="specialty" [(ngModel)]="selectedSpecialty" (change)="filterDoctors()">
@@ -9,20 +11,33 @@
       </select>
     </div>
 
+    <!-- Doctor -->
     <div class="form-group" *ngIf="filteredDoctors.length > 0">
       <label for="doctor">👩‍⚕️ Doctor</label>
-      <select id="doctor" [(ngModel)]="selectedDoctor" (change)="loadAvailableDates()">
+      <select id="doctor" [(ngModel)]="selectedDoctor" (change)="loadAvailableAppointments()">
         <option *ngFor="let doctor of filteredDoctors" [ngValue]="doctor">{{ doctor.nombreCompleto }}</option>
+      </select>
+    </div>
+
+    <!-- Tipo de Cita -->
+    <div class="form-group" *ngIf="availableAppointments.length > 0">
+      <label for="appointment-type">📋 Tipo de Cita</label>
+      <select id="appointment-type" [(ngModel)]="selectedType" (change)="filterAppointmentsByType()">
+        <option value="">Seleccione un tipo</option>
+        <option value="CONSULTA">Consulta</option>
+        <option value="REVISION">Revisión</option>
+        <option value="URGENCIA">Urgencia</option>
       </select>
     </div>
   </div>
 
-  <div class="calendar-section" *ngIf="selectedDoctor && !isLoading">
+  <!-- Calendario -->
+  <div class="calendar-section" *ngIf="filteredAppointments.length > 0">
     <h3>📅 Seleccione una fecha</h3>
     <mat-calendar (selectedChange)="selectDate($event)" [dateClass]="dateClass"></mat-calendar>
   </div>
 
-  <!-- Selector de horas disponibles -->
+  <!-- Horas Disponibles -->
   <div class="hours-section" *ngIf="availableHours.length > 0">
     <h3>🕒 Horas Disponibles</h3>
     <div class="form-group">

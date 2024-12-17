@@ -17,10 +17,12 @@ export class CreateAppointmentComponent {
   selectedDoctor: any = null;
   availableDates: string[] = [];
   availableAppointments: any[] = [];
+  filteredAppointments: any[] = []; // Filtradas por tipo de cita
   availableHours: { hour: string, citaId: number }[] = [];
   selectedHour: string = '';
   selectedDate: Date | null = null;
   selectedCitaId: number | null = null;
+  selectedType: string = ''; // Tipo de cita seleccionado
   isLoading: boolean = true;
 
   constructor(private citasService: CitasService, private router: Router, private authService: AuthService) {}
@@ -46,6 +48,9 @@ export class CreateAppointmentComponent {
         this.filteredDoctors = doctors;
         this.selectedDoctor = null;
         this.availableDates = [];
+        this.availableAppointments = [];
+        this.filteredAppointments = [];
+        this.availableHours = [];
       },
       (error) => {
         console.error('Error al cargar los doctores:', error);
@@ -53,78 +58,76 @@ export class CreateAppointmentComponent {
     );
   }
 
-  loadAvailableDates() {
+  loadAvailableAppointments() {
     if (this.selectedDoctor) {
       this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
         (appointments) => {
+          // Filtrar citas disponibles (paciente === null)
           this.availableAppointments = appointments.filter((appointment: any) => appointment.paciente === null);
-          this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
-          //this.highlightAvailableDates();
-
-          if (this.availableDates.length > 0) {
-            const closestDate = this.getClosestDate(this.availableDates);
-            this.selectDate(new Date(closestDate)); 
-          }
-
-          this.isLoading = false;
-
-
+  
+          // Limpiar filtros previos
+          this.filteredAppointments = [];
+          this.availableDates = [];
+          this.availableHours = [];
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
-          this.isLoading = false;
         }
       );
     }
-  }
+  }  
 
-  getMonthNumber(monthName: string): string {
-    const months: { [key: string]: number } = {
-      'Enero': 1, 'January': 1,
-      'Febrero': 2, 'February': 2,
-      'Marzo': 3, 'March': 3,
-      'Abril': 4, 'April': 4,
-      'Mayo': 5, 'May': 5,
-      'Junio': 6, 'June': 6,
-      'Julio': 7, 'July': 7,
-      'Agosto': 8, 'August': 8,
-      'Septiembre': 9, 'September': 9,
-      'Octubre': 10, 'October': 10,
-      'Noviembre': 11, 'November': 11,
-      'Diciembre': 12, 'December': 12,
-    };
-
-    return months[monthName]?.toString() || '0';
-  }
-
-  selectDate(date: Date | null): void {
-    if (!date) {
-      console.warn('La fecha seleccionada es null.');
-      return;
+  filterAppointmentsByType(): void {
+    if (this.selectedType) {
+      // Filtrar citas por tipo seleccionado
+      this.filteredAppointments = this.availableAppointments.filter(
+        (appointment: any) => appointment.tipoCita === this.selectedType
+      );
+    } else {
+      // Si no hay filtro, mostrar todas las citas
+      this.filteredAppointments = this.availableAppointments;
     }
   
-    // Ajusta la hora y guarda la fecha seleccionada
-    date.setHours(date.getHours() + 1);
+    // Actualizar las fechas disponibles
+    this.availableDates = Array.from(
+      new Set(this.filteredAppointments.map((appointment: any) => appointment.fecha.split(' ')[0]))
+    );
+  
+    // Seleccionar automáticamente el primer día disponible y sus horas
+    if (this.availableDates.length > 0) {
+      const closestDate = this.getClosestDate(this.availableDates);
+      this.selectDate(new Date(closestDate)); // Seleccionar la fecha más cercana
+    } else {
+      this.selectedDate = null;
+      this.availableHours = [];
+    }
+  }  
+  
+
+  selectDate(date: Date | null): void {
+    if (!date) return;
+  
     this.selectedDate = date;
     const selectedDateString = date.toISOString().split('T')[0];
   
-    // Filtra las citas disponibles para la fecha seleccionada
-    const appointmentsForDate = this.availableAppointments.filter(
+    // Filtrar citas para la fecha seleccionada
+    const appointmentsForDate = this.filteredAppointments.filter(
       (appointment: any) => appointment.fecha.split(' ')[0] === selectedDateString
     );
   
-    // Extrae las horas disponibles con citaId para el desplegable
+    // Extraer las horas disponibles
     this.availableHours = appointmentsForDate.map((appointment: any) => ({
       hour: appointment.fecha.split(' ')[1],
       citaId: appointment.id
     }));
-
+  
+    // Seleccionar automáticamente la primera hora disponible
     if (this.availableHours.length > 0) {
       this.selectedHour = this.availableHours[0].hour;
       this.selectedCitaId = this.availableHours[0].citaId;
     }
-
-  }
+  }  
+  
 
   confirmAppointment() {
     const userId = this.authService.getId();
@@ -135,27 +138,19 @@ export class CreateAppointmentComponent {
 
     if (this.selectedDoctor && this.selectedSpecialty && this.selectedHour && this.selectedDate) {
       const selectedDateString = this.selectedDate.toISOString().split('T')[0];
-
-      const selectedAppointment = this.availableHours.find(availableHour => availableHour.hour === this.selectedHour);
-
-      if (!selectedAppointment){
-        alert("No se ha podido obtener la id de la cita");
-        return;
-      }
-
       const appointmentData = {
         doctorId: this.selectedDoctor.id,
         specialty: this.selectedSpecialty,
         date: `${selectedDateString} ${this.selectedHour}`,
         userId: userId,
-        citaId: selectedAppointment.citaId,
+        citaId: this.selectedCitaId,
       };
 
       this.citasService.pedirCita(appointmentData, userId).subscribe(
         () => {
           alert(`Cita creada exitosamente para el ${selectedDateString} a las ${this.selectedHour} con ${this.selectedDoctor.nombre}`);
           this.router.navigate(['/appointments']);
-          window.location.reload()
+          window.location.reload();
         },
         (error) => {
           console.error('Error al pedir la cita:', error);
@@ -168,34 +163,17 @@ export class CreateAppointmentComponent {
   }
 
   dateClass = (date: Date): string => {
-    // Normaliza la fecha actual
-    date.setHours(date.getHours() + 1);
     const dateString = date.toISOString().split('T')[0];
+    return this.availableDates.includes(dateString) ? 'highlight-date' : '';
+  };
   
-
-    // Compara correctamente y verifica
-    const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);
-  
-    // Log para depurar la clase que se devuelve
-    if (isAvailable) {
-      console.log(`%c highlight-date aplicado a: ${dateString}`, 'color: green; font-weight: bold;');
-      return 'highlight-date';
-    }
-    return '';
-  }
 
   getClosestDate(availableDates: string[]): string {
-    const today = new Date().toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
-    let closestDate = availableDates[0];
-
-    // Busca la fecha más cercana a hoy
-    availableDates.forEach(date => {
-      if (new Date(date) >= new Date(today) && new Date(date) < new Date(closestDate)) {
-        closestDate = date;
-      }
-    });
-
-    return closestDate;
-  }
-
+    const today = new Date();
+    return availableDates.reduce((closest, date) => {
+      const currentDate = new Date(date);
+      const closestDate = new Date(closest);
+      return currentDate >= today && currentDate < closestDate ? date : closest;
+    }, availableDates[0]);
+  }  
 }
