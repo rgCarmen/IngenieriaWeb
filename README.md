@@ -1,37 +1,44 @@
-# IngeriaWeb
+# Gestión de Citas - Proyecto de Ingeniería Web
 
-## Requisitos que quedan por realizar
-- [x] RF1.01 Falta DNI y teléfono en el formulario de registro. ➡️ Se registra el usario con rol Paciente y un paciente  
-- [ ] RF1.02 Registro Médico (Especialidad y disponibilidad)
-- [x] RF1.05 Dos pacientes no pueden tener el mismo email (ENLAZAR) ➡️ Campo email en Usuario unique 
+Este proyecto es una aplicación para la **gestión de citas médicas** desarrollada con **Spring Boot** para el backend y **Angular** para el frontend. Permite a los pacientes gestionar sus citas y a los médicos gestionar su disponibilidad y ver sus citas. 
 
-- [ ] RF2.01 Marcar disponibilidad en el calendario
-- [ ] RF2.02 Elegir fecha y hora de las citas
-- [ ] RF2.03 Enviar Confirmación al paciente y al médico (módulo notificaciones)
-- [ ] RF2.04 Asignación automática de citas (mostrar por ejemplo la cita más próxima disponible)
+## Características Principales
 
-- [ ] RF3.01 Mostrar fechas y horas disponibles para modificar la cita
-- [x] RF3.03 Añadir un módulo de notificaciones para que vayan saliendo las notificaciones que se vayan generando en vez de usar email (Notificación de modificación y cancelación)
-- [ ] RF3.04 Si no hay disponibilidad meter en lista de espera (Añadir botón en Crear Cita que imprima un mensaje de que se ha sido añadido a la lista de espera del doctor tal con especialidad tal)
+- **Registro de pacientes**: Los pacientes pueden registrarse en la plataforma y gestionar sus citas médicas.
+- **Gestión de médicos**: Los médicos pueden actualizar su disponibilidad y ver sus citas programadas.
+- **Asignación de citas**: Los pacientes pueden ver las fechas y horas disponibles para agendar citas con los médicos.
+- **Notificaciones**: La aplicación incluye un sistema de notificaciones para informar a los usuarios sobre la confirmación, modificación o cancelación de citas.
+- **Panel de administración**: Los administradores podrán registrar nuevos médicos.
 
-- [ ] RF4.01 Enviar notificaciones recordando citas (al módulo notificaciones)
-- [ ] RF4.03 Notificar al médico cambio en la cita (al módulo notificaciones)
+## Cómo Ejecutar la Aplicación
 
-- [x] RF5.01 Que el médico pueda modificar su franja de disponibilidad
-- [x] RF5.02 Que el médico pueda ver sus citas por día o semana (agregar en Mi Cuenta)
-- [ ] RF5.03 El médico pueda ver todas las citas de un paciente (como sugerencia se podría poner en el historial clínico)
+### Backend - Spring Boot
 
-- [ ] RF7.01 Citas Prioritarias
-- [ ] RF7.02 Añadir campo en crear cita para tipo de consulta (revisión rutinaria, emergencia o consulta especializada) o (primera consulta, consulta sucesiva y consulta telefónica o virtual)
-- [ ] RF7.03 Sugerir la mejor cita y médico según el tipo de consulta (REVISAR como lo vamos a hacer)
+1. Clona el repositorio y ve a backendcitas:
+  ```bash
+  git clone https://github.com/rgCarmen/IngenieriaWeb.git
+  cd backendcitas
+  ```
+2. Inicia el servidor backend
+  ```bash
+  mvn spring-boot:run
+  ```
+### Frontend - Angular
+1. Instalar las dependencias del proyecto
+ ```bash
+ cd frontendcitas
+ npm install
+ ```
+2. Inicia el servidor de desarrollo
+  ```bash
+  ng serve
+  ```
+3. Abre tu navegador y accede a http://localhost:4200.
 
-- [x] RF8.01 Generar informe (número de citas, cancelaciones, tiempo de espera, especialidades más demandadas...)
-
-- [x] RF9.01 Panel administrativo para los administradores
-- [x] RF9.03 Mostrar en el panel reportes generados automáticamente (informes como RF8.01)
-
-## Requisitos que no se van a implementar
-- RF1.03 Código de verificación cuando se registra el paciente (NO HACER)
-- RF4.02 En esa notificación que se pueda confirmar la asistencia (DUDOSO)
-- RF4.04 Poder configurar cuanto antes se quiere recibir ese recordatorio (NO HACER)
-- RF8.02 Análisis estadísticos de lo anterior (NO HACER)
+---
+### Usuarios de Ejemplo
+| **Rol**        | **Email**                 | **Contraseña**  |
+|----------------|---------------------------|-----------------|
+| **Paciente**   | paciente@example.com       | paciente        |
+| **Administrador** | admin@example.com         | admin           |
+| **Médico**     | medico@example.com         | medico          |
