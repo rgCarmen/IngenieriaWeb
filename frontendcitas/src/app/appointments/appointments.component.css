@@ -1,8 +1,8 @@
 /* Contenedor principal */
 .appointments-container {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 1200px; /* Establece un ancho máximo */
-  margin: 0 auto; /* Centra el contenedor */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
   text-align: center;
 }
@@ -10,16 +10,18 @@
 /* Contenedor principal con dos columnas */
 .content-wrapper {
   display: flex;
-  gap: 40px; /* Espacio entre columnas */
-  justify-content: space-between;
+  gap: 40px;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-top: 20px;
+  width: 100%;
+  padding: 0 20px;
 }
 
 /* Columna de la agenda */
 .agenda-column {
-  /* La agenda toma el espacio restante */
-  background: #e8f4ff; /* Fondo azul claro */
+  flex: 1;
+  background: #e8f4ff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -27,12 +29,12 @@
 
 /* Columna de acciones */
 .actions-column {
-  /* Establece un ancho fijo para la columna de acciones */
-  width: 40%; /* Ampliamos el ancho de la columna de acciones */
+  flex: 0 0 52%; /* Increased width to 50% from 45% */
+  max-width: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #e8f4ff; /* Fondo azul claro */
+  background: #e8f4ff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -46,6 +48,7 @@
   gap: 20px;
   width: 100%;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .actions button {
@@ -56,25 +59,6 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-/* Estilos de los botones individuales */
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-secondary {
-  background-color: #6c757d;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background-color: #495057;
 }
 
 /* Estilos de la tabla */
@@ -137,12 +121,16 @@ tr:hover {
   .agenda-column {
     min-width: 100%;
     max-width: 100%;
-    margin-left: 0; /* Eliminamos el desplazamiento en pantallas pequeñas */
+    margin-left: 0;
   }
 
   .actions-column {
     min-width: 100%;
     max-width: 100%;
+    width: 100%;
+    margin-left: 0;
+  }
+  .actions button {
     width: 100%;
   }
 }

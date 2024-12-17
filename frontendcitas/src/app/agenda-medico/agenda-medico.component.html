@@ -121,7 +121,7 @@
               <!-- Citas dentro del Grupo -->
               <ng-container *ngIf="group.isExpanded">
                 <tr *ngFor="let cita of group.citas">
-                  <td>{{ cita.fecha | date: 'short' }}</td>
+                  <td>{{cita.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
                   <td>{{ cita.paciente }}</td>
                   <td>{{ cita.tipo }}</td>
                   <td>
@@ -166,7 +166,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let cita of filteredPatients">
-          <td>{{ cita.fecha | date: 'short' }}</td>
+          <td>{{cita.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
           <td>{{ cita.paciente }}</td>
           <td>{{ cita.tipo }}</td>
           <td>

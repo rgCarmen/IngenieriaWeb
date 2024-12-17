@@ -1,9 +1,8 @@
-<div class="appointments-container" style="display: flex; width: 100%; justify-content: center;">
-  <div class="content-wrapper" style="display: flex; width: 90%; gap: 40px; align-items: flex-start; flex-direction: row;">
-
+<div class="appointments-container">
+  <div class="content-wrapper">
     <!-- Sección de Agenda (Ocupa el resto del espacio disponible) - Izquierda -->
-    <div style="width: 60%; display: flex; flex-direction: column; gap: 20px;">
-      <div class="agenda-column" style="background: #e8f4ff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="agenda-column">
         <h2>Citas Próximas</h2>
         <div class="agenda-container">
           <table>
@@ -17,7 +16,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let cita of citasProximas">
-              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.fecha |date: 'dd/MM/yyyy HH:mm' }}</td>
               <td>{{ cita.medico }}</td>
               <td>{{ cita.especialidad }}</td>
               <td>
@@ -31,7 +30,7 @@
         </div>
       </div>
 
-      <div class="agenda-column" style="background: #e8f4ff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <div class="agenda-column">
         <h2>Citas Pasadas</h2>
         <div class="agenda-container">
           <table>
@@ -44,7 +43,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let cita of citasPasadas">
-              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.fecha| date: 'dd/MM/yyyy HH:mm' }}</td>
               <td>{{ cita.medico }}</td>
               <td>{{ cita.especialidad }}</td>
             </tr>
@@ -55,9 +54,9 @@
     </div>
 
     <!-- Columna de Gestión de Citas (Lateral Derecho) -->
-    <div class="actions-column" style="text-align: center; width: 40%; margin-top: 0px; min-width: 200px;">
+    <div class="actions-column">
       <h2>Gestión de Citas</h2>
-      <div class="actions" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="actions">
         <button (click)="navigateTo('create')" class="btn-primary" style="margin-bottom: 10px;">Pedir Cita</button>
         <button (click)="navigateTo('modify')" class="btn-secondary">Modificar Cita</button>
       </div>
