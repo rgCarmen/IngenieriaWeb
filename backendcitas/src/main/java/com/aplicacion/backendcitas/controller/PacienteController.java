@@ -22,6 +22,7 @@ import com.aplicacion.backendcitas.model.entidades.Cita;
 import com.aplicacion.backendcitas.model.entidades.Medico;
 import com.aplicacion.backendcitas.model.entidades.Notificaciones;
 import com.aplicacion.backendcitas.model.entidades.Paciente;
+import com.aplicacion.backendcitas.model.entidades.Usuario;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -140,17 +141,53 @@ public class PacienteController {
     public ResponseEntity<Void> cancelarCita(@PathVariable Long usuarioId, @PathVariable Long id) {
         try {
             Cita cita = citaService.obtenerCitaPorId(id);
-            if (cita.getPaciente().getUsuario().getId() != usuarioId) { // comprobar que sea una cita de ese paciente
+            
+            // Verificar que la cita pertenece al paciente que realiza la solicitud
+            if (cita.getPaciente() == null || !cita.getPaciente().getUsuario().getId().equals(usuarioId)) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
-            if (cita.getFecha().isBefore(LocalDateTime.now())) { // que no sea una cita pasada
+
+            // Verificar que la cita no es pasada
+            if (cita.getFecha().isBefore(LocalDateTime.now())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
 
+            // Obtener detalles del paciente y médico relacionados con la cita
+            Paciente paciente = cita.getPaciente();
+            Medico medico = cita.getMedico();
+            Usuario usuarioPaciente = paciente.getUsuario();
+            Usuario usuarioMedico = medico.getUsuario();
+
+            // Cancelar la cita
             citaService.cancelarCita(id);
+
+            // Crear notificación para el paciente
+            String mensajePaciente = String.format(
+                "Has cancelado tu cita programada para el %s a las %s con el Dr./Dra. %s.",
+                cita.getFecha().toLocalDate(),
+                cita.getFecha().toLocalTime(),
+                medico.getNombre() + " " + medico.getApellidos()
+            );
+            Notificaciones notificacionPaciente = new Notificaciones(usuarioPaciente, mensajePaciente, LocalDateTime.now());
+            notificacionRepository.save(notificacionPaciente);
+
+            // Crear notificación para el médico
+            String mensajeMedico = String.format(
+                "El paciente %s %s ha cancelado la cita programada para el %s a las %s.",
+                paciente.getNombre(),
+                paciente.getApellidos(),
+                cita.getFecha().toLocalDate(),
+                cita.getFecha().toLocalTime()
+            );
+            Notificaciones notificacionMedico = new Notificaciones(usuarioMedico, mensajeMedico, LocalDateTime.now());
+            notificacionRepository.save(notificacionMedico);
+
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
         } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 si la cita no existe
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Retorna 500 si ocurre un error
         }
     }
 
