@@ -64,15 +64,21 @@ export class CreateAppointmentComponent {
         (appointments) => {
           // Filtrar citas disponibles (paciente === null)
           this.availableAppointments = appointments.filter((appointment: any) => appointment.paciente === null);
-  
-          // Limpiar filtros previos
+          this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
           this.filteredAppointments = [];
-          this.availableDates = [];
+
+          if (this.availableDates.length > 0) {
+            const closestDate = this.getClosestDate(this.availableDates);
+            this.selectDate(new Date(closestDate)); 
+          }
           this.availableHours = [];
+          this.isLoading = false;
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
+          this.isLoading = false;
         }
+        
       );
     }
   }  
@@ -106,21 +112,30 @@ export class CreateAppointmentComponent {
 
   selectDate(date: Date | null): void {
     if (!date) return;
-  
+
     this.selectedDate = date;
     const selectedDateString = date.toISOString().split('T')[0];
-  
+
     // Filtrar citas para la fecha seleccionada
     const appointmentsForDate = this.filteredAppointments.filter(
       (appointment: any) => appointment.fecha.split(' ')[0] === selectedDateString
     );
-  
+
     // Extraer las horas disponibles
     this.availableHours = appointmentsForDate.map((appointment: any) => ({
       hour: appointment.fecha.split(' ')[1],
       citaId: appointment.id
     }));
-  
+    this.availableHours.sort((a, b) => {
+      const [hourA, minuteA] = a.hour.split(':').map(Number);
+      const [hourB, minuteB] = b.hour.split(':').map(Number);
+    
+      if (hourA === hourB) {
+        return minuteA - minuteB; // Si las horas son iguales, se comparan los minutos
+      }
+      return hourA - hourB; // Comparar las horas
+    });
+
     // Seleccionar automáticamente la primera hora disponible
     if (this.availableHours.length > 0) {
       this.selectedHour = this.availableHours[0].hour;
@@ -128,7 +143,6 @@ export class CreateAppointmentComponent {
     }
   }  
   
-
   confirmAppointment() {
     const userId = this.authService.getId();
     if (!userId) {
@@ -163,17 +177,32 @@ export class CreateAppointmentComponent {
   }
 
   dateClass = (date: Date): string => {
+    // Normaliza la fecha actual
+    date.setHours(date.getHours() + 1);
     const dateString = date.toISOString().split('T')[0];
-    return this.availableDates.includes(dateString) ? 'highlight-date' : '';
-  };
-  
 
+ 
+    // Compara correctamente y verifica
+    const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);
+
+    // Log para depurar la clase que se devuelve
+    if (isAvailable) {
+      return 'highlight-date';
+    }
+    return '';
+  }
+  
   getClosestDate(availableDates: string[]): string {
-    const today = new Date();
-    return availableDates.reduce((closest, date) => {
-      const currentDate = new Date(date);
-      const closestDate = new Date(closest);
-      return currentDate >= today && currentDate < closestDate ? date : closest;
-    }, availableDates[0]);
-  }  
+    const today = new Date().toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
+    let closestDate = availableDates[0];
+
+    // Busca la fecha más cercana a hoy
+    availableDates.forEach(date => {
+      if (new Date(date) >= new Date(today) && new Date(date) < new Date(closestDate)) {
+        closestDate = date;
+      }
+    });
+
+    return closestDate;
+  }
 }
