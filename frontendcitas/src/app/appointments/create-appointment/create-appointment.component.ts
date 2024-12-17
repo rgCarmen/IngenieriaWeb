@@ -60,7 +60,15 @@ export class CreateAppointmentComponent {
           this.availableAppointments = appointments.filter((appointment: any) => appointment.paciente === null);
           this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
           //this.highlightAvailableDates();
+
+          if (this.availableDates.length > 0) {
+            const closestDate = this.getClosestDate(this.availableDates);
+            this.selectDate(new Date(closestDate)); 
+          }
+
           this.isLoading = false;
+
+
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
@@ -110,6 +118,11 @@ export class CreateAppointmentComponent {
       hour: appointment.fecha.split(' ')[1],
       citaId: appointment.id
     }));
+
+    if (this.availableHours.length > 0) {
+      this.selectedHour = this.availableHours[0].hour;
+      this.selectedCitaId = this.availableHours[0].citaId;
+    }
 
   }
 
@@ -169,6 +182,20 @@ export class CreateAppointmentComponent {
       return 'highlight-date';
     }
     return '';
+  }
+
+  getClosestDate(availableDates: string[]): string {
+    const today = new Date().toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
+    let closestDate = availableDates[0];
+
+    // Busca la fecha más cercana a hoy
+    availableDates.forEach(date => {
+      if (new Date(date) >= new Date(today) && new Date(date) < new Date(closestDate)) {
+        closestDate = date;
+      }
+    });
+
+    return closestDate;
   }
 
 }
