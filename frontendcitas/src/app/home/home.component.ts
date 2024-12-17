@@ -15,6 +15,10 @@ export class HomeComponent {
     this.router.navigate(['/login']);
   }
 
+  goToRegister() {
+    this.router.navigate(['/registro']);
+  }
+
   // Función para verificar si se está en una subruta
   isSubRouteActive(): boolean {
     return this.router.url !== '/home';
