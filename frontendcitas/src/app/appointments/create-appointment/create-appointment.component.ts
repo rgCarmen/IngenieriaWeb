@@ -120,6 +120,16 @@ export class CreateAppointmentComponent {
       hour: appointment.fecha.split(' ')[1],
       citaId: appointment.id
     }));
+
+    this.availableHours.sort((a, b) => {
+      const [hourA, minuteA] = a.hour.split(':').map(Number);
+      const [hourB, minuteB] = b.hour.split(':').map(Number);
+    
+      if (hourA === hourB) {
+        return minuteA - minuteB; // Si las horas son iguales, se comparan los minutos
+      }
+      return hourA - hourB; // Comparar las horas
+    });
   
     // Seleccionar automáticamente la primera hora disponible
     if (this.availableHours.length > 0) {
