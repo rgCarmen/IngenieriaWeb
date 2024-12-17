@@ -3,7 +3,6 @@ package com.aplicacion.backendcitas.model;
 import com.aplicacion.backendcitas.model.entidades.Medico;
 import com.aplicacion.backendcitas.model.entidades.Paciente;
 import com.aplicacion.backendcitas.model.entidades.Usuario;
-import jakarta.transaction.Transactional;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

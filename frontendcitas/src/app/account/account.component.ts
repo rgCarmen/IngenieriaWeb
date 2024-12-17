@@ -35,9 +35,8 @@ export class AccountComponent implements OnInit{
   loadPersonalData() {
    this.accountService.getUsuario().subscribe(
       (data) => {
-        console.log(data);
         this.personalData = data;
-        console.log(this.personalData);
+       
       },
       (error) => {
         console.error('Error al obtener los datos:', error);
@@ -51,7 +50,7 @@ export class AccountComponent implements OnInit{
 
     this.accountService.updateUsuario(this.personalData, nombre, apellidos, telefono).subscribe(
       (response) => {
-        console.log('Datos actualizados correctamente:', response);
+        
         this.openConfirmDialog(this.updateConfirmDialog);
       },
       (error) => {

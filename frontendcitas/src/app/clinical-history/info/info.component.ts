@@ -30,7 +30,7 @@ export class InfoComponent implements OnInit {
     this.clinicalHistoryService.getPatientAppointments(pacienteId).subscribe(
       (data) => {
         this.appointments = data;
-        console.log(this.appointments);
+      
       },
       (error) => {
         console.error('Error al obtener las citas del paciente:', error);

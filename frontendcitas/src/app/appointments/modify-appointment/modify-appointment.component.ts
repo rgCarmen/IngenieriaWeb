@@ -41,7 +41,6 @@ export class ModifyAppointmentComponent implements OnInit {
           return appointmentDate > now;
         });
   
-        console.log('Citas próximas cargadas:', this.appointments); // Depuración
       },
       (error) => {
         console.error('Error al cargar las citas del paciente:', error);
@@ -71,7 +70,6 @@ export class ModifyAppointmentComponent implements OnInit {
             (appointment: any) => appointment.paciente === null
           );
           this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
-          console.log('Fechas disponibles:', this.availableDates);
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
@@ -105,9 +103,6 @@ export class ModifyAppointmentComponent implements OnInit {
       return;
     }
 
-    console.log(this.selectedAppointment);
-    console.log(this.availableAppointments);
-  
     // Crear el objeto de cita actualizada con la fecha y hora seleccionadas
    
     const fecha=`${this.selectedAppointment.date.toISOString().split('T')[0]} ${this.selectedHour}`;
@@ -118,7 +113,6 @@ export class ModifyAppointmentComponent implements OnInit {
 
 
     const updated = {citaId: filteredAppointments.id};
-    console.log("Updated", updated)
 
     this.citasService.actualizarCitaPaciente(this.selectedAppointment.id,updated).subscribe(
       () => {
@@ -141,9 +135,8 @@ export class ModifyAppointmentComponent implements OnInit {
     console.log(`Revisando fecha del calendario: "${dateString}"`);
   
     this.availableDates.forEach((availableDate) => {
-      console.log(`Comparando "${availableDate.trim()}" con "${dateString}"`);
+      
       if (availableDate.trim() === dateString) {
-        console.log(`%c ¡Coincidencia encontrada!: ${dateString}`, 'color: green; font-weight: bold;');
       }
     });
   

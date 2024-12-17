@@ -34,7 +34,7 @@ export class AdminPanelComponent {
 
       this.AdminService.registerDoctor(doctorData).subscribe(
         response => {
-          console.log('Médico registrado exitosamente:', response);
+         
           this.dialog.open(this.updateConfirmDialog); // Abre el diálogo de confirmación
         },
         error => {

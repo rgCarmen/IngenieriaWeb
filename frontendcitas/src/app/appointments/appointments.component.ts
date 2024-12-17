@@ -27,7 +27,6 @@ export class AppointmentsComponent implements OnInit {
   cargarCitas() {
     this.citasService.citasPaciente().subscribe({
       next: (data) => {
-        console.log('Datos recibidos:', data); // Verifica la respuesta recibida
 
         // Asigna todas las citas con formato de fecha adecuado
         this.citas = data.map((cita: any) => ({
@@ -90,7 +89,6 @@ export class AppointmentsComponent implements OnInit {
     if (this.selectedCitaId !== null) {
       this.citasService.cancelarCita(this.selectedCitaId).subscribe(
         response => {
-          console.log('Cita cancelada con éxito');
           this.cargarCitas(); // Recargar las citas después de la cancelación
           this.dialog.closeAll(); // Cerrar el diálogo
         },

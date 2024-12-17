@@ -3,7 +3,6 @@ package com.aplicacion.backendcitas.model;
 import com.aplicacion.backendcitas.model.entidades.Notificaciones;
 import com.aplicacion.backendcitas.model.entidades.Usuario;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;

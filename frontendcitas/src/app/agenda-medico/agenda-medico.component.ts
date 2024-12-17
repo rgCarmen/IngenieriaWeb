@@ -41,7 +41,7 @@ export class AgendaMedicoComponent implements OnInit{
     this.citasService.citasMedico().subscribe({
       next: (data) => {
         const now = new Date();
-        console.log(data); // Imprime la respuesta en la consola
+        
         const citas = data.map((cita: any) => ({
           fecha: new Date(cita.fecha),
           paciente:  cita.paciente ? `${cita.paciente.nombre} ${cita.paciente.apellidos}` : '-',
@@ -145,8 +145,7 @@ export class AgendaMedicoComponent implements OnInit{
       this.citasService.eliminarCita(this.selectedCitaId).subscribe({
         next: () => {
           this.citasFuturas = this.citasFuturas.filter((cita: any) => cita.id !== Number(this.selectedCitaId));
-          console.log(this.selectedCitaId);
-          console.log(this.citasFuturas.filter((cita: any) => cita.id !== this.selectedCitaId));
+          
           this.citaEliminada = true;
           setTimeout(() => {
             this.citaEliminada = false; 
@@ -199,12 +198,11 @@ export class AgendaMedicoComponent implements OnInit{
       console.log(currentDateTime.getMinutes() + intervalMinutes);
     }
     
-    console.log("Citas", citas);
     citas.forEach((cita) => {
 
       this.citasService.crearCitaMedico(cita).subscribe({
         next: (response) => {
-          console.log('Cita creada exitosamente:', response);
+        
           this.citasMedico();
         },
         error: (err) => {
@@ -233,7 +231,7 @@ export class AgendaMedicoComponent implements OnInit{
   
       this.citasService.actualizarCita(cita).subscribe({
         next: (response) => {
-          console.log('Cita modificada exitosamente:', response);
+          
           this.selectedCita=null;
           this.citasMedico();
         },
@@ -289,7 +287,6 @@ export class AgendaMedicoComponent implements OnInit{
 
   guardarEdicion(cita: any) {
     cita.editing = false;
-    console.log(cita);
     const camposModificados={
       diagnostico:cita.diagnostico,
       descripcion:cita.detalles

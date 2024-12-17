@@ -5,7 +5,7 @@
 
     <!-- Pestañas visibles solo si el usuario está autenticado -->
     <a mat-button routerLink="/">Inicio</a>
-    <a mat-button routerLink="/appointments">Citas</a>
+    <a mat-button routerLink="/appointments" *ngIf="authService.isLoggedIn() && authService.getRole() === 'PACIENTE'">Citas</a>
     <a mat-button routerLink="/account" *ngIf="authService.isLoggedIn() && (authService.getRole() === 'MEDICO' || authService.getRole() === 'PACIENTE')">Mi cuenta</a>
 
     <!-- Opciones específicas por rol -->

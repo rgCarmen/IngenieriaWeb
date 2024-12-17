@@ -57,7 +57,6 @@ export class CreateAppointmentComponent {
     if (this.selectedDoctor) {
       this.citasService.obtenerCitasPorMedico(this.selectedDoctor.id).subscribe(
         (appointments) => {
-          console.log("Raw appointments from backend:", appointments);
           this.availableAppointments = appointments.filter((appointment: any) => appointment.paciente === null);
           this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
           //this.highlightAvailableDates();
@@ -111,8 +110,7 @@ export class CreateAppointmentComponent {
       hour: appointment.fecha.split(' ')[1],
       citaId: appointment.id
     }));
-  
-    console.log('Available Hours:', this.availableHours);
+
   }
 
   confirmAppointment() {
@@ -161,8 +159,6 @@ export class CreateAppointmentComponent {
     date.setHours(date.getHours() + 1);
     const dateString = date.toISOString().split('T')[0];
   
-    // Depura la comparación detalladamente
-    console.log(`"Revisando fecha del calendario: "${dateString}"`);
 
     // Compara correctamente y verifica
     const isAvailable = this.availableDates.some((availableDate) => availableDate.trim() === dateString);

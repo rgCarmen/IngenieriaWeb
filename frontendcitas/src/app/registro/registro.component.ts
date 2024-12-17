@@ -40,7 +40,6 @@ export class RegistroComponent {
     if(!this.passwordMismatch){
       this.registroService.registrar(this.email, this.confirmPassword, this.nombre, this.apellidos, this.dni, this.telefono).subscribe({
         next: (response) => {
-          console.log('Registrado correctamente', response);
           this.router.navigate(['/login']); // Redirige al usuario a la página principal
         },
         error: (error) => {

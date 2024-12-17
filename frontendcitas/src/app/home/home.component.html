@@ -43,8 +43,8 @@
 
       <div class="actions">
         <button mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" (click)="goToLogin()">Iniciar sesión</button>
-        <a mat-raised-button color="accent" routerLink="/appointments" *ngIf="authService.isLoggedIn()">Mis Citas</a>
-        <a mat-raised-button color="warn" routerLink="/account" *ngIf="authService.isLoggedIn()">Mi Cuenta</a>
+        <a mat-raised-button color="accent" routerLink="/appointments" *ngIf="authService.isLoggedIn() && (authService.getRole() === 'PACIENTE')">Mis Citas</a>
+        <a mat-raised-button color="warn" routerLink="/account" *ngIf="authService.isLoggedIn()  && (authService.getRole() === 'MEDICO' || authService.getRole() === 'PACIENTE')">Mi Cuenta</a>
       </div>
 
       <img src="assets/medical-illustration.jpg" alt="Gestión médica" class="hero-image">
