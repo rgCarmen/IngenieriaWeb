@@ -127,25 +127,45 @@ p {
 }
 
 /* Botones */
-.actions {
-    margin-top: 30px;
+/* Contenedor de botones */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 20px;
 }
 
-.actions button, .actions a {
-    margin: 10px;
-    padding: 15px 20px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Botón Iniciar Sesión - Destacado */
+.btn-login {
+    background-color: #007bff !important; /* Azul vibrante */
+    color: #fff !important; /* Texto blanco */
+    font-weight: bold; /* Texto en negrita */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra destacada */
+    transform: scale(1);
+    transition: all 0.3s ease; /* Transición suave */
 }
 
-.contact-btn {
-    background-color: #007bff;
-    color: white;
+.btn-login:hover {
+    background-color: #0056b3 !important; /* Azul más oscuro */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
-.contact-btn:hover {
-    background-color: #0056b3;
+/* Botón Registrarse - Sencillo */
+.btn-register {
+    background-color: #868e96 !important; /* Gris */
+    color: #fff !important;
+    font-weight: normal;
+    box-shadow: none; /* Sin sombra destacada */
+    transition: background-color 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #5a6268 !important; /* Gris más oscuro */
+    transform: scale(1.05); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 /* Imagen central del componente */
