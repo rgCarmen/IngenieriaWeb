@@ -73,7 +73,7 @@ export class ModifyAppointmentComponent implements OnInit {
         (appointments) => {
           // Filtrar citas disponibles (paciente === null)
           this.availableAppointments = appointments.filter(
-            (appointment: any) => appointment.paciente === null
+            (appointment: any) => appointment.paciente === null && appointment.tipoCita===this.selectedType 
           );
 
           // Extraer fechas únicas de las citas disponibles
@@ -82,7 +82,10 @@ export class ModifyAppointmentComponent implements OnInit {
           );
 
           // Seleccionar automáticamente el primer día disponible
+            
           if (this.availableDates.length > 0) {
+            
+            // Seleccionar automáticamente la fecha más cercana si no hay filtro
             const closestDate = this.getClosestDate(this.availableDates);
             this.selectDate(new Date(closestDate));
           } else {
@@ -103,7 +106,7 @@ export class ModifyAppointmentComponent implements OnInit {
     if (this.selectedType) {
       // Filtrar citas disponibles por el tipo de cita seleccionado
       this.availableAppointments = this.availableAppointments.filter(
-        (appointment: any) => appointment.tipo === this.selectedType
+        (appointment: any) => appointment.tipoCita === this.selectedType
       );
     } else {
       // Si no hay tipo seleccionado, mostrar todas las citas disponibles
