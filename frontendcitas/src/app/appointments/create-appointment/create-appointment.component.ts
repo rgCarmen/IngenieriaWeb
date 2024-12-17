@@ -156,6 +156,11 @@ export class CreateAppointmentComponent {
       this.selectedHour = this.availableHours[0].hour;
       this.selectedCitaId = this.availableHours[0].citaId;
     }
+
+    // Forzar actualización del calendario
+    if (this.calendar) {
+      this.calendar.updateTodaysDate(); // Fuerza el re-renderizado
+    }
   }  
   
   confirmAppointment() {

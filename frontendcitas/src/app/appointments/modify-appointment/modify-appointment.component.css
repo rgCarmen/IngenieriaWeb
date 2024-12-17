@@ -53,6 +53,21 @@ mat-calendar {
   justify-content: center;
 }
 
+/* Estilo para la fecha seleccionada */
+::ng-deep button.mat-calendar-body-cell.selected-date .mat-calendar-body-cell-content {
+  background-color: #ffa500 !important; /* Naranja */
+  color: #ffffff !important; /* Texto blanco */
+  border-radius: 50%; /* Círculo */
+  font-weight: bold; /* Negrita */
+  border: 2px solid #ffa500; /* Borde naranja */
+}
+
+/* Hover para fechas seleccionadas */
+::ng-deep button.mat-calendar-body-cell.selected-date:hover .mat-calendar-body-cell-content {
+  background-color: #e69500 !important; /* Naranja oscuro */
+  cursor: pointer;
+}
+
 /* Estilo global para resaltar fechas disponibles en el calendario */
 ::ng-deep button.mat-calendar-body-cell.highlight-date .mat-calendar-body-cell-content {
   background-color: #90ee90 !important; /* Verde claro */

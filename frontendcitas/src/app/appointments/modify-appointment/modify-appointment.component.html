@@ -9,7 +9,7 @@
         <option *ngFor="let appointment of appointments" [ngValue]="appointment">
           {{ appointment.medico.especialidad }} - {{ appointment.medico.nombre }} {{ appointment.medico.apellidos }} - {{ appointment.fecha }}
         </option>
-      </select>           
+      </select>
     </div>
 
     <!-- Especialidad (solo lectura) -->
@@ -23,13 +23,24 @@
       <label for="doctor">👩‍⚕️ Doctor</label>
       <input id="doctor" type="text" [(ngModel)]="selectedDoctor" readonly />
     </div>
+
+    <!-- Tipo de Cita (solo lectura) -->
+    <div class="form-group" *ngIf="selectedAppointment">
+      <label for="appointment-type">📋 Tipo de Cita</label>
+      <input id="appointment-type" type="text" [(ngModel)]="selectedType" readonly />
+    </div>
   </div>
 
   <!-- Calendario -->
-  <div class="calendar-section" *ngIf="selectedAppointment && !isLoading">
+  <div class="calendar-section" *ngIf="availableAppointments.length > 0 && !isLoading">
     <h3>📅 Seleccione una nueva fecha</h3>
     <div class="calendar-container">
-      <mat-calendar *ngIf="selectedAppointment.date" [(selected)]="selectedAppointment.date" (selectedChange)="selectDate($event)" [dateClass]="dateClass"></mat-calendar>
+      <mat-calendar 
+        *ngIf="selectedAppointment.date" 
+        [(selected)]="selectedAppointment.date" 
+        (selectedChange)="selectDate($event)" 
+        [dateClass]="dateClass">
+      </mat-calendar>
     </div>
   </div>
 
