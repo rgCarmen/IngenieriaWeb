@@ -29,7 +29,10 @@ export class InfoComponent implements OnInit {
 
     this.clinicalHistoryService.getPatientAppointments(pacienteId).subscribe(
       (data) => {
-        this.appointments = data;
+        
+        this.appointments = data.sort((a:any, b:any) => {
+          return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+        });
       
       },
       (error) => {
@@ -41,7 +44,7 @@ export class InfoComponent implements OnInit {
   viewReport(appointment: any) {
     this.dialog.open(this.updateConfirmDialog, {
       width: '400px',
-      data: appointment, // Pasar datos al diálogo
+      data: appointment // Pasar datos al diálogo
     });
   }
 
