@@ -24,6 +24,7 @@ export class ClinicalHistoryComponent implements OnInit {
     this.clinicalHistoryService.getPatients().subscribe(
       (data) => {
         this.patients = data;
+        console.log(this.patients);
         
         this.filterPatients(); // Inicializamos el filtro con todos los pacientes
       },

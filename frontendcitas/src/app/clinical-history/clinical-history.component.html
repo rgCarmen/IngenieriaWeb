@@ -21,14 +21,12 @@
     <thead>
       <tr>
         <th>Paciente</th>
-        <th>Última Consulta</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let patient of filteredPatients">
         <td>{{ patient.nombre }} {{ patient.apellidos }}</td>
-        <td>Cita</td>
         <td>
           <button mat-raised-button color="primary" (click)="viewPatientHistory(patient)">
             Ver Historial

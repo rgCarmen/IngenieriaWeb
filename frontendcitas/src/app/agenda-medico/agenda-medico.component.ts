@@ -18,7 +18,9 @@ export class AgendaMedicoComponent implements OnInit{
   citasPasadas: any[] = [];
   selectedCitaId: number | null =null;
   citaEliminada: boolean=false;
-  selectedCita: any = null; 
+  selectedCita: any = null;
+  filteredPatients: any[] = [];
+  searchTerm: string = ''; 
 
   schedule = {
     date: '',
@@ -51,8 +53,9 @@ export class AgendaMedicoComponent implements OnInit{
           id: cita.id
         }));
 
-        this.citasFuturas = citas.filter((cita: any) => cita.fecha >= now).sort((a:any, b:any) => a.fecha.getTime() - b.fecha.getTime());;
+        this.citasFuturas = citas.filter((cita: any) => cita.fecha >= now).sort((a:any, b:any) => a.fecha.getTime() - b.fecha.getTime());
         this.citasPasadas = citas.filter((cita: any) => cita.fecha < now).sort((a:any, b:any) => b.fecha.getTime() - a.fecha.getTime());
+        this.filteredPatients=this.citasPasadas;
         this.groupCitas();
       },
       error: (err) => {
@@ -304,5 +307,12 @@ export class AgendaMedicoComponent implements OnInit{
     });
 
       
+  }
+
+  filterPatients(): void {
+    
+    this.filteredPatients = this.citasPasadas.filter((c) =>
+      c.paciente.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }
