@@ -53,8 +53,8 @@
         <option *ngFor="let hour of availableHours" [value]="hour">{{ hour }}</option>
       </select>
     </div>
+    
+    <!-- Botón para guardar cambios -->
+    <button class="btn-primary" (click)="saveChanges()">💾 Guardar Cambios</button>
   </div>
-
-  <!-- Botón para guardar cambios -->
-  <button class="btn-primary" (click)="saveChanges()">💾 Guardar Cambios</button>
 </div>
