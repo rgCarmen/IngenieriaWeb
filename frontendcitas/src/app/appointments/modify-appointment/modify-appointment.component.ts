@@ -21,6 +21,7 @@ export class ModifyAppointmentComponent implements OnInit {
   selectedHour: string = '';
   selectedSpecialty: string = '';
   selectedDoctor: string = '';
+  isLoading: boolean = true;
 
 
   constructor(private citasService: CitasService, private router: Router, private authService: AuthService) {}
@@ -70,9 +71,12 @@ export class ModifyAppointmentComponent implements OnInit {
             (appointment: any) => appointment.paciente === null
           );
           this.availableDates = this.availableAppointments.map((appointment: any) => appointment.fecha.split(' ')[0].trim());
+          //console.log('Fechas disponibles:', this.availableDates);
+          this.isLoading = false;
         },
         (error) => {
           console.error('Error al cargar las citas disponibles:', error);
+          this.isLoading = false;
         }
       );
     }
